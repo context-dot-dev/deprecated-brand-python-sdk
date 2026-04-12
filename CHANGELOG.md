@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.44.0 (2026-04-12)
+
+Full Changelog: [v1.43.0...v1.44.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.43.0...v1.44.0)
+
+### Features
+
+* **api:** api update ([bd0f93f](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/bd0f93f4df85dc1e822ca6b59fb7ce594976ad49))
+* **api:** api update ([a388d39](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a388d39c93b50ec075a553957081a45f64b73d39))
+* **api:** api update ([9213463](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/9213463afaf5d76d3b706a5aef49082c72409189))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([a92d7b7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a92d7b7c66f52b259cbf31d938c8a70565190b5c))
+* ensure file data are only sent as 1 parameter ([9b72a51](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/9b72a51afe0d9992f3c52ee727c1ffc1ec76312f))
+
 ## 1.43.0 (2026-04-03)
 
 Full Changelog: [v1.42.0...v1.43.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.42.0...v1.43.0)
