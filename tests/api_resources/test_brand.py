@@ -684,6 +684,7 @@ class TestBrand:
     def test_method_web_scrape_html_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_html(
             url="https://example.com",
+            headers={"foo": "J!"},
             include_frames=True,
             max_age_ms=0,
             pdf={
@@ -741,6 +742,7 @@ class TestBrand:
                 "max_time_per_ms": 1,
                 "resolution": True,
             },
+            headers={"foo": "J!"},
             max_age_ms=0,
             timeout_ms=1000,
             wait_for_ms=0,
@@ -786,6 +788,7 @@ class TestBrand:
     def test_method_web_scrape_md_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_md(
             url="https://example.com",
+            headers={"foo": "J!"},
             include_frames=True,
             include_images=True,
             include_links=True,
@@ -841,6 +844,7 @@ class TestBrand:
     def test_method_web_scrape_sitemap_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_sitemap(
             domain="domain",
+            headers={"foo": "J!"},
             max_links=1,
             timeout_ms=1000,
             url_regex="^https?://[^/]+/blog/",
@@ -1529,6 +1533,7 @@ class TestAsyncBrand:
     async def test_method_web_scrape_html_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_html(
             url="https://example.com",
+            headers={"foo": "J!"},
             include_frames=True,
             max_age_ms=0,
             pdf={
@@ -1586,6 +1591,7 @@ class TestAsyncBrand:
                 "max_time_per_ms": 1,
                 "resolution": True,
             },
+            headers={"foo": "J!"},
             max_age_ms=0,
             timeout_ms=1000,
             wait_for_ms=0,
@@ -1631,6 +1637,7 @@ class TestAsyncBrand:
     async def test_method_web_scrape_md_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_md(
             url="https://example.com",
+            headers={"foo": "J!"},
             include_frames=True,
             include_images=True,
             include_links=True,
@@ -1686,6 +1693,7 @@ class TestAsyncBrand:
     async def test_method_web_scrape_sitemap_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_sitemap(
             domain="domain",
+            headers={"foo": "J!"},
             max_links=1,
             timeout_ms=1000,
             url_regex="^https?://[^/]+/blog/",
