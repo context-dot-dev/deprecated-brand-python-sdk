@@ -684,8 +684,10 @@ class TestBrand:
     def test_method_web_scrape_html_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_html(
             url="https://example.com",
+            exclude_selectors=["string"],
             headers={"foo": "J!"},
             include_frames=True,
+            include_selectors=["string"],
             max_age_ms=0,
             pdf={
                 "end": 1,
@@ -788,10 +790,12 @@ class TestBrand:
     def test_method_web_scrape_md_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_md(
             url="https://example.com",
+            exclude_selectors=["string"],
             headers={"foo": "J!"},
             include_frames=True,
             include_images=True,
             include_links=True,
+            include_selectors=["string"],
             max_age_ms=0,
             pdf={
                 "end": 1,
@@ -1533,8 +1537,10 @@ class TestAsyncBrand:
     async def test_method_web_scrape_html_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_html(
             url="https://example.com",
+            exclude_selectors=["string"],
             headers={"foo": "J!"},
             include_frames=True,
+            include_selectors=["string"],
             max_age_ms=0,
             pdf={
                 "end": 1,
@@ -1637,10 +1643,12 @@ class TestAsyncBrand:
     async def test_method_web_scrape_md_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_md(
             url="https://example.com",
+            exclude_selectors=["string"],
             headers={"foo": "J!"},
             include_frames=True,
             include_images=True,
             include_links=True,
+            include_selectors=["string"],
             max_age_ms=0,
             pdf={
                 "end": 1,
