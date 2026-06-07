@@ -25,7 +25,7 @@ from ..types import (
     brand_retrieve_simplified_params,
     brand_identify_from_transaction_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -2179,8 +2179,10 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        exclude_selectors: SequenceNotStr[str] | Omit = omit,
         headers: Dict[str, str] | Omit = omit,
         include_frames: bool | Omit = omit,
+        include_selectors: SequenceNotStr[str] | Omit = omit,
         max_age_ms: int | Omit = omit,
         pdf: brand_web_scrape_html_params.Pdf | Omit = omit,
         timeout_ms: int | Omit = omit,
@@ -2198,11 +2200,19 @@ class BrandResource(SyncAPIResource):
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
 
+          exclude_selectors: CSS selectors to remove from the result. Applied after includeSelectors.
+              Exclusion takes precedence: an element matching both is removed. Examples:
+              "nav", "footer", ".ad-banner", "[aria-hidden=true]".
+
           headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
               deep-object query params such as headers[X-Custom]=value. When provided, caching
               is bypassed: the result is neither read from nor written to cache.
 
           include_frames: When true, iframes are rendered inline into the returned HTML.
+
+          include_selectors: CSS selectors. When provided, only matching subtrees (and their descendants) are
+              kept and everything else is dropped. When omitted, the entire document is kept.
+              Examples: "article.main", "#content", "[role=main]".
 
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
@@ -2237,8 +2247,10 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "url": url,
+                        "exclude_selectors": exclude_selectors,
                         "headers": headers,
                         "include_frames": include_frames,
+                        "include_selectors": include_selectors,
                         "max_age_ms": max_age_ms,
                         "pdf": pdf,
                         "timeout_ms": timeout_ms,
@@ -2326,10 +2338,12 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        exclude_selectors: SequenceNotStr[str] | Omit = omit,
         headers: Dict[str, str] | Omit = omit,
         include_frames: bool | Omit = omit,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        include_selectors: SequenceNotStr[str] | Omit = omit,
         max_age_ms: int | Omit = omit,
         pdf: brand_web_scrape_md_params.Pdf | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
@@ -2350,6 +2364,10 @@ class BrandResource(SyncAPIResource):
           url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
 
+          exclude_selectors: CSS selectors to remove before conversion to Markdown. Applied after
+              includeSelectors. Exclusion takes precedence: an element matching both is
+              removed. Examples: "nav", "footer", ".ad-banner", "[aria-hidden=true]".
+
           headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
               deep-object query params such as headers[X-Custom]=value. When provided, caching
               is bypassed: the result is neither read from nor written to cache.
@@ -2359,6 +2377,10 @@ class BrandResource(SyncAPIResource):
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
+
+          include_selectors: CSS selectors. When provided, only matching HTML subtrees (and their
+              descendants) are kept before conversion to Markdown. When omitted, the entire
+              document is kept. Examples: "article.main", "#content", "[role=main]".
 
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
@@ -2397,10 +2419,12 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "url": url,
+                        "exclude_selectors": exclude_selectors,
                         "headers": headers,
                         "include_frames": include_frames,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "include_selectors": include_selectors,
                         "max_age_ms": max_age_ms,
                         "pdf": pdf,
                         "shorten_base64_images": shorten_base64_images,
@@ -4602,8 +4626,10 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        exclude_selectors: SequenceNotStr[str] | Omit = omit,
         headers: Dict[str, str] | Omit = omit,
         include_frames: bool | Omit = omit,
+        include_selectors: SequenceNotStr[str] | Omit = omit,
         max_age_ms: int | Omit = omit,
         pdf: brand_web_scrape_html_params.Pdf | Omit = omit,
         timeout_ms: int | Omit = omit,
@@ -4621,11 +4647,19 @@ class AsyncBrandResource(AsyncAPIResource):
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
 
+          exclude_selectors: CSS selectors to remove from the result. Applied after includeSelectors.
+              Exclusion takes precedence: an element matching both is removed. Examples:
+              "nav", "footer", ".ad-banner", "[aria-hidden=true]".
+
           headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
               deep-object query params such as headers[X-Custom]=value. When provided, caching
               is bypassed: the result is neither read from nor written to cache.
 
           include_frames: When true, iframes are rendered inline into the returned HTML.
+
+          include_selectors: CSS selectors. When provided, only matching subtrees (and their descendants) are
+              kept and everything else is dropped. When omitted, the entire document is kept.
+              Examples: "article.main", "#content", "[role=main]".
 
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
@@ -4660,8 +4694,10 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "url": url,
+                        "exclude_selectors": exclude_selectors,
                         "headers": headers,
                         "include_frames": include_frames,
+                        "include_selectors": include_selectors,
                         "max_age_ms": max_age_ms,
                         "pdf": pdf,
                         "timeout_ms": timeout_ms,
@@ -4749,10 +4785,12 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        exclude_selectors: SequenceNotStr[str] | Omit = omit,
         headers: Dict[str, str] | Omit = omit,
         include_frames: bool | Omit = omit,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        include_selectors: SequenceNotStr[str] | Omit = omit,
         max_age_ms: int | Omit = omit,
         pdf: brand_web_scrape_md_params.Pdf | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
@@ -4773,6 +4811,10 @@ class AsyncBrandResource(AsyncAPIResource):
           url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
 
+          exclude_selectors: CSS selectors to remove before conversion to Markdown. Applied after
+              includeSelectors. Exclusion takes precedence: an element matching both is
+              removed. Examples: "nav", "footer", ".ad-banner", "[aria-hidden=true]".
+
           headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
               deep-object query params such as headers[X-Custom]=value. When provided, caching
               is bypassed: the result is neither read from nor written to cache.
@@ -4782,6 +4824,10 @@ class AsyncBrandResource(AsyncAPIResource):
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
+
+          include_selectors: CSS selectors. When provided, only matching HTML subtrees (and their
+              descendants) are kept before conversion to Markdown. When omitted, the entire
+              document is kept. Examples: "article.main", "#content", "[role=main]".
 
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
@@ -4820,10 +4866,12 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "url": url,
+                        "exclude_selectors": exclude_selectors,
                         "headers": headers,
                         "include_frames": include_frames,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "include_selectors": include_selectors,
                         "max_age_ms": max_age_ms,
                         "pdf": pdf,
                         "shorten_base64_images": shorten_base64_images,
