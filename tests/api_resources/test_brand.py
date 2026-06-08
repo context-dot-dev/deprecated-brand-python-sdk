@@ -695,6 +695,7 @@ class TestBrand:
                 "start": 1,
             },
             timeout_ms=1000,
+            use_main_content_only=True,
             wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
@@ -1548,6 +1549,7 @@ class TestAsyncBrand:
                 "start": 1,
             },
             timeout_ms=1000,
+            use_main_content_only=True,
             wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
