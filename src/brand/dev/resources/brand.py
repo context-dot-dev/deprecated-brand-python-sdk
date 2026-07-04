@@ -2488,6 +2488,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        dedupe: bool | Omit = omit,
         enrichment: brand_web_scrape_images_params.Enrichment | Omit = omit,
         headers: Dict[str, str] | Omit = omit,
         max_age_ms: int | Omit = omit,
@@ -2508,6 +2509,11 @@ class BrandResource(SyncAPIResource):
 
         Args:
           url: Page URL to inspect. Must include http:// or https://.
+
+          dedupe: When true, visually duplicate images are removed: every image is loaded and
+              perceptually hashed, and only the highest-resolution copy of each duplicate
+              group is kept. Images that cannot be downloaded or hashed are kept. Default:
+              false.
 
           enrichment: Optional per-image processing, sent as deep-object query params such as
               enrichment[resolution]=true.
@@ -2544,6 +2550,7 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "url": url,
+                        "dedupe": dedupe,
                         "enrichment": enrichment,
                         "headers": headers,
                         "max_age_ms": max_age_ms,
@@ -5374,6 +5381,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        dedupe: bool | Omit = omit,
         enrichment: brand_web_scrape_images_params.Enrichment | Omit = omit,
         headers: Dict[str, str] | Omit = omit,
         max_age_ms: int | Omit = omit,
@@ -5394,6 +5402,11 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           url: Page URL to inspect. Must include http:// or https://.
+
+          dedupe: When true, visually duplicate images are removed: every image is loaded and
+              perceptually hashed, and only the highest-resolution copy of each duplicate
+              group is kept. Images that cannot be downloaded or hashed are kept. Default:
+              false.
 
           enrichment: Optional per-image processing, sent as deep-object query params such as
               enrichment[resolution]=true.
@@ -5430,6 +5443,7 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "url": url,
+                        "dedupe": dedupe,
                         "enrichment": enrichment,
                         "headers": headers,
                         "max_age_ms": max_age_ms,
