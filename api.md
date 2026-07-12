@@ -41,3 +41,11 @@ Methods:
 - <code title="get /web/scrape/images">client.brand.<a href="./src/brand/dev/resources/brand.py">web_scrape_images</a>(\*\*<a href="src/brand/dev/types/brand_web_scrape_images_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_web_scrape_images_response.py">BrandWebScrapeImagesResponse</a></code>
 - <code title="get /web/scrape/markdown">client.brand.<a href="./src/brand/dev/resources/brand.py">web_scrape_md</a>(\*\*<a href="src/brand/dev/types/brand_web_scrape_md_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_web_scrape_md_response.py">BrandWebScrapeMdResponse</a></code>
 - <code title="get /web/scrape/sitemap">client.brand.<a href="./src/brand/dev/resources/brand.py">web_scrape_sitemap</a>(\*\*<a href="src/brand/dev/types/brand_web_scrape_sitemap_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_web_scrape_sitemap_response.py">BrandWebScrapeSitemapResponse</a></code>
+
+# Monitors
+
+Types:
+
+```python
+from brand.dev.types import WebhookDelivery
+```
