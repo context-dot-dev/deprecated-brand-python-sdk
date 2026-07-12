@@ -2430,8 +2430,8 @@ class BrandResource(SyncAPIResource):
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
-          pdf: PDF parsing controls. Use start/end to limit text extraction and OCR to an
-              inclusive 1-based page range.
+          pdf: PDF parsing controls. Use start/end to limit text extraction and embedded-image
+              detection/OCR to an inclusive 1-based page range.
 
           settle_animations: When true, waits briefly for CSS and transition animations to settle before
               extracting HTML. Defaults to false. This adds a bit of latency in exchange for
@@ -2842,8 +2842,8 @@ class BrandResource(SyncAPIResource):
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
-          pdf: PDF parsing controls. Use start/end to limit text extraction and OCR to an
-              inclusive 1-based page range.
+          pdf: PDF parsing controls. Use start/end to limit text extraction and embedded-image
+              detection/OCR to an inclusive 1-based page range.
 
           settle_animations: When true, waits briefly for CSS and transition animations to settle before
               converting to Markdown. Defaults to false. This adds a bit of latency in
@@ -5339,8 +5339,8 @@ class AsyncBrandResource(AsyncAPIResource):
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
-          pdf: PDF parsing controls. Use start/end to limit text extraction and OCR to an
-              inclusive 1-based page range.
+          pdf: PDF parsing controls. Use start/end to limit text extraction and embedded-image
+              detection/OCR to an inclusive 1-based page range.
 
           settle_animations: When true, waits briefly for CSS and transition animations to settle before
               extracting HTML. Defaults to false. This adds a bit of latency in exchange for
@@ -5751,8 +5751,8 @@ class AsyncBrandResource(AsyncAPIResource):
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
-          pdf: PDF parsing controls. Use start/end to limit text extraction and OCR to an
-              inclusive 1-based page range.
+          pdf: PDF parsing controls. Use start/end to limit text extraction and embedded-image
+              detection/OCR to an inclusive 1-based page range.
 
           settle_animations: When true, waits briefly for CSS and transition animations to settle before
               converting to Markdown. Defaults to false. This adds a bit of latency in
