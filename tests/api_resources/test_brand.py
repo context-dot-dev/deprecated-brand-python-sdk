@@ -692,6 +692,7 @@ class TestBrand:
             max_age_ms=0,
             pdf={
                 "end": 1,
+                "ocr": True,
                 "should_parse": True,
                 "start": 1,
             },
@@ -804,6 +805,7 @@ class TestBrand:
             max_age_ms=0,
             pdf={
                 "end": 1,
+                "ocr": True,
                 "should_parse": True,
                 "start": 1,
             },
@@ -1551,6 +1553,7 @@ class TestAsyncBrand:
             max_age_ms=0,
             pdf={
                 "end": 1,
+                "ocr": True,
                 "should_parse": True,
                 "start": 1,
             },
@@ -1663,6 +1666,7 @@ class TestAsyncBrand:
             max_age_ms=0,
             pdf={
                 "end": 1,
+                "ocr": True,
                 "should_parse": True,
                 "start": 1,
             },
