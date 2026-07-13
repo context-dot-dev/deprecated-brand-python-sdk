@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["BrandIdentifyFromTransactionParams"]
@@ -407,6 +408,13 @@ class BrandIdentifyFromTransactionParams(TypedDict, total=False):
 
     phone: float
     """Optional phone number from the transaction to help verify brand match."""
+
+    tags: SequenceNotStr[str]
+    """Optional comma-separated caller-defined tags for tracking this request.
+
+    Tags are recorded on the request's usage log and can be used to filter usage on
+    the dashboard usage page. Up to 20 tags, each 1-50 characters.
+    """
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
     """Optional timeout in milliseconds for the request.

@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, Iterable
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["BrandAIQueryParams", "DataToExtract", "SpecificPages"]
@@ -19,6 +20,13 @@ class BrandAIQueryParams(TypedDict, total=False):
 
     specific_pages: SpecificPages
     """Optional object specifying which pages to analyze"""
+
+    tags: SequenceNotStr[str]
+    """Optional caller-defined tags for tracking this request.
+
+    Tags are recorded on the request's usage log and can be used to filter usage on
+    the dashboard usage page. Up to 20 tags, each 1-50 characters.
+    """
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
     """Optional timeout in milliseconds for the request.
