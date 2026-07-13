@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["BrandRetrieveByTickerParams"]
@@ -153,6 +154,13 @@ class BrandRetrieveByTickerParams(TypedDict, total=False):
 
     When set to true, the API will skip time-consuming operations for faster
     response at the cost of less comprehensive data.
+    """
+
+    tags: SequenceNotStr[str]
+    """Optional comma-separated caller-defined tags for tracking this request.
+
+    Tags are recorded on the request's usage log and can be used to filter usage on
+    the dashboard usage page. Up to 20 tags, each 1-50 characters.
     """
 
     ticker_exchange: Literal[

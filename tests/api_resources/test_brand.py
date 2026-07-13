@@ -50,6 +50,7 @@ class TestBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
@@ -94,6 +95,7 @@ class TestBrand:
         brand = client.brand.ai_product(
             url="https://example.com",
             max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
@@ -139,6 +141,7 @@ class TestBrand:
             domain="domain",
             max_age_ms=0,
             max_products=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
@@ -184,6 +187,7 @@ class TestBrand:
             direct_url="https://example.com",
             max_age_ms=0,
             max_products=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
@@ -259,6 +263,7 @@ class TestBrand:
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
@@ -325,6 +330,7 @@ class TestBrand:
             max_speed=True,
             mcc="mcc",
             phone=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
@@ -368,6 +374,7 @@ class TestBrand:
     def test_method_prefetch_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.prefetch(
             domain="domain",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
@@ -411,6 +418,7 @@ class TestBrand:
     def test_method_prefetch_by_email_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.prefetch_by_email(
             email="dev@stainless.com",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
@@ -457,6 +465,7 @@ class TestBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
@@ -503,6 +512,7 @@ class TestBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
@@ -550,6 +560,7 @@ class TestBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
@@ -596,6 +607,7 @@ class TestBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             ticker_exchange="AMEX",
             timeout_ms=1000,
         )
@@ -641,6 +653,7 @@ class TestBrand:
         brand = client.brand.retrieve_simplified(
             domain="domain",
             max_age_ms=86400000,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
@@ -697,6 +710,7 @@ class TestBrand:
                 "start": 1,
             },
             settle_animations=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
             use_main_content_only=True,
             wait_for_ms=0,
@@ -751,6 +765,7 @@ class TestBrand:
             },
             headers={"foo": "J!"},
             max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
             wait_for_ms=0,
         )
@@ -811,6 +826,7 @@ class TestBrand:
             },
             settle_animations=True,
             shorten_base64_images=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
             use_main_content_only=True,
             wait_for_ms=0,
@@ -858,6 +874,7 @@ class TestBrand:
             domain="domain",
             headers={"foo": "J!"},
             max_links=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
             url_regex="^https?://[^/]+/blog/",
         )
@@ -911,6 +928,7 @@ class TestAsyncBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
@@ -955,6 +973,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.ai_product(
             url="https://example.com",
             max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
@@ -1000,6 +1019,7 @@ class TestAsyncBrand:
             domain="domain",
             max_age_ms=0,
             max_products=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
@@ -1045,6 +1065,7 @@ class TestAsyncBrand:
             direct_url="https://example.com",
             max_age_ms=0,
             max_products=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
@@ -1120,6 +1141,7 @@ class TestAsyncBrand:
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
@@ -1186,6 +1208,7 @@ class TestAsyncBrand:
             max_speed=True,
             mcc="mcc",
             phone=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
@@ -1229,6 +1252,7 @@ class TestAsyncBrand:
     async def test_method_prefetch_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch(
             domain="domain",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
@@ -1272,6 +1296,7 @@ class TestAsyncBrand:
     async def test_method_prefetch_by_email_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch_by_email(
             email="dev@stainless.com",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
@@ -1318,6 +1343,7 @@ class TestAsyncBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
@@ -1364,6 +1390,7 @@ class TestAsyncBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
@@ -1411,6 +1438,7 @@ class TestAsyncBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
@@ -1457,6 +1485,7 @@ class TestAsyncBrand:
             force_language="afrikaans",
             max_age_ms=86400000,
             max_speed=True,
+            tags=["production", "team-alpha"],
             ticker_exchange="AMEX",
             timeout_ms=1000,
         )
@@ -1502,6 +1531,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.retrieve_simplified(
             domain="domain",
             max_age_ms=86400000,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
@@ -1558,6 +1588,7 @@ class TestAsyncBrand:
                 "start": 1,
             },
             settle_animations=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
             use_main_content_only=True,
             wait_for_ms=0,
@@ -1612,6 +1643,7 @@ class TestAsyncBrand:
             },
             headers={"foo": "J!"},
             max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
             wait_for_ms=0,
         )
@@ -1672,6 +1704,7 @@ class TestAsyncBrand:
             },
             settle_animations=True,
             shorten_base64_images=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
             use_main_content_only=True,
             wait_for_ms=0,
@@ -1719,6 +1752,7 @@ class TestAsyncBrand:
             domain="domain",
             headers={"foo": "J!"},
             max_links=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
             url_regex="^https?://[^/]+/blog/",
         )

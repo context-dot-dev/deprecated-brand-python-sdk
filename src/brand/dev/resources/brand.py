@@ -205,6 +205,7 @@ class BrandResource(SyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -232,6 +233,10 @@ class BrandResource(SyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data. Works with all three lookup methods.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -257,6 +262,7 @@ class BrandResource(SyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
@@ -270,6 +276,7 @@ class BrandResource(SyncAPIResource):
         *,
         url: str,
         max_age_ms: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -289,6 +296,10 @@ class BrandResource(SyncAPIResource):
               younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -307,6 +318,7 @@ class BrandResource(SyncAPIResource):
                 {
                     "url": url,
                     "max_age_ms": max_age_ms,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_product_params.BrandAIProductParams,
@@ -324,6 +336,7 @@ class BrandResource(SyncAPIResource):
         domain: str,
         max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -347,6 +360,10 @@ class BrandResource(SyncAPIResource):
 
           max_products: Maximum number of products to extract.
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -368,6 +385,7 @@ class BrandResource(SyncAPIResource):
         direct_url: str,
         max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -392,6 +410,10 @@ class BrandResource(SyncAPIResource):
 
           max_products: Maximum number of products to extract.
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -413,6 +435,7 @@ class BrandResource(SyncAPIResource):
         domain: str | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         direct_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -429,6 +452,7 @@ class BrandResource(SyncAPIResource):
                     "domain": domain,
                     "max_age_ms": max_age_ms,
                     "max_products": max_products,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                     "direct_url": direct_url,
                 },
@@ -446,6 +470,7 @@ class BrandResource(SyncAPIResource):
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
         specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -467,6 +492,10 @@ class BrandResource(SyncAPIResource):
 
           specific_pages: Optional object specifying which pages to analyze
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -486,6 +515,7 @@ class BrandResource(SyncAPIResource):
                     "data_to_extract": data_to_extract,
                     "domain": domain,
                     "specific_pages": specific_pages,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_query_params.BrandAIQueryParams,
@@ -870,6 +900,7 @@ class BrandResource(SyncAPIResource):
         max_speed: bool | Omit = omit,
         mcc: str | Omit = omit,
         phone: float | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -904,6 +935,10 @@ class BrandResource(SyncAPIResource):
 
           phone: Optional phone number from the transaction to help verify brand match.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -933,6 +968,7 @@ class BrandResource(SyncAPIResource):
                         "max_speed": max_speed,
                         "mcc": mcc,
                         "phone": phone,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
@@ -945,6 +981,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -959,6 +996,10 @@ class BrandResource(SyncAPIResource):
 
         Args:
           domain: Domain name to prefetch brand data for
+
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -977,6 +1018,7 @@ class BrandResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "domain": domain,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_prefetch_params.BrandPrefetchParams,
@@ -991,6 +1033,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         email: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1010,6 +1053,10 @@ class BrandResource(SyncAPIResource):
               email. Free email providers (gmail.com, yahoo.com, etc.) and disposable email
               addresses are not allowed.
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -1027,6 +1074,7 @@ class BrandResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "email": email,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_prefetch_by_email_params.BrandPrefetchByEmailParams,
@@ -1166,6 +1214,7 @@ class BrandResource(SyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1195,6 +1244,10 @@ class BrandResource(SyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -1220,6 +1273,7 @@ class BrandResource(SyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_email_params.BrandRetrieveByEmailParams,
@@ -1357,6 +1411,7 @@ class BrandResource(SyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1385,6 +1440,10 @@ class BrandResource(SyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -1410,6 +1469,7 @@ class BrandResource(SyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_isin_params.BrandRetrieveByIsinParams,
@@ -1789,6 +1849,7 @@ class BrandResource(SyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1818,6 +1879,10 @@ class BrandResource(SyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -1844,6 +1909,7 @@ class BrandResource(SyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_name_params.BrandRetrieveByNameParams,
@@ -1981,6 +2047,7 @@ class BrandResource(SyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         ticker_exchange: Literal[
             "AMEX",
             "AMS",
@@ -2082,6 +2149,10 @@ class BrandResource(SyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           ticker_exchange: Optional stock exchange for the ticker. Defaults to NASDAQ if not specified.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
@@ -2109,6 +2180,7 @@ class BrandResource(SyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
@@ -2123,6 +2195,7 @@ class BrandResource(SyncAPIResource):
         *,
         domain: str,
         max_age_ms: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2143,6 +2216,10 @@ class BrandResource(SyncAPIResource):
               refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
               are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
               year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -2167,6 +2244,7 @@ class BrandResource(SyncAPIResource):
                     {
                         "domain": domain,
                         "max_age_ms": max_age_ms,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_simplified_params.BrandRetrieveSimplifiedParams,
@@ -2393,6 +2471,7 @@ class BrandResource(SyncAPIResource):
         max_age_ms: int | Omit = omit,
         pdf: brand_web_scrape_html_params.Pdf | Omit = omit,
         settle_animations: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         wait_for_ms: int | Omit = omit,
@@ -2437,6 +2516,10 @@ class BrandResource(SyncAPIResource):
               extracting HTML. Defaults to false. This adds a bit of latency in exchange for
               more stable output on animated pages.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -2474,6 +2557,7 @@ class BrandResource(SyncAPIResource):
                         "max_age_ms": max_age_ms,
                         "pdf": pdf,
                         "settle_animations": settle_animations,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
                         "wait_for_ms": wait_for_ms,
@@ -2492,6 +2576,7 @@ class BrandResource(SyncAPIResource):
         enrichment: brand_web_scrape_images_params.Enrichment | Omit = omit,
         headers: Dict[str, str] | Omit = omit,
         max_age_ms: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2525,6 +2610,10 @@ class BrandResource(SyncAPIResource):
           max_age_ms: Reuse a cached result this many milliseconds old or newer. Default: 86400000 (1
               day). Set to 0 to bypass cache. Maximum: 2592000000 (30 days).
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -2554,6 +2643,7 @@ class BrandResource(SyncAPIResource):
                         "enrichment": enrichment,
                         "headers": headers,
                         "max_age_ms": max_age_ms,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                         "wait_for_ms": wait_for_ms,
                     },
@@ -2784,6 +2874,7 @@ class BrandResource(SyncAPIResource):
         pdf: brand_web_scrape_md_params.Pdf | Omit = omit,
         settle_animations: bool | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         wait_for_ms: int | Omit = omit,
@@ -2851,6 +2942,10 @@ class BrandResource(SyncAPIResource):
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -2890,6 +2985,7 @@ class BrandResource(SyncAPIResource):
                         "pdf": pdf,
                         "settle_animations": settle_animations,
                         "shorten_base64_images": shorten_base64_images,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
                         "wait_for_ms": wait_for_ms,
@@ -2906,6 +3002,7 @@ class BrandResource(SyncAPIResource):
         domain: str,
         headers: Dict[str, str] | Omit = omit,
         max_links: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         url_regex: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2927,6 +3024,10 @@ class BrandResource(SyncAPIResource):
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -2955,6 +3056,7 @@ class BrandResource(SyncAPIResource):
                         "domain": domain,
                         "headers": headers,
                         "max_links": max_links,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                         "url_regex": url_regex,
                     },
@@ -3114,6 +3216,7 @@ class AsyncBrandResource(AsyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3141,6 +3244,10 @@ class AsyncBrandResource(AsyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data. Works with all three lookup methods.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -3166,6 +3273,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
@@ -3179,6 +3287,7 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         url: str,
         max_age_ms: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3198,6 +3307,10 @@ class AsyncBrandResource(AsyncAPIResource):
               younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -3216,6 +3329,7 @@ class AsyncBrandResource(AsyncAPIResource):
                 {
                     "url": url,
                     "max_age_ms": max_age_ms,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_product_params.BrandAIProductParams,
@@ -3233,6 +3347,7 @@ class AsyncBrandResource(AsyncAPIResource):
         domain: str,
         max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3256,6 +3371,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
           max_products: Maximum number of products to extract.
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -3277,6 +3396,7 @@ class AsyncBrandResource(AsyncAPIResource):
         direct_url: str,
         max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3301,6 +3421,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
           max_products: Maximum number of products to extract.
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -3322,6 +3446,7 @@ class AsyncBrandResource(AsyncAPIResource):
         domain: str | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         direct_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -3338,6 +3463,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     "domain": domain,
                     "max_age_ms": max_age_ms,
                     "max_products": max_products,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                     "direct_url": direct_url,
                 },
@@ -3355,6 +3481,7 @@ class AsyncBrandResource(AsyncAPIResource):
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
         specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3376,6 +3503,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
           specific_pages: Optional object specifying which pages to analyze
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -3395,6 +3526,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     "data_to_extract": data_to_extract,
                     "domain": domain,
                     "specific_pages": specific_pages,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_query_params.BrandAIQueryParams,
@@ -3779,6 +3911,7 @@ class AsyncBrandResource(AsyncAPIResource):
         max_speed: bool | Omit = omit,
         mcc: str | Omit = omit,
         phone: float | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3813,6 +3946,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
           phone: Optional phone number from the transaction to help verify brand match.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -3842,6 +3979,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "max_speed": max_speed,
                         "mcc": mcc,
                         "phone": phone,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
@@ -3854,6 +3992,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3868,6 +4007,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           domain: Domain name to prefetch brand data for
+
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -3886,6 +4029,7 @@ class AsyncBrandResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "domain": domain,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_prefetch_params.BrandPrefetchParams,
@@ -3900,6 +4044,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         email: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3919,6 +4064,10 @@ class AsyncBrandResource(AsyncAPIResource):
               email. Free email providers (gmail.com, yahoo.com, etc.) and disposable email
               addresses are not allowed.
 
+          tags: Optional caller-defined tags for tracking this request. Tags are recorded on the
+              request's usage log and can be used to filter usage on the dashboard usage page.
+              Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -3936,6 +4085,7 @@ class AsyncBrandResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "email": email,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_prefetch_by_email_params.BrandPrefetchByEmailParams,
@@ -4075,6 +4225,7 @@ class AsyncBrandResource(AsyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -4104,6 +4255,10 @@ class AsyncBrandResource(AsyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -4129,6 +4284,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_email_params.BrandRetrieveByEmailParams,
@@ -4266,6 +4422,7 @@ class AsyncBrandResource(AsyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -4294,6 +4451,10 @@ class AsyncBrandResource(AsyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -4319,6 +4480,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_isin_params.BrandRetrieveByIsinParams,
@@ -4698,6 +4860,7 @@ class AsyncBrandResource(AsyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -4727,6 +4890,10 @@ class AsyncBrandResource(AsyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -4753,6 +4920,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_name_params.BrandRetrieveByNameParams,
@@ -4890,6 +5058,7 @@ class AsyncBrandResource(AsyncAPIResource):
         | Omit = omit,
         max_age_ms: int | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         ticker_exchange: Literal[
             "AMEX",
             "AMS",
@@ -4991,6 +5160,10 @@ class AsyncBrandResource(AsyncAPIResource):
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           ticker_exchange: Optional stock exchange for the ticker. Defaults to NASDAQ if not specified.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
@@ -5018,6 +5191,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "force_language": force_language,
                         "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
@@ -5032,6 +5206,7 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         domain: str,
         max_age_ms: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -5052,6 +5227,10 @@ class AsyncBrandResource(AsyncAPIResource):
               refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
               are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
               year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -5076,6 +5255,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "domain": domain,
                         "max_age_ms": max_age_ms,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_simplified_params.BrandRetrieveSimplifiedParams,
@@ -5302,6 +5482,7 @@ class AsyncBrandResource(AsyncAPIResource):
         max_age_ms: int | Omit = omit,
         pdf: brand_web_scrape_html_params.Pdf | Omit = omit,
         settle_animations: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         wait_for_ms: int | Omit = omit,
@@ -5346,6 +5527,10 @@ class AsyncBrandResource(AsyncAPIResource):
               extracting HTML. Defaults to false. This adds a bit of latency in exchange for
               more stable output on animated pages.
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -5383,6 +5568,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "max_age_ms": max_age_ms,
                         "pdf": pdf,
                         "settle_animations": settle_animations,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
                         "wait_for_ms": wait_for_ms,
@@ -5401,6 +5587,7 @@ class AsyncBrandResource(AsyncAPIResource):
         enrichment: brand_web_scrape_images_params.Enrichment | Omit = omit,
         headers: Dict[str, str] | Omit = omit,
         max_age_ms: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -5434,6 +5621,10 @@ class AsyncBrandResource(AsyncAPIResource):
           max_age_ms: Reuse a cached result this many milliseconds old or newer. Default: 86400000 (1
               day). Set to 0 to bypass cache. Maximum: 2592000000 (30 days).
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -5463,6 +5654,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "enrichment": enrichment,
                         "headers": headers,
                         "max_age_ms": max_age_ms,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                         "wait_for_ms": wait_for_ms,
                     },
@@ -5693,6 +5885,7 @@ class AsyncBrandResource(AsyncAPIResource):
         pdf: brand_web_scrape_md_params.Pdf | Omit = omit,
         settle_animations: bool | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         wait_for_ms: int | Omit = omit,
@@ -5760,6 +5953,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -5799,6 +5996,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "pdf": pdf,
                         "settle_animations": settle_animations,
                         "shorten_base64_images": shorten_base64_images,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
                         "wait_for_ms": wait_for_ms,
@@ -5815,6 +6013,7 @@ class AsyncBrandResource(AsyncAPIResource):
         domain: str,
         headers: Dict[str, str] | Omit = omit,
         max_links: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         url_regex: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -5836,6 +6035,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -5864,6 +6067,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "domain": domain,
                         "headers": headers,
                         "max_links": max_links,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                         "url_regex": url_regex,
                     },
