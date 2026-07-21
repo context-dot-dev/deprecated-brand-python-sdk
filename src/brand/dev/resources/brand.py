@@ -2567,6 +2567,7 @@ class BrandResource(SyncAPIResource):
         timeout_ms: int | Omit = omit,
         use_main_content_only: Union[bool, Literal["true", "false"]] | Omit = omit,
         wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2624,6 +2625,11 @@ class BrandResource(SyncAPIResource):
               Optional browser wait time in milliseconds after initial page load. Min: 0. Max:
               30000 (30 seconds).
 
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2654,6 +2660,7 @@ class BrandResource(SyncAPIResource):
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
                         "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
                 ),
@@ -2971,6 +2978,7 @@ class BrandResource(SyncAPIResource):
         timeout_ms: int | Omit = omit,
         use_main_content_only: Union[bool, Literal["true", "false"]] | Omit = omit,
         wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3050,6 +3058,11 @@ class BrandResource(SyncAPIResource):
           wait_for_ms: Optional browser wait time in milliseconds after initial page load before
               converting the page to Markdown. Min: 0. Max: 30000 (30 seconds).
 
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -3083,6 +3096,7 @@ class BrandResource(SyncAPIResource):
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
                         "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_md_params.BrandWebScrapeMdParams,
                 ),
@@ -3100,6 +3114,7 @@ class BrandResource(SyncAPIResource):
         tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         url_regex: str | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3134,6 +3149,11 @@ class BrandResource(SyncAPIResource):
           url_regex: Optional RE2-compatible regex pattern. Only URLs matching this pattern are
               returned and counted against maxLinks.
 
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -3158,6 +3178,7 @@ class BrandResource(SyncAPIResource):
                         "tags": tags,
                         "timeout_ms": timeout_ms,
                         "url_regex": url_regex,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),
@@ -5677,6 +5698,7 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout_ms: int | Omit = omit,
         use_main_content_only: Union[bool, Literal["true", "false"]] | Omit = omit,
         wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -5734,6 +5756,11 @@ class AsyncBrandResource(AsyncAPIResource):
               Optional browser wait time in milliseconds after initial page load. Min: 0. Max:
               30000 (30 seconds).
 
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -5764,6 +5791,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
                         "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
                 ),
@@ -6081,6 +6109,7 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout_ms: int | Omit = omit,
         use_main_content_only: Union[bool, Literal["true", "false"]] | Omit = omit,
         wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -6160,6 +6189,11 @@ class AsyncBrandResource(AsyncAPIResource):
           wait_for_ms: Optional browser wait time in milliseconds after initial page load before
               converting the page to Markdown. Min: 0. Max: 30000 (30 seconds).
 
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -6193,6 +6227,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
                         "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_md_params.BrandWebScrapeMdParams,
                 ),
@@ -6210,6 +6245,7 @@ class AsyncBrandResource(AsyncAPIResource):
         tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         url_regex: str | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -6244,6 +6280,11 @@ class AsyncBrandResource(AsyncAPIResource):
           url_regex: Optional RE2-compatible regex pattern. Only URLs matching this pattern are
               returned and counted against maxLinks.
 
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -6268,6 +6309,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "tags": tags,
                         "timeout_ms": timeout_ms,
                         "url_regex": url_regex,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),
