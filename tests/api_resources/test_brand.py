@@ -712,6 +712,7 @@ class TestBrand:
             timeout_ms=1,
             use_main_content_only="true",
             wait_for_ms=0,
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -828,6 +829,7 @@ class TestBrand:
             timeout_ms=1,
             use_main_content_only="true",
             wait_for_ms=0,
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -876,6 +878,7 @@ class TestBrand:
             tags=["production", "team-alpha"],
             timeout_ms=1,
             url_regex="^https?://[^/]+/blog/",
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
@@ -1589,6 +1592,7 @@ class TestAsyncBrand:
             timeout_ms=1,
             use_main_content_only="true",
             wait_for_ms=0,
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -1705,6 +1709,7 @@ class TestAsyncBrand:
             timeout_ms=1,
             use_main_content_only="true",
             wait_for_ms=0,
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -1753,6 +1758,7 @@ class TestAsyncBrand:
             tags=["production", "team-alpha"],
             timeout_ms=1,
             url_regex="^https?://[^/]+/blog/",
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
