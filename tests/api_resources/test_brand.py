@@ -695,6 +695,12 @@ class TestBrand:
     def test_method_web_scrape_html_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_html(
             url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
             country="de",
             exclude_selectors=["x"],
             headers={"foo": "J!"},
@@ -755,6 +761,12 @@ class TestBrand:
     def test_method_web_scrape_images_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_images(
             url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
             dedupe="true",
             enrichment={
                 "classification": "true",
@@ -809,6 +821,12 @@ class TestBrand:
     def test_method_web_scrape_md_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_md(
             url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
             country="de",
             exclude_selectors=["x"],
             headers={"foo": "J!"},
@@ -1575,6 +1593,12 @@ class TestAsyncBrand:
     async def test_method_web_scrape_html_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_html(
             url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
             country="de",
             exclude_selectors=["x"],
             headers={"foo": "J!"},
@@ -1635,6 +1659,12 @@ class TestAsyncBrand:
     async def test_method_web_scrape_images_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_images(
             url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
             dedupe="true",
             enrichment={
                 "classification": "true",
@@ -1689,6 +1719,12 @@ class TestAsyncBrand:
     async def test_method_web_scrape_md_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_md(
             url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
             country="de",
             exclude_selectors=["x"],
             headers={"foo": "J!"},
