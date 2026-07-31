@@ -63,5 +63,5 @@ from brand.dev.types import WebhookDelivery
 Types:
 
 ```python
-from brand.dev.types import ErrorCount, Error
+from brand.dev.types import PageErrorCount, Failure, CrawlControls, Intake
 ```
