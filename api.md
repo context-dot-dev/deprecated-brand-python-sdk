@@ -49,3 +49,11 @@ Types:
 ```python
 from brand.dev.types import WebhookDelivery
 ```
+
+# Batch
+
+Types:
+
+```python
+from brand.dev.types import ErrorCount, Error
+```
