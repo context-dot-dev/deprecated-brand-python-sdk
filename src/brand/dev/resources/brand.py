@@ -8,12 +8,16 @@ from typing_extensions import Literal, overload
 import httpx
 
 from ..types import (
+    brand_fonts_params,
     brand_ai_query_params,
     brand_prefetch_params,
     brand_retrieve_params,
     brand_ai_product_params,
+    brand_screenshot_params,
+    brand_styleguide_params,
     brand_ai_products_params,
     brand_web_scrape_md_params,
+    brand_retrieve_naics_params,
     brand_web_scrape_html_params,
     brand_retrieve_by_isin_params,
     brand_retrieve_by_name_params,
@@ -36,12 +40,16 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.brand_fonts_response import BrandFontsResponse
 from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_ai_product_response import BrandAIProductResponse
+from ..types.brand_screenshot_response import BrandScreenshotResponse
+from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_ai_products_response import BrandAIProductsResponse
 from ..types.brand_web_scrape_md_response import BrandWebScrapeMdResponse
+from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
 from ..types.brand_web_scrape_html_response import BrandWebScrapeHTMLResponse
 from ..types.brand_retrieve_by_isin_response import BrandRetrieveByIsinResponse
 from ..types.brand_retrieve_by_name_response import BrandRetrieveByNameResponse
@@ -606,6 +614,76 @@ class BrandResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrandAIQueryResponse,
+        )
+
+    def fonts(
+        self,
+        *,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandFontsResponse:
+        """
+        Scrape font information from a website including font families, usage
+        statistics, fallbacks, and element/word counts.
+
+        Args:
+          direct_url: A specific URL to fetch fonts from directly, bypassing domain resolution (e.g.,
+              'https://example.com/design-system'). When provided, fonts are extracted from
+              this exact URL. You must provide either 'domain' or 'directUrl', but not both.
+
+          domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/web/fonts",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "direct_url": direct_url,
+                        "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_fonts_params.BrandFontsParams,
+                ),
+            ),
+            cast_to=BrandFontsResponse,
         )
 
     def identify_from_transaction(
@@ -2278,6 +2356,71 @@ class BrandResource(SyncAPIResource):
             cast_to=BrandRetrieveByTickerResponse,
         )
 
+    def retrieve_naics(
+        self,
+        *,
+        input: str,
+        max_results: int | Omit = omit,
+        min_results: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandRetrieveNaicsResponse:
+        """
+        Classify any brand into 2022 NAICS industry codes from its domain or name.
+
+        Args:
+          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided,
+              it will be used for classification, otherwise, we will search for the brand
+              using the provided title.
+
+          max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
+              to 5.
+
+          min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/web/naics",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "input": input,
+                        "max_results": max_results,
+                        "min_results": min_results,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_naics_params.BrandRetrieveNaicsParams,
+                ),
+            ),
+            cast_to=BrandRetrieveNaicsResponse,
+        )
+
     def retrieve_simplified(
         self,
         *,
@@ -2343,6 +2486,413 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandRetrieveSimplifiedResponse,
+        )
+
+    def screenshot(
+        self,
+        *,
+        color_scheme: Literal["light", "dark"] | Omit = omit,
+        country: Literal[
+            "ad",
+            "ae",
+            "af",
+            "ag",
+            "ai",
+            "al",
+            "am",
+            "ao",
+            "ar",
+            "at",
+            "au",
+            "aw",
+            "az",
+            "ba",
+            "bb",
+            "bd",
+            "be",
+            "bf",
+            "bg",
+            "bh",
+            "bi",
+            "bj",
+            "bm",
+            "bn",
+            "bo",
+            "bq",
+            "br",
+            "bs",
+            "bw",
+            "by",
+            "bz",
+            "ca",
+            "cd",
+            "cf",
+            "cg",
+            "ch",
+            "ci",
+            "cl",
+            "cm",
+            "cn",
+            "co",
+            "cr",
+            "cv",
+            "cw",
+            "cy",
+            "cz",
+            "de",
+            "dj",
+            "dk",
+            "dm",
+            "do",
+            "dz",
+            "ec",
+            "ee",
+            "eg",
+            "es",
+            "et",
+            "fi",
+            "fj",
+            "fr",
+            "ga",
+            "gb",
+            "gd",
+            "ge",
+            "gf",
+            "gg",
+            "gh",
+            "gm",
+            "gn",
+            "gp",
+            "gq",
+            "gr",
+            "gt",
+            "gu",
+            "gw",
+            "gy",
+            "hk",
+            "hn",
+            "hr",
+            "ht",
+            "hu",
+            "id",
+            "ie",
+            "il",
+            "im",
+            "in",
+            "iq",
+            "ir",
+            "is",
+            "it",
+            "je",
+            "jm",
+            "jo",
+            "jp",
+            "ke",
+            "kg",
+            "kh",
+            "kn",
+            "kr",
+            "kw",
+            "ky",
+            "kz",
+            "la",
+            "lb",
+            "lc",
+            "lk",
+            "lr",
+            "ls",
+            "lt",
+            "lu",
+            "lv",
+            "ly",
+            "ma",
+            "mc",
+            "md",
+            "me",
+            "mf",
+            "mg",
+            "mk",
+            "ml",
+            "mm",
+            "mn",
+            "mo",
+            "mq",
+            "mr",
+            "mt",
+            "mu",
+            "mv",
+            "mw",
+            "mx",
+            "my",
+            "mz",
+            "na",
+            "nc",
+            "ne",
+            "ng",
+            "ni",
+            "nl",
+            "no",
+            "np",
+            "nz",
+            "om",
+            "pa",
+            "pe",
+            "pf",
+            "pg",
+            "ph",
+            "pk",
+            "pl",
+            "pr",
+            "ps",
+            "pt",
+            "py",
+            "qa",
+            "re",
+            "ro",
+            "rs",
+            "ru",
+            "rw",
+            "sa",
+            "sc",
+            "sd",
+            "se",
+            "sg",
+            "si",
+            "sk",
+            "sl",
+            "sm",
+            "sn",
+            "so",
+            "sr",
+            "ss",
+            "st",
+            "sv",
+            "sx",
+            "sy",
+            "sz",
+            "tc",
+            "td",
+            "tg",
+            "th",
+            "tj",
+            "tl",
+            "tm",
+            "tn",
+            "tr",
+            "tt",
+            "tw",
+            "tz",
+            "ua",
+            "ug",
+            "us",
+            "uy",
+            "uz",
+            "vc",
+            "ve",
+            "vg",
+            "vi",
+            "vn",
+            "ye",
+            "yt",
+            "za",
+            "zm",
+            "zw",
+        ]
+        | Omit = omit,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
+        full_screenshot: Literal["true", "false"] | Omit = omit,
+        handle_cookie_popup: Union[bool, Literal["true", "false"]] | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
+        scroll_offset: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        viewport: brand_screenshot_params.Viewport | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandScreenshotResponse:
+        """
+        Capture a screenshot of a website.
+
+        Args:
+          color_scheme: Optional parameter to choose the site's visual theme in the screenshot. Use
+              'light' or 'dark' when the site offers both appearances.
+
+          country: Two-letter ISO 3166-1 alpha-2 country code identifying a supported Context.dev
+              residential proxy exit location. Must be one of Context.dev's supported
+              countries. When provided, Context.dev fetches the target page from that country.
+
+          direct_url: A specific URL to screenshot directly, bypassing domain resolution (e.g.,
+              'https://example.com/pricing'). When provided, the screenshot is taken of this
+              exact URL. You must provide either 'domain' or 'directUrl', but not both.
+
+          domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
+              screenshot capturing all content. If 'false' or not provided, takes a viewport
+              screenshot (standard browser view).
+
+          handle_cookie_popup: Optional parameter to control cookie/consent popup handling. If 'true', we
+              dismiss cookie banner before capture. If 'false' or not provided, captures the
+              page without that step.
+
+          max_age_ms: Return a cached screenshot if a prior screenshot for the same parameters exists
+              and is younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always capture fresh.
+
+          page: Optional parameter to specify which page type to screenshot. If provided, the
+              system will scrape the domain's links and use heuristics to find the most
+              appropriate URL for the specified page type (30 supported languages). If not
+              provided, screenshots the main domain landing page. Only applicable when using
+              'domain', not 'directUrl'.
+
+          scroll_offset: Optional vertical scroll offset in pixels for capturing a long page in
+              viewport-sized chunks. When provided, the full page is captured once and the
+              returned image is the viewport-sized slice that begins at this Y offset (e.g.
+              request scrollOffset=0, then 1080, then 2160 to walk a 1920x1080 landing page
+              top to bottom). The final slice may be shorter than the viewport height. Takes
+              precedence over fullScreenshot. Max: 100000.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          viewport: Optional browser viewport dimensions for the screenshot. Defaults to 1920x1080.
+
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before taking
+              the screenshot. Min: 0. Max: 30000 (30 seconds). Defaults to 3000 ms when
+              omitted.
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/web/screenshot",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "color_scheme": color_scheme,
+                        "country": country,
+                        "direct_url": direct_url,
+                        "domain": domain,
+                        "full_screenshot": full_screenshot,
+                        "handle_cookie_popup": handle_cookie_popup,
+                        "max_age_ms": max_age_ms,
+                        "page": page,
+                        "scroll_offset": scroll_offset,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "viewport": viewport,
+                        "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
+                    },
+                    brand_screenshot_params.BrandScreenshotParams,
+                ),
+            ),
+            cast_to=BrandScreenshotResponse,
+        )
+
+    def styleguide(
+        self,
+        *,
+        color_scheme: Literal["light", "dark"] | Omit = omit,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandStyleguideResponse:
+        """
+        Extract a comprehensive design system from a website including colors,
+        typography, spacing, shadows, and UI components.
+
+        Args:
+          color_scheme: Optional browser color scheme to emulate for websites that respond to
+              prefers-color-scheme. This value is part of the styleguide cache key.
+
+          direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
+              resolution (e.g., 'https://example.com/design-system'). When provided, the
+              styleguide is extracted from this exact URL. You must provide either 'domain' or
+              'directUrl', but not both.
+
+          domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/web/styleguide",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "color_scheme": color_scheme,
+                        "direct_url": direct_url,
+                        "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_styleguide_params.BrandStyleguideParams,
+                ),
+            ),
+            cast_to=BrandStyleguideResponse,
         )
 
     def web_scrape_html(
@@ -3758,6 +4308,76 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrandAIQueryResponse,
+        )
+
+    async def fonts(
+        self,
+        *,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandFontsResponse:
+        """
+        Scrape font information from a website including font families, usage
+        statistics, fallbacks, and element/word counts.
+
+        Args:
+          direct_url: A specific URL to fetch fonts from directly, bypassing domain resolution (e.g.,
+              'https://example.com/design-system'). When provided, fonts are extracted from
+              this exact URL. You must provide either 'domain' or 'directUrl', but not both.
+
+          domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/web/fonts",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "direct_url": direct_url,
+                        "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_fonts_params.BrandFontsParams,
+                ),
+            ),
+            cast_to=BrandFontsResponse,
         )
 
     async def identify_from_transaction(
@@ -5430,6 +6050,71 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveByTickerResponse,
         )
 
+    async def retrieve_naics(
+        self,
+        *,
+        input: str,
+        max_results: int | Omit = omit,
+        min_results: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandRetrieveNaicsResponse:
+        """
+        Classify any brand into 2022 NAICS industry codes from its domain or name.
+
+        Args:
+          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided,
+              it will be used for classification, otherwise, we will search for the brand
+              using the provided title.
+
+          max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
+              to 5.
+
+          min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/web/naics",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "input": input,
+                        "max_results": max_results,
+                        "min_results": min_results,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_naics_params.BrandRetrieveNaicsParams,
+                ),
+            ),
+            cast_to=BrandRetrieveNaicsResponse,
+        )
+
     async def retrieve_simplified(
         self,
         *,
@@ -5495,6 +6180,413 @@ class AsyncBrandResource(AsyncAPIResource):
                 ),
             ),
             cast_to=BrandRetrieveSimplifiedResponse,
+        )
+
+    async def screenshot(
+        self,
+        *,
+        color_scheme: Literal["light", "dark"] | Omit = omit,
+        country: Literal[
+            "ad",
+            "ae",
+            "af",
+            "ag",
+            "ai",
+            "al",
+            "am",
+            "ao",
+            "ar",
+            "at",
+            "au",
+            "aw",
+            "az",
+            "ba",
+            "bb",
+            "bd",
+            "be",
+            "bf",
+            "bg",
+            "bh",
+            "bi",
+            "bj",
+            "bm",
+            "bn",
+            "bo",
+            "bq",
+            "br",
+            "bs",
+            "bw",
+            "by",
+            "bz",
+            "ca",
+            "cd",
+            "cf",
+            "cg",
+            "ch",
+            "ci",
+            "cl",
+            "cm",
+            "cn",
+            "co",
+            "cr",
+            "cv",
+            "cw",
+            "cy",
+            "cz",
+            "de",
+            "dj",
+            "dk",
+            "dm",
+            "do",
+            "dz",
+            "ec",
+            "ee",
+            "eg",
+            "es",
+            "et",
+            "fi",
+            "fj",
+            "fr",
+            "ga",
+            "gb",
+            "gd",
+            "ge",
+            "gf",
+            "gg",
+            "gh",
+            "gm",
+            "gn",
+            "gp",
+            "gq",
+            "gr",
+            "gt",
+            "gu",
+            "gw",
+            "gy",
+            "hk",
+            "hn",
+            "hr",
+            "ht",
+            "hu",
+            "id",
+            "ie",
+            "il",
+            "im",
+            "in",
+            "iq",
+            "ir",
+            "is",
+            "it",
+            "je",
+            "jm",
+            "jo",
+            "jp",
+            "ke",
+            "kg",
+            "kh",
+            "kn",
+            "kr",
+            "kw",
+            "ky",
+            "kz",
+            "la",
+            "lb",
+            "lc",
+            "lk",
+            "lr",
+            "ls",
+            "lt",
+            "lu",
+            "lv",
+            "ly",
+            "ma",
+            "mc",
+            "md",
+            "me",
+            "mf",
+            "mg",
+            "mk",
+            "ml",
+            "mm",
+            "mn",
+            "mo",
+            "mq",
+            "mr",
+            "mt",
+            "mu",
+            "mv",
+            "mw",
+            "mx",
+            "my",
+            "mz",
+            "na",
+            "nc",
+            "ne",
+            "ng",
+            "ni",
+            "nl",
+            "no",
+            "np",
+            "nz",
+            "om",
+            "pa",
+            "pe",
+            "pf",
+            "pg",
+            "ph",
+            "pk",
+            "pl",
+            "pr",
+            "ps",
+            "pt",
+            "py",
+            "qa",
+            "re",
+            "ro",
+            "rs",
+            "ru",
+            "rw",
+            "sa",
+            "sc",
+            "sd",
+            "se",
+            "sg",
+            "si",
+            "sk",
+            "sl",
+            "sm",
+            "sn",
+            "so",
+            "sr",
+            "ss",
+            "st",
+            "sv",
+            "sx",
+            "sy",
+            "sz",
+            "tc",
+            "td",
+            "tg",
+            "th",
+            "tj",
+            "tl",
+            "tm",
+            "tn",
+            "tr",
+            "tt",
+            "tw",
+            "tz",
+            "ua",
+            "ug",
+            "us",
+            "uy",
+            "uz",
+            "vc",
+            "ve",
+            "vg",
+            "vi",
+            "vn",
+            "ye",
+            "yt",
+            "za",
+            "zm",
+            "zw",
+        ]
+        | Omit = omit,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
+        full_screenshot: Literal["true", "false"] | Omit = omit,
+        handle_cookie_popup: Union[bool, Literal["true", "false"]] | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
+        scroll_offset: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        viewport: brand_screenshot_params.Viewport | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandScreenshotResponse:
+        """
+        Capture a screenshot of a website.
+
+        Args:
+          color_scheme: Optional parameter to choose the site's visual theme in the screenshot. Use
+              'light' or 'dark' when the site offers both appearances.
+
+          country: Two-letter ISO 3166-1 alpha-2 country code identifying a supported Context.dev
+              residential proxy exit location. Must be one of Context.dev's supported
+              countries. When provided, Context.dev fetches the target page from that country.
+
+          direct_url: A specific URL to screenshot directly, bypassing domain resolution (e.g.,
+              'https://example.com/pricing'). When provided, the screenshot is taken of this
+              exact URL. You must provide either 'domain' or 'directUrl', but not both.
+
+          domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
+              screenshot capturing all content. If 'false' or not provided, takes a viewport
+              screenshot (standard browser view).
+
+          handle_cookie_popup: Optional parameter to control cookie/consent popup handling. If 'true', we
+              dismiss cookie banner before capture. If 'false' or not provided, captures the
+              page without that step.
+
+          max_age_ms: Return a cached screenshot if a prior screenshot for the same parameters exists
+              and is younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always capture fresh.
+
+          page: Optional parameter to specify which page type to screenshot. If provided, the
+              system will scrape the domain's links and use heuristics to find the most
+              appropriate URL for the specified page type (30 supported languages). If not
+              provided, screenshots the main domain landing page. Only applicable when using
+              'domain', not 'directUrl'.
+
+          scroll_offset: Optional vertical scroll offset in pixels for capturing a long page in
+              viewport-sized chunks. When provided, the full page is captured once and the
+              returned image is the viewport-sized slice that begins at this Y offset (e.g.
+              request scrollOffset=0, then 1080, then 2160 to walk a 1920x1080 landing page
+              top to bottom). The final slice may be shorter than the viewport height. Takes
+              precedence over fullScreenshot. Max: 100000.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          viewport: Optional browser viewport dimensions for the screenshot. Defaults to 1920x1080.
+
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before taking
+              the screenshot. Min: 0. Max: 30000 (30 seconds). Defaults to 3000 ms when
+              omitted.
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/web/screenshot",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "color_scheme": color_scheme,
+                        "country": country,
+                        "direct_url": direct_url,
+                        "domain": domain,
+                        "full_screenshot": full_screenshot,
+                        "handle_cookie_popup": handle_cookie_popup,
+                        "max_age_ms": max_age_ms,
+                        "page": page,
+                        "scroll_offset": scroll_offset,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "viewport": viewport,
+                        "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
+                    },
+                    brand_screenshot_params.BrandScreenshotParams,
+                ),
+            ),
+            cast_to=BrandScreenshotResponse,
+        )
+
+    async def styleguide(
+        self,
+        *,
+        color_scheme: Literal["light", "dark"] | Omit = omit,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandStyleguideResponse:
+        """
+        Extract a comprehensive design system from a website including colors,
+        typography, spacing, shadows, and UI components.
+
+        Args:
+          color_scheme: Optional browser color scheme to emulate for websites that respond to
+              prefers-color-scheme. This value is part of the styleguide cache key.
+
+          direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
+              resolution (e.g., 'https://example.com/design-system'). When provided, the
+              styleguide is extracted from this exact URL. You must provide either 'domain' or
+              'directUrl', but not both.
+
+          domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/web/styleguide",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "color_scheme": color_scheme,
+                        "direct_url": direct_url,
+                        "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_styleguide_params.BrandStyleguideParams,
+                ),
+            ),
+            cast_to=BrandStyleguideResponse,
         )
 
     async def web_scrape_html(
@@ -6376,6 +7468,9 @@ class BrandResourceWithRawResponse:
         self.ai_query = to_raw_response_wrapper(
             brand.ai_query,
         )
+        self.fonts = to_raw_response_wrapper(
+            brand.fonts,
+        )
         self.identify_from_transaction = to_raw_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -6397,8 +7492,17 @@ class BrandResourceWithRawResponse:
         self.retrieve_by_ticker = to_raw_response_wrapper(
             brand.retrieve_by_ticker,
         )
+        self.retrieve_naics = to_raw_response_wrapper(
+            brand.retrieve_naics,
+        )
         self.retrieve_simplified = to_raw_response_wrapper(
             brand.retrieve_simplified,
+        )
+        self.screenshot = to_raw_response_wrapper(
+            brand.screenshot,
+        )
+        self.styleguide = to_raw_response_wrapper(
+            brand.styleguide,
         )
         self.web_scrape_html = to_raw_response_wrapper(
             brand.web_scrape_html,
@@ -6430,6 +7534,9 @@ class AsyncBrandResourceWithRawResponse:
         self.ai_query = async_to_raw_response_wrapper(
             brand.ai_query,
         )
+        self.fonts = async_to_raw_response_wrapper(
+            brand.fonts,
+        )
         self.identify_from_transaction = async_to_raw_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -6451,8 +7558,17 @@ class AsyncBrandResourceWithRawResponse:
         self.retrieve_by_ticker = async_to_raw_response_wrapper(
             brand.retrieve_by_ticker,
         )
+        self.retrieve_naics = async_to_raw_response_wrapper(
+            brand.retrieve_naics,
+        )
         self.retrieve_simplified = async_to_raw_response_wrapper(
             brand.retrieve_simplified,
+        )
+        self.screenshot = async_to_raw_response_wrapper(
+            brand.screenshot,
+        )
+        self.styleguide = async_to_raw_response_wrapper(
+            brand.styleguide,
         )
         self.web_scrape_html = async_to_raw_response_wrapper(
             brand.web_scrape_html,
@@ -6484,6 +7600,9 @@ class BrandResourceWithStreamingResponse:
         self.ai_query = to_streamed_response_wrapper(
             brand.ai_query,
         )
+        self.fonts = to_streamed_response_wrapper(
+            brand.fonts,
+        )
         self.identify_from_transaction = to_streamed_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -6505,8 +7624,17 @@ class BrandResourceWithStreamingResponse:
         self.retrieve_by_ticker = to_streamed_response_wrapper(
             brand.retrieve_by_ticker,
         )
+        self.retrieve_naics = to_streamed_response_wrapper(
+            brand.retrieve_naics,
+        )
         self.retrieve_simplified = to_streamed_response_wrapper(
             brand.retrieve_simplified,
+        )
+        self.screenshot = to_streamed_response_wrapper(
+            brand.screenshot,
+        )
+        self.styleguide = to_streamed_response_wrapper(
+            brand.styleguide,
         )
         self.web_scrape_html = to_streamed_response_wrapper(
             brand.web_scrape_html,
@@ -6538,6 +7666,9 @@ class AsyncBrandResourceWithStreamingResponse:
         self.ai_query = async_to_streamed_response_wrapper(
             brand.ai_query,
         )
+        self.fonts = async_to_streamed_response_wrapper(
+            brand.fonts,
+        )
         self.identify_from_transaction = async_to_streamed_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -6559,8 +7690,17 @@ class AsyncBrandResourceWithStreamingResponse:
         self.retrieve_by_ticker = async_to_streamed_response_wrapper(
             brand.retrieve_by_ticker,
         )
+        self.retrieve_naics = async_to_streamed_response_wrapper(
+            brand.retrieve_naics,
+        )
         self.retrieve_simplified = async_to_streamed_response_wrapper(
             brand.retrieve_simplified,
+        )
+        self.screenshot = async_to_streamed_response_wrapper(
+            brand.screenshot,
+        )
+        self.styleguide = async_to_streamed_response_wrapper(
+            brand.styleguide,
         )
         self.web_scrape_html = async_to_streamed_response_wrapper(
             brand.web_scrape_html,
