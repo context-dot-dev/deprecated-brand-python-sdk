@@ -2725,9 +2725,8 @@ class BrandResource(SyncAPIResource):
           color_scheme: Optional parameter to choose the site's visual theme in the screenshot. Use
               'light' or 'dark' when the site offers both appearances.
 
-          country: Two-letter ISO 3166-1 alpha-2 country code identifying a supported Context.dev
-              residential proxy exit location. Must be one of Context.dev's supported
-              countries. When provided, Context.dev fetches the target page from that country.
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
 
           direct_url: A specific URL to screenshot directly, bypassing domain resolution (e.g.,
               'https://example.com/pricing'). When provided, the screenshot is taken of this
@@ -3138,9 +3137,8 @@ class BrandResource(SyncAPIResource):
               content is captured. Requires a paid plan. Send a JSON array in the query
               parameter. Maximum: 5 actions.
 
-          country: Two-letter ISO 3166-1 alpha-2 country code identifying a supported Context.dev
-              residential proxy exit location. Must be one of Context.dev's supported
-              countries. When provided, Context.dev fetches the target page from that country.
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
 
           exclude_selectors: CSS selectors to remove from the result. Applied after includeSelectors.
               Exclusion takes precedence: an element matching both is removed. Examples:
@@ -3579,9 +3577,8 @@ class BrandResource(SyncAPIResource):
               content is captured. Requires a paid plan. Send a JSON array in the query
               parameter. Maximum: 5 actions.
 
-          country: Two-letter ISO 3166-1 alpha-2 country code identifying a supported Context.dev
-              residential proxy exit location. Must be one of Context.dev's supported
-              countries. When provided, Context.dev fetches the target page from that country.
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
 
           exclude_selectors: CSS selectors to remove before conversion to Markdown. Applied after
               includeSelectors. Exclusion takes precedence: an element matching both is
@@ -6419,9 +6416,8 @@ class AsyncBrandResource(AsyncAPIResource):
           color_scheme: Optional parameter to choose the site's visual theme in the screenshot. Use
               'light' or 'dark' when the site offers both appearances.
 
-          country: Two-letter ISO 3166-1 alpha-2 country code identifying a supported Context.dev
-              residential proxy exit location. Must be one of Context.dev's supported
-              countries. When provided, Context.dev fetches the target page from that country.
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
 
           direct_url: A specific URL to screenshot directly, bypassing domain resolution (e.g.,
               'https://example.com/pricing'). When provided, the screenshot is taken of this
@@ -6832,9 +6828,8 @@ class AsyncBrandResource(AsyncAPIResource):
               content is captured. Requires a paid plan. Send a JSON array in the query
               parameter. Maximum: 5 actions.
 
-          country: Two-letter ISO 3166-1 alpha-2 country code identifying a supported Context.dev
-              residential proxy exit location. Must be one of Context.dev's supported
-              countries. When provided, Context.dev fetches the target page from that country.
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
 
           exclude_selectors: CSS selectors to remove from the result. Applied after includeSelectors.
               Exclusion takes precedence: an element matching both is removed. Examples:
@@ -7273,9 +7268,8 @@ class AsyncBrandResource(AsyncAPIResource):
               content is captured. Requires a paid plan. Send a JSON array in the query
               parameter. Maximum: 5 actions.
 
-          country: Two-letter ISO 3166-1 alpha-2 country code identifying a supported Context.dev
-              residential proxy exit location. Must be one of Context.dev's supported
-              countries. When provided, Context.dev fetches the target page from that country.
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
 
           exclude_selectors: CSS selectors to remove before conversion to Markdown. Applied after
               includeSelectors. Exclusion takes precedence: an element matching both is
