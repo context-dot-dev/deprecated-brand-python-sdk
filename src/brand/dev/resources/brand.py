@@ -3565,6 +3565,7 @@ class BrandResource(SyncAPIResource):
         | 401 / 403   | No                                        | Invalid/disabled key, insufficient permissions, or credits exhausted; inspect error_code |
         | 404         | No                                        | Target page returned or fingerprinted as not found                                       |
         | 408         | No                                        | Request timed out                                                                        |
+        | 413         | No                                        | Target content exceeds the maximum supported size (20 MB)                                |
         | 415         | No                                        | Unsupported content type                                                                 |
         | 429         | No                                        | Per-minute rate limit exceeded; honor Retry-After                                        |
         | 500         | No                                        | Internal error                                                                           |
@@ -7256,6 +7257,7 @@ class AsyncBrandResource(AsyncAPIResource):
         | 401 / 403   | No                                        | Invalid/disabled key, insufficient permissions, or credits exhausted; inspect error_code |
         | 404         | No                                        | Target page returned or fingerprinted as not found                                       |
         | 408         | No                                        | Request timed out                                                                        |
+        | 413         | No                                        | Target content exceeds the maximum supported size (20 MB)                                |
         | 415         | No                                        | Unsupported content type                                                                 |
         | 429         | No                                        | Per-minute rate limit exceeded; honor Retry-After                                        |
         | 500         | No                                        | Internal error                                                                           |
