@@ -3679,6 +3679,7 @@ class BrandResource(SyncAPIResource):
         domain: str,
         headers: Dict[str, str] | Omit = omit,
         max_links: int | Omit = omit,
+        search: str | Omit = omit,
         sitemap_url: str | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
@@ -3691,8 +3692,13 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
-        """
-        Crawl an entire website's sitemap and return all discovered page URLs.
+        """Crawl an entire website's sitemap and return all discovered page URLs.
+
+        Pass
+        `search` to have the crawled sitemap filtered down to the pages about a phrase
+        (for example `pricing and plans` or `api authentication docs`), most relevant
+        first — a searched crawl scans the whole sitemap and costs 2 credits instead
+        of 1.
 
         Args:
           domain: Domain to build a sitemap for
@@ -3703,6 +3709,10 @@ class BrandResource(SyncAPIResource):
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          search: Optional search phrase. When provided, the crawled sitemap is filtered to the
+              pages whose URLs are about that phrase, most relevant first, and the request
+              costs 2 credits instead of 1.
 
           sitemap_url: Optional explicit sitemap URL. When provided, exactly this sitemap is crawled
               instead of discovering the domain's sitemaps.
@@ -3743,6 +3753,7 @@ class BrandResource(SyncAPIResource):
                         "domain": domain,
                         "headers": headers,
                         "max_links": max_links,
+                        "search": search,
                         "sitemap_url": sitemap_url,
                         "tags": tags,
                         "timeout_ms": timeout_ms,
@@ -7371,6 +7382,7 @@ class AsyncBrandResource(AsyncAPIResource):
         domain: str,
         headers: Dict[str, str] | Omit = omit,
         max_links: int | Omit = omit,
+        search: str | Omit = omit,
         sitemap_url: str | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
@@ -7383,8 +7395,13 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
-        """
-        Crawl an entire website's sitemap and return all discovered page URLs.
+        """Crawl an entire website's sitemap and return all discovered page URLs.
+
+        Pass
+        `search` to have the crawled sitemap filtered down to the pages about a phrase
+        (for example `pricing and plans` or `api authentication docs`), most relevant
+        first — a searched crawl scans the whole sitemap and costs 2 credits instead
+        of 1.
 
         Args:
           domain: Domain to build a sitemap for
@@ -7395,6 +7412,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          search: Optional search phrase. When provided, the crawled sitemap is filtered to the
+              pages whose URLs are about that phrase, most relevant first, and the request
+              costs 2 credits instead of 1.
 
           sitemap_url: Optional explicit sitemap URL. When provided, exactly this sitemap is crawled
               instead of discovering the domain's sitemaps.
@@ -7435,6 +7456,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "domain": domain,
                         "headers": headers,
                         "max_links": max_links,
+                        "search": search,
                         "sitemap_url": sitemap_url,
                         "tags": tags,
                         "timeout_ms": timeout_ms,
