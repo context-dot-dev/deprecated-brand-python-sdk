@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing import Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
@@ -153,7 +153,7 @@ class BrandRetrieveByIsinParams(TypedDict, total=False):
     year.
     """
 
-    max_speed: Annotated[Union[bool, Literal["true", "false"]], PropertyInfo(alias="maxSpeed")]
+    max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
     """Optional parameter to optimize the API call for maximum speed.
 
     When set to true, the API will skip time-consuming operations for faster

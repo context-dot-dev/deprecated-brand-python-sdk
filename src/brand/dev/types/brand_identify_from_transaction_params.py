@@ -390,13 +390,13 @@ class BrandIdentifyFromTransactionParams(TypedDict, total=False):
     ]
     """Language to force for the retrieved brand data."""
 
-    high_confidence_only: Union[bool, Literal["true", "false"]]
+    high_confidence_only: bool
     """
     When set to true, the API will perform an additional verification steps to
     ensure the identified brand matches the transaction with high confidence.
     """
 
-    max_speed: Annotated[Union[bool, Literal["true", "false"]], PropertyInfo(alias="maxSpeed")]
+    max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
     """Optional parameter to optimize the API call for maximum speed.
 
     When set to true, the API will skip time-consuming operations for faster
