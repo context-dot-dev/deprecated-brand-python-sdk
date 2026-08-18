@@ -782,6 +782,7 @@ class TestBrand:
     @parametrize
     def test_method_screenshot_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.screenshot(
+            clear_popups=True,
             color_scheme="light",
             country="de",
             direct_url="https://example.com",
@@ -1861,6 +1862,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_screenshot_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.screenshot(
+            clear_popups=True,
             color_scheme="light",
             country="de",
             direct_url="https://example.com",
