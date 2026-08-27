@@ -41,18 +41,21 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: BrandDev) -> None:
-        brand = client.brand.retrieve(
-            domain="domain",
-        )
+        brand = client.brand.retrieve()
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve(
-            domain="domain",
-            force_language="albanian",
+            domain="xxx",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            name="xxx",
+            tags=["production", "team-alpha"],
+            ticker="ticker",
+            ticker_exchange="AMEX",
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
@@ -60,9 +63,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.retrieve(
-            domain="domain",
-        )
+        response = client.brand.with_raw_response.retrieve()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -72,9 +73,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.retrieve(
-            domain="domain",
-        ) as response:
+        with client.brand.with_streaming_response.retrieve() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -96,6 +95,8 @@ class TestBrand:
     def test_method_ai_product_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.ai_product(
             url="https://example.com",
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
@@ -139,7 +140,9 @@ class TestBrand:
     def test_method_ai_products_with_all_params_overload_1(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
             domain="domain",
+            max_age_ms=0,
             max_products=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
@@ -183,7 +186,9 @@ class TestBrand:
     def test_method_ai_products_with_all_params_overload_2(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
             direct_url="https://example.com",
+            max_age_ms=0,
             max_products=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
@@ -259,6 +264,7 @@ class TestBrand:
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
@@ -308,16 +314,17 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_fonts(self, client: BrandDev) -> None:
-        brand = client.brand.fonts(
-            domain="domain",
-        )
+        brand = client.brand.fonts()
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_fonts_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.fonts(
-            domain="domain",
+            direct_url="https://example.com",
+            domain="xxx",
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
@@ -325,9 +332,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_fonts(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.fonts(
-            domain="domain",
-        )
+        response = client.brand.with_raw_response.fonts()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -337,9 +342,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_fonts(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.fonts(
-            domain="domain",
-        ) as response:
+        with client.brand.with_streaming_response.fonts() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -352,7 +355,7 @@ class TestBrand:
     @parametrize
     def test_method_identify_from_transaction(self, client: BrandDev) -> None:
         brand = client.brand.identify_from_transaction(
-            transaction_info="transaction_info",
+            transaction_info="xxx",
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
@@ -360,14 +363,15 @@ class TestBrand:
     @parametrize
     def test_method_identify_from_transaction_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.identify_from_transaction(
-            transaction_info="transaction_info",
+            transaction_info="xxx",
             city="city",
-            country_gl="ad",
-            force_language="albanian",
+            country_gl="af",
+            force_language="afrikaans",
             high_confidence_only=True,
             max_speed=True,
-            mcc="mcc",
-            phone=0,
+            mcc="string",
+            phone="string",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
@@ -376,7 +380,7 @@ class TestBrand:
     @parametrize
     def test_raw_response_identify_from_transaction(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.identify_from_transaction(
-            transaction_info="transaction_info",
+            transaction_info="xxx",
         )
 
         assert response.is_closed is True
@@ -388,7 +392,7 @@ class TestBrand:
     @parametrize
     def test_streaming_response_identify_from_transaction(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.identify_from_transaction(
-            transaction_info="transaction_info",
+            transaction_info="xxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -411,6 +415,7 @@ class TestBrand:
     def test_method_prefetch_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.prefetch(
             domain="domain",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
@@ -454,6 +459,7 @@ class TestBrand:
     def test_method_prefetch_by_email_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.prefetch_by_email(
             email="dev@stainless.com",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
@@ -497,8 +503,10 @@ class TestBrand:
     def test_method_retrieve_by_email_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_email(
             email="dev@stainless.com",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
@@ -542,8 +550,10 @@ class TestBrand:
     def test_method_retrieve_by_isin_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_isin(
             isin="SE60513A9993",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
@@ -587,9 +597,11 @@ class TestBrand:
     def test_method_retrieve_by_name_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_name(
             name="xxx",
-            country_gl="ad",
-            force_language="albanian",
+            country_gl="af",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
@@ -633,8 +645,10 @@ class TestBrand:
     def test_method_retrieve_by_ticker_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_ticker(
             ticker="ticker",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            tags=["production", "team-alpha"],
             ticker_exchange="AMEX",
             timeout_ms=1000,
         )
@@ -670,7 +684,7 @@ class TestBrand:
     @parametrize
     def test_method_retrieve_naics(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_naics(
-            input="input",
+            input="xxxx",
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
@@ -678,9 +692,10 @@ class TestBrand:
     @parametrize
     def test_method_retrieve_naics_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_naics(
-            input="input",
+            input="xxxx",
             max_results=1,
             min_results=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
@@ -689,7 +704,7 @@ class TestBrand:
     @parametrize
     def test_raw_response_retrieve_naics(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_naics(
-            input="input",
+            input="xxxx",
         )
 
         assert response.is_closed is True
@@ -701,7 +716,7 @@ class TestBrand:
     @parametrize
     def test_streaming_response_retrieve_naics(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve_naics(
-            input="input",
+            input="xxxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -715,7 +730,7 @@ class TestBrand:
     @parametrize
     def test_method_retrieve_simplified(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_simplified(
-            domain="domain",
+            domain="xxx",
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
@@ -723,7 +738,10 @@ class TestBrand:
     @parametrize
     def test_method_retrieve_simplified_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_simplified(
-            domain="domain",
+            domain="xxx",
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
+            theme="light",
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
@@ -732,7 +750,7 @@ class TestBrand:
     @parametrize
     def test_raw_response_retrieve_simplified(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_simplified(
-            domain="domain",
+            domain="xxx",
         )
 
         assert response.is_closed is True
@@ -744,7 +762,7 @@ class TestBrand:
     @parametrize
     def test_streaming_response_retrieve_simplified(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve_simplified(
-            domain="domain",
+            domain="xxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -757,28 +775,38 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_screenshot(self, client: BrandDev) -> None:
-        brand = client.brand.screenshot(
-            domain="domain",
-        )
+        brand = client.brand.screenshot()
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_screenshot_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.screenshot(
-            domain="domain",
+            clear_popups=True,
+            color_scheme="light",
+            country="de",
+            direct_url="https://example.com",
+            domain="xxx",
             full_screenshot="true",
+            handle_cookie_popup=True,
+            max_age_ms=0,
             page="login",
-            prioritize="speed",
+            scroll_offset=0,
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
+            viewport={
+                "height": 240,
+                "width": 240,
+            },
+            wait_for_ms=0,
+            zdr="enabled",
         )
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_screenshot(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.screenshot(
-            domain="domain",
-        )
+        response = client.brand.with_raw_response.screenshot()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -788,9 +816,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_screenshot(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.screenshot(
-            domain="domain",
-        ) as response:
+        with client.brand.with_streaming_response.screenshot() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -809,8 +835,11 @@ class TestBrand:
     @parametrize
     def test_method_styleguide_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.styleguide(
+            color_scheme="light",
             direct_url="https://example.com",
-            domain="domain",
+            domain="xxx",
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
@@ -847,6 +876,38 @@ class TestBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_web_scrape_html_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_html(
+            url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
+            country="de",
+            exclude_selectors=["x"],
+            headers={"foo": "J!"},
+            include_frames=True,
+            include_selectors=["x"],
+            max_age_ms=0,
+            pdf={
+                "end": 1,
+                "ocr": True,
+                "should_parse": True,
+                "start": 1,
+            },
+            settle_animations=True,
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
+            use_main_content_only=True,
+            wait_for_ms=0,
+            zdr="enabled",
+        )
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_web_scrape_html(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.web_scrape_html(
             url="https://example.com",
@@ -876,6 +937,32 @@ class TestBrand:
     def test_method_web_scrape_images(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_images(
             url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_web_scrape_images_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_images(
+            url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
+            dedupe=True,
+            enrichment={
+                "classification": True,
+                "hosted_url": True,
+                "max_time_per_ms": 1,
+                "resolution": True,
+            },
+            headers={"foo": "J!"},
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
 
@@ -918,10 +1005,34 @@ class TestBrand:
     def test_method_web_scrape_md_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_md(
             url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
+            country="de",
+            exclude_selectors=["x"],
+            headers={"foo": "J!"},
+            include_frames=True,
+            include_html=True,
             include_images=True,
             include_links=True,
+            include_selectors=["x"],
+            max_age_ms=0,
+            pdf={
+                "end": 1,
+                "ocr": True,
+                "should_parse": True,
+                "start": 1,
+            },
+            settle_animations=True,
             shorten_base64_images=True,
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
             use_main_content_only=True,
+            wait_for_ms=0,
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -955,7 +1066,7 @@ class TestBrand:
     @parametrize
     def test_method_web_scrape_sitemap(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_sitemap(
-            domain="domain",
+            domain="xxx",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
@@ -963,8 +1074,15 @@ class TestBrand:
     @parametrize
     def test_method_web_scrape_sitemap_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_sitemap(
-            domain="domain",
+            domain="xxx",
+            headers={"foo": "J!"},
             max_links=1,
+            search="help center and troubleshooting articles",
+            sitemap_url="https://example.com",
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
+            url_regex="^https?://[^/]+/blog/",
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
@@ -972,7 +1090,7 @@ class TestBrand:
     @parametrize
     def test_raw_response_web_scrape_sitemap(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.web_scrape_sitemap(
-            domain="domain",
+            domain="xxx",
         )
 
         assert response.is_closed is True
@@ -984,7 +1102,7 @@ class TestBrand:
     @parametrize
     def test_streaming_response_web_scrape_sitemap(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.web_scrape_sitemap(
-            domain="domain",
+            domain="xxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1003,18 +1121,21 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.retrieve(
-            domain="domain",
-        )
+        brand = await async_client.brand.retrieve()
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve(
-            domain="domain",
-            force_language="albanian",
+            domain="xxx",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            name="xxx",
+            tags=["production", "team-alpha"],
+            ticker="ticker",
+            ticker_exchange="AMEX",
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
@@ -1022,9 +1143,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.retrieve(
-            domain="domain",
-        )
+        response = await async_client.brand.with_raw_response.retrieve()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1034,9 +1153,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.retrieve(
-            domain="domain",
-        ) as response:
+        async with async_client.brand.with_streaming_response.retrieve() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -1058,6 +1175,8 @@ class TestAsyncBrand:
     async def test_method_ai_product_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_product(
             url="https://example.com",
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
@@ -1101,7 +1220,9 @@ class TestAsyncBrand:
     async def test_method_ai_products_with_all_params_overload_1(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
             domain="domain",
+            max_age_ms=0,
             max_products=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
@@ -1145,7 +1266,9 @@ class TestAsyncBrand:
     async def test_method_ai_products_with_all_params_overload_2(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
             direct_url="https://example.com",
+            max_age_ms=0,
             max_products=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
@@ -1221,6 +1344,7 @@ class TestAsyncBrand:
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
@@ -1270,16 +1394,17 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_fonts(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.fonts(
-            domain="domain",
-        )
+        brand = await async_client.brand.fonts()
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_fonts_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.fonts(
-            domain="domain",
+            direct_url="https://example.com",
+            domain="xxx",
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
@@ -1287,9 +1412,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_fonts(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.fonts(
-            domain="domain",
-        )
+        response = await async_client.brand.with_raw_response.fonts()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1299,9 +1422,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_fonts(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.fonts(
-            domain="domain",
-        ) as response:
+        async with async_client.brand.with_streaming_response.fonts() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -1314,7 +1435,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_identify_from_transaction(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.identify_from_transaction(
-            transaction_info="transaction_info",
+            transaction_info="xxx",
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
@@ -1322,14 +1443,15 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_identify_from_transaction_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.identify_from_transaction(
-            transaction_info="transaction_info",
+            transaction_info="xxx",
             city="city",
-            country_gl="ad",
-            force_language="albanian",
+            country_gl="af",
+            force_language="afrikaans",
             high_confidence_only=True,
             max_speed=True,
-            mcc="mcc",
-            phone=0,
+            mcc="string",
+            phone="string",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
@@ -1338,7 +1460,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_raw_response_identify_from_transaction(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.identify_from_transaction(
-            transaction_info="transaction_info",
+            transaction_info="xxx",
         )
 
         assert response.is_closed is True
@@ -1350,7 +1472,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_streaming_response_identify_from_transaction(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.identify_from_transaction(
-            transaction_info="transaction_info",
+            transaction_info="xxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1373,6 +1495,7 @@ class TestAsyncBrand:
     async def test_method_prefetch_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch(
             domain="domain",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
@@ -1416,6 +1539,7 @@ class TestAsyncBrand:
     async def test_method_prefetch_by_email_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch_by_email(
             email="dev@stainless.com",
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
@@ -1459,8 +1583,10 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_email_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_email(
             email="dev@stainless.com",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
@@ -1504,8 +1630,10 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_isin_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_isin(
             isin="SE60513A9993",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
@@ -1549,9 +1677,11 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_name_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_name(
             name="xxx",
-            country_gl="ad",
-            force_language="albanian",
+            country_gl="af",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
@@ -1595,8 +1725,10 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_ticker_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_ticker(
             ticker="ticker",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=0,
             max_speed=True,
+            tags=["production", "team-alpha"],
             ticker_exchange="AMEX",
             timeout_ms=1000,
         )
@@ -1632,7 +1764,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_naics(
-            input="input",
+            input="xxxx",
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
@@ -1640,9 +1772,10 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_retrieve_naics_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_naics(
-            input="input",
+            input="xxxx",
             max_results=1,
             min_results=1,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
@@ -1651,7 +1784,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_raw_response_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_naics(
-            input="input",
+            input="xxxx",
         )
 
         assert response.is_closed is True
@@ -1663,7 +1796,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_streaming_response_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve_naics(
-            input="input",
+            input="xxxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1677,7 +1810,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_simplified(
-            domain="domain",
+            domain="xxx",
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
@@ -1685,7 +1818,10 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_retrieve_simplified_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_simplified(
-            domain="domain",
+            domain="xxx",
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
+            theme="light",
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
@@ -1694,7 +1830,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_raw_response_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_simplified(
-            domain="domain",
+            domain="xxx",
         )
 
         assert response.is_closed is True
@@ -1706,7 +1842,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_streaming_response_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve_simplified(
-            domain="domain",
+            domain="xxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1719,28 +1855,38 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_screenshot(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.screenshot(
-            domain="domain",
-        )
+        brand = await async_client.brand.screenshot()
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_screenshot_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.screenshot(
-            domain="domain",
+            clear_popups=True,
+            color_scheme="light",
+            country="de",
+            direct_url="https://example.com",
+            domain="xxx",
             full_screenshot="true",
+            handle_cookie_popup=True,
+            max_age_ms=0,
             page="login",
-            prioritize="speed",
+            scroll_offset=0,
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
+            viewport={
+                "height": 240,
+                "width": 240,
+            },
+            wait_for_ms=0,
+            zdr="enabled",
         )
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_screenshot(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.screenshot(
-            domain="domain",
-        )
+        response = await async_client.brand.with_raw_response.screenshot()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1750,9 +1896,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_screenshot(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.screenshot(
-            domain="domain",
-        ) as response:
+        async with async_client.brand.with_streaming_response.screenshot() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -1771,8 +1915,11 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_styleguide_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.styleguide(
+            color_scheme="light",
             direct_url="https://example.com",
-            domain="domain",
+            domain="xxx",
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
             timeout_ms=1000,
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
@@ -1809,6 +1956,38 @@ class TestAsyncBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_web_scrape_html_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_html(
+            url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
+            country="de",
+            exclude_selectors=["x"],
+            headers={"foo": "J!"},
+            include_frames=True,
+            include_selectors=["x"],
+            max_age_ms=0,
+            pdf={
+                "end": 1,
+                "ocr": True,
+                "should_parse": True,
+                "start": 1,
+            },
+            settle_animations=True,
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
+            use_main_content_only=True,
+            wait_for_ms=0,
+            zdr="enabled",
+        )
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_raw_response_web_scrape_html(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.web_scrape_html(
             url="https://example.com",
@@ -1838,6 +2017,32 @@ class TestAsyncBrand:
     async def test_method_web_scrape_images(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_images(
             url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_images_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_images(
+            url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
+            dedupe=True,
+            enrichment={
+                "classification": True,
+                "hosted_url": True,
+                "max_time_per_ms": 1,
+                "resolution": True,
+            },
+            headers={"foo": "J!"},
+            max_age_ms=0,
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
 
@@ -1880,10 +2085,34 @@ class TestAsyncBrand:
     async def test_method_web_scrape_md_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_md(
             url="https://example.com",
+            actions=[
+                {
+                    "do": "wait",
+                    "time_ms": 0,
+                }
+            ],
+            country="de",
+            exclude_selectors=["x"],
+            headers={"foo": "J!"},
+            include_frames=True,
+            include_html=True,
             include_images=True,
             include_links=True,
+            include_selectors=["x"],
+            max_age_ms=0,
+            pdf={
+                "end": 1,
+                "ocr": True,
+                "should_parse": True,
+                "start": 1,
+            },
+            settle_animations=True,
             shorten_base64_images=True,
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
             use_main_content_only=True,
+            wait_for_ms=0,
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -1917,7 +2146,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_web_scrape_sitemap(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_sitemap(
-            domain="domain",
+            domain="xxx",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
@@ -1925,8 +2154,15 @@ class TestAsyncBrand:
     @parametrize
     async def test_method_web_scrape_sitemap_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_sitemap(
-            domain="domain",
+            domain="xxx",
+            headers={"foo": "J!"},
             max_links=1,
+            search="help center and troubleshooting articles",
+            sitemap_url="https://example.com",
+            tags=["production", "team-alpha"],
+            timeout_ms=1,
+            url_regex="^https?://[^/]+/blog/",
+            zdr="enabled",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
@@ -1934,7 +2170,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_raw_response_web_scrape_sitemap(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.web_scrape_sitemap(
-            domain="domain",
+            domain="xxx",
         )
 
         assert response.is_closed is True
@@ -1946,7 +2182,7 @@ class TestAsyncBrand:
     @parametrize
     async def test_streaming_response_web_scrape_sitemap(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.web_scrape_sitemap(
-            domain="domain",
+            domain="xxx",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

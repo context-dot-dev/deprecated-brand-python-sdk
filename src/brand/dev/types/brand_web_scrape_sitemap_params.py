@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing import Dict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["BrandWebScrapeSitemapParams"]
@@ -11,13 +13,59 @@ __all__ = ["BrandWebScrapeSitemapParams"]
 
 class BrandWebScrapeSitemapParams(TypedDict, total=False):
     domain: Required[str]
-    """Domain name to crawl sitemaps for (e.g., 'example.com').
+    """Domain to build a sitemap for"""
 
-    The domain will be automatically normalized and validated.
+    headers: Dict[str, str]
+    """
+    Optional outbound HTTP headers forwarded only to the target URL, sent as
+    deep-object query params such as headers[X-Custom]=value. When provided, caching
+    is bypassed: the result is neither read from nor written to cache.
     """
 
     max_links: Annotated[int, PropertyInfo(alias="maxLinks")]
     """Maximum number of links to return from the sitemap crawl.
 
     Defaults to 10,000. Minimum is 1, maximum is 100,000.
+    """
+
+    search: str
+    """Optional search phrase.
+
+    When provided, the crawled sitemap is filtered to the pages whose URLs are about
+    that phrase, most relevant first, and the request costs 2 credits instead of 1.
+    """
+
+    sitemap_url: Annotated[str, PropertyInfo(alias="sitemapUrl")]
+    """Optional explicit sitemap URL.
+
+    When provided, exactly this sitemap is crawled instead of discovering the
+    domain's sitemaps.
+    """
+
+    tags: SequenceNotStr[str]
+    """Optional comma-separated caller-defined tags for tracking this request.
+
+    Tags are recorded on the request's usage log and can be used to filter usage on
+    the dashboard usage page. Up to 20 tags, each 1-50 characters.
+    """
+
+    timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
+    """Optional timeout in milliseconds for the request.
+
+    If the request takes longer than this value, it will be aborted with a 408
+    status code. Maximum allowed value is 300000ms (5 minutes).
+    """
+
+    url_regex: Annotated[str, PropertyInfo(alias="urlRegex")]
+    """Optional RE2-compatible regex pattern.
+
+    Only URLs matching this pattern are returned and counted against maxLinks.
+    """
+
+    zdr: Literal["enabled", "disabled"]
+    """
+    Set to enabled to bypass shared caches and omit request and response content
+    from retained usage logs. Requires zero data retention to be enabled for your
+    organization (contact support@context.dev), otherwise the request fails with
+    ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
     """

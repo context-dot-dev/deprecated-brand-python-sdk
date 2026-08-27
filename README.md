@@ -44,7 +44,7 @@ client = BrandDev(
 brand = client.brand.retrieve(
     domain="REPLACE_ME",
 )
-print(brand.brand)
+print(brand.cache_metadata)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -70,7 +70,7 @@ async def main() -> None:
     brand = await client.brand.retrieve(
         domain="REPLACE_ME",
     )
-    print(brand.brand)
+    print(brand.cache_metadata)
 
 
 asyncio.run(main())
@@ -106,7 +106,7 @@ async def main() -> None:
         brand = await client.brand.retrieve(
             domain="REPLACE_ME",
         )
-        print(brand.brand)
+        print(brand.cache_metadata)
 
 
 asyncio.run(main())
@@ -280,7 +280,7 @@ response = client.brand.with_raw_response.retrieve(
 print(response.headers.get('X-My-Header'))
 
 brand = response.parse()  # get the object that `brand.retrieve()` would have returned
-print(brand.brand)
+print(brand.cache_metadata)
 ```
 
 These methods return an [`APIResponse`](https://github.com/context-dot-dev/deprecated-brand-python-sdk/tree/main/src/brand/dev/_response.py) object.

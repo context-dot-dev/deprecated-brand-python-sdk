@@ -1,5 +1,102 @@
 # Changelog
 
+## 1.44.0 (2026-08-27)
+
+Full Changelog: [v1.43.0...v1.44.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.43.0...v1.44.0)
+
+### Features
+
+* **api:** api update ([469c51f](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/469c51fcac5b49cb790ca9ada11057f0251b6f26))
+* **api:** api update ([2f7a00d](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/2f7a00d4ae115dc62cceb68c819bb5ca41d24aab))
+* **api:** api update ([b33f584](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b33f5845badc18ea89d37d0e9a2b6ba4aac4b9bd))
+* **api:** api update ([0a1be9f](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/0a1be9f31d30c8af1b6c161fa3f4c5db606ccbdf))
+* **api:** api update ([cef8985](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/cef898517f614a4e5be683f03f8a313559543fb9))
+* **api:** api update ([f9c41f0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/f9c41f0317e16c04bf3debc0004afe29e1d5d33b))
+* **api:** api update ([1daf26d](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/1daf26d1d3eed8b85104c07cd378376d9cf13d7e))
+* **api:** api update ([e1ad9e1](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/e1ad9e1f9a5f88f2ee6d73f32e844fd0aaf22278))
+* **api:** api update ([b7f5e9b](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b7f5e9b0438bd5e26055023c3117e1fcec90dac2))
+* **api:** api update ([2d8802e](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/2d8802e9c6e6d1a8e61f97d75329a44f76788fa7))
+* **api:** api update ([78467da](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/78467da3426d5ff78f213c53969f1d9aac00a092))
+* **api:** api update ([1663120](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/166312012d466c4cc5965a5d3248233da0d8741d))
+* **api:** api update ([dc2b5a9](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/dc2b5a91a6bb3e401ed572c5f947ce8e4b19e441))
+* **api:** api update ([49c0b77](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/49c0b77f71a54fd765a8dfe617157ccd40e5eeeb))
+* **api:** api update ([b6a1c5f](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b6a1c5faa36993696573b78604e99e8b45901182))
+* **api:** api update ([2299656](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/2299656bdea0af0bd6b815ae31e2e1992435c99e))
+* **api:** api update ([51bf948](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/51bf94817c9bb7f07a7ba87d710334371f6a658f))
+* **api:** api update ([703ef35](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/703ef3597b8ade1129d7e3d9191134ccc47adfb4))
+* **api:** api update ([51745b2](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/51745b252b74eedfd5100c0e0f64a4f1e41ae320))
+* **api:** api update ([1f032b7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/1f032b7f9e6a4a89cb6628b23153e59a7691261f))
+* **api:** api update ([5ca34aa](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/5ca34aa8034971169e2bfbf5367f30e3cb68f50d))
+* **api:** api update ([60f9a71](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/60f9a71a0b547d73ff171d00ed45301ed72cd84b))
+* **api:** api update ([b059e59](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b059e5925b3733f5fffc00ce7da8afdfebe51e14))
+* **api:** api update ([445014e](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/445014e0f5d2bdbe0221ecc8999e9ebb70ce34d5))
+* **api:** api update ([b41ed13](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b41ed132270724ef2d8aa7ed74cc3d754987334d))
+* **api:** api update ([1fa614f](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/1fa614fe452de9347bcc7ad4994949ef73464e0f))
+* **api:** api update ([f0eb6d6](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/f0eb6d6617d371caed07f21a6b10f6a6e9478eed))
+* **api:** api update ([a321b40](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a321b406072a56c32794cf10b79548dafc29508a))
+* **api:** api update ([f96d2bf](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/f96d2bfe085f9724934a5b6a0841064172f3fbc7))
+* **api:** api update ([92be332](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/92be33255808a72338489c963bc16523e7dce74c))
+* **api:** api update ([cd67f5c](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/cd67f5c3a3559c2dbbac7d937c33827137d0579c))
+* **api:** api update ([f3a02b7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/f3a02b778d05e9613943a29cba865017944e0355))
+* **api:** api update ([aceb4cf](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/aceb4cfb8e848877bac17b9a32fe8a626f22347e))
+* **api:** api update ([79a00c4](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/79a00c4b749b418c45d99bc3feb431cd9b1d7e02))
+* **api:** api update ([bd579fd](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/bd579fd5ab8c8f9c5224eb680e17c8498871b228))
+* **api:** api update ([4faf983](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/4faf983d75e7b72691ccfc9f4639d78de9b908fd))
+* **api:** api update ([234d568](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/234d56806ca02b209f848907dbae998d20066920))
+* **api:** api update ([835e3dc](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/835e3dc7d16ab4d4d7d8e6223b7671103ea99316))
+* **api:** api update ([b35bfa8](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b35bfa83453d3ee820e8aab7a3914545924f6df8))
+* **api:** api update ([b868536](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b86853684cdddc71c11371f7ac065004bd415078))
+* **api:** api update ([4f2fb89](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/4f2fb892f17828300c268e9e316477b3ee9de0b4))
+* **api:** api update ([bb7be8c](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/bb7be8c9f17e5a86aa69e7651cac1ae7b3c170c2))
+* **api:** api update ([90b98b6](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/90b98b60f940e7aa127cb2b52fbdf0e467cd45c1))
+* **api:** api update ([44865c2](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/44865c2f5a63e7d0e2e4ccd0c4d2c06206044fe8))
+* **api:** api update ([291415a](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/291415a60a6ee87cc6b27364e6b71e039ccb3590))
+* **api:** api update ([ce906ee](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/ce906ee12160bff29e64d8c140decf63c02fa104))
+* **api:** api update ([00262df](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/00262dff8700b717cdacde8d05c040c2e240b94b))
+* **api:** api update ([fcd2959](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/fcd2959f013e42957386b17c540c3b69fde4b08e))
+* **api:** api update ([34da1c0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/34da1c09d1e5883a6134fba8bef1a2622a841a3d))
+* **api:** api update ([5573ee7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/5573ee7e42f5018a95e85e66460bfccc3d695a2a))
+* **api:** api update ([e4f1307](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/e4f1307a639a0c14467bd4c6af34eafe96b86033))
+* **api:** api update ([3e783d9](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/3e783d9ad471999f34ed2cbc92a58099f15ce9cb))
+* **api:** api update ([f9047c7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/f9047c77841d0b1707cdeab18880d93dd2e6a115))
+* **api:** api update ([390e85c](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/390e85cad5c6199e1a3d03de72e77d54f0108234))
+* **api:** api update ([74f22a5](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/74f22a55a3d82b5adcc63d5f12218a162180ae95))
+* **api:** api update ([a04e938](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a04e9389794725781408dc53d635226406d89cb2))
+* **api:** api update ([b4672ab](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b4672ab67f11664113177977497c75e6c5ce82f8))
+* **api:** api update ([b494e66](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b494e66bdee0f1c447ee587836aa74c7955da0aa))
+* **api:** api update ([af4c2fa](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/af4c2fa317c4a5cd2ef86e6562fe41ff7436daed))
+* **api:** api update ([9d4a64e](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/9d4a64e28b1321eda8463d8c86ec8a130c78c318))
+* **api:** api update ([f13cc2b](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/f13cc2be3ce7c3355168ba62bb3bd5ec5aaf4105))
+* **api:** api update ([93a9472](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/93a9472c495a1d34afa82ff7a6889e32ff706e3f))
+* **api:** api update ([bf48ceb](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/bf48ceb8693e734ab3da2b89e80f394d351215e6))
+* **api:** api update ([b5e8905](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b5e8905b3e8554890bda8c7eb9e4255c363f1a81))
+* **api:** api update ([04fafa1](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/04fafa1b94a4047cc9fb3825ab84e6f517baefc4))
+* **api:** api update ([bd0f93f](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/bd0f93f4df85dc1e822ca6b59fb7ce594976ad49))
+* **api:** api update ([a388d39](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a388d39c93b50ec075a553957081a45f64b73d39))
+* **api:** api update ([9213463](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/9213463afaf5d76d3b706a5aef49082c72409189))
+* **api:** manual updates ([64bc711](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/64bc7110618dc0733bff60be38ccadaace6b62fb))
+* **internal/types:** support eagerly validating pydantic iterators ([06b88f4](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/06b88f47143a8e1c9182ceab6bf3c1f2eca6cfdc))
+* support setting headers via env ([0ce56bb](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/0ce56bbd77bbb7170a90b838c9dff09616dea488))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([af1c0ca](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/af1c0cab6151a11859136bd4cbbd8a0a200acdd5))
+* **client:** preserve hardcoded query params when merging with user params ([a92d7b7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a92d7b7c66f52b259cbf31d938c8a70565190b5c))
+* ensure file data are only sent as 1 parameter ([9b72a51](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/9b72a51afe0d9992f3c52ee727c1ffc1ec76312f))
+* use correct field name format for multipart file arrays ([c74c369](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/c74c3699de55fd58f298fa9a9d378db7f677a344))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([d7e4a18](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/d7e4a181dd0e9146f98bb51bb977300eac439c6e))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([28007d9](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/28007d91dbe45b20fc33670466006d9934ac7c5a))
+* **internal:** reformat pyproject.toml ([3e37dca](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/3e37dcaafaafaa677893794e66cec86afedb65ca))
+
 ## 1.43.0 (2026-04-03)
 
 Full Changelog: [v1.42.0...v1.43.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.42.0...v1.43.0)

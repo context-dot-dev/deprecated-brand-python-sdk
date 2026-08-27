@@ -7,12 +7,14 @@ from .._models import BaseModel
 
 __all__ = [
     "BrandIdentifyFromTransactionResponse",
+    "CacheMetadata",
     "Brand",
     "BrandAddress",
     "BrandBackdrop",
     "BrandBackdropColor",
     "BrandBackdropResolution",
     "BrandColor",
+    "BrandEmployees",
     "BrandIndustries",
     "BrandIndustriesEic",
     "BrandLinks",
@@ -21,7 +23,24 @@ __all__ = [
     "BrandLogoResolution",
     "BrandSocial",
     "BrandStock",
+    "KeyMetadata",
 ]
+
+
+class CacheMetadata(BaseModel):
+    """Cache outcome for this response.
+
+    Composite responses are hits only when every cache-controlled fetch contributing to the output was a hit; age_ms is the oldest contributing hit.
+    """
+
+    age_ms: int
+    """Age of the cached data in milliseconds. Zero for miss and zdr responses."""
+
+    status: Literal["hit", "miss", "zdr"]
+    """
+    Whether the response was served from cache, required fresh work, or honored
+    zero-data-retention cache bypass.
+    """
 
 
 class BrandAddress(BaseModel):
@@ -87,6 +106,27 @@ class BrandColor(BaseModel):
 
     name: Optional[str] = None
     """Name of the color"""
+
+    source: Optional[Literal["site", "logo"]] = None
+    """
+    Where the color was observed: 'site' colors come from the website's own theme
+    signals (rendered page colors, manifest, theme-color meta), 'logo' colors from
+    logo image pixels.
+    """
+
+
+class BrandEmployees(BaseModel):
+    """Employee headcount information for the brand (will be null if unknown)"""
+
+    exact: Optional[int] = None
+    """Exact employee count when a precise headcount is known"""
+
+    range: Optional[
+        Literal[
+            "1 to 10", "11 to 50", "51 to 200", "201 to 500", "501 to 1000", "1001 to 5000", "5001 to 10000", "10001+"
+        ]
+    ] = None
+    """Employee count range for the brand (e.g. '11 to 50')"""
 
 
 class BrandIndustriesEic(BaseModel):
@@ -169,7 +209,6 @@ class BrandIndustriesEic(BaseModel):
         "Streaming Platforms (Video, Music, Audio)",
         "Gaming & Interactive Entertainment",
         "Creator Economy & Influencer Platforms",
-        "Advertising, Adtech & Media Buying",
         "Film, TV & Production Studios",
         "Events, Venues & Live Entertainment",
         "Virtual Worlds & Metaverse Experiences",
@@ -230,6 +269,7 @@ class BrandIndustriesEic(BaseModel):
         "Streetwear & Emerging Luxury",
         "Couture & Made-to-Measure",
         "News Publishing & Journalism",
+        "Advertising, Adtech & Media Buying",
         "Digital Media & Content Platforms",
         "Broadcasting (TV & Radio)",
         "Podcasting & Audio Media",
@@ -415,8 +455,42 @@ class BrandLogo(BaseModel):
 
 
 class BrandSocial(BaseModel):
-    type: Optional[str] = None
-    """Type of social media, e.g., 'facebook', 'twitter'"""
+    type: Optional[
+        Literal[
+            "x",
+            "facebook",
+            "instagram",
+            "linkedin",
+            "youtube",
+            "pinterest",
+            "tiktok",
+            "dribbble",
+            "github",
+            "behance",
+            "snapchat",
+            "whatsapp",
+            "telegram",
+            "line",
+            "discord",
+            "twitch",
+            "vimeo",
+            "imdb",
+            "tumblr",
+            "flickr",
+            "giphy",
+            "medium",
+            "spotify",
+            "soundcloud",
+            "tripadvisor",
+            "yelp",
+            "producthunt",
+            "reddit",
+            "crunchbase",
+            "appstore",
+            "playstore",
+        ]
+    ] = None
+    """Type of social media platform"""
 
     url: Optional[str] = None
     """URL of the social media page"""
@@ -455,6 +529,9 @@ class Brand(BaseModel):
     email: Optional[str] = None
     """Company email address"""
 
+    employees: Optional[BrandEmployees] = None
+    """Employee headcount information for the brand (will be null if unknown)"""
+
     industries: Optional[BrandIndustries] = None
     """Industry classification information for the brand"""
 
@@ -465,10 +542,140 @@ class Brand(BaseModel):
     """Important website links for the brand"""
 
     logos: Optional[List[BrandLogo]] = None
-    """An array of logos associated with the brand"""
+    """An array of logos associated with the brand.
+
+    When a similarly shaped SVG variant exists, it is returned ahead of its raster
+    equivalent; otherwise relevance order is preserved
+    """
 
     phone: Optional[str] = None
     """Company phone number"""
+
+    primary_language: Optional[
+        Literal[
+            "afrikaans",
+            "albanian",
+            "amharic",
+            "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
+            "azeri",
+            "basque",
+            "belarusian",
+            "bengali",
+            "bosnian",
+            "bulgarian",
+            "burmese",
+            "cantonese",
+            "catalan",
+            "cebuano",
+            "chinese",
+            "corsican",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "esperanto",
+            "estonian",
+            "farsi",
+            "fijian",
+            "finnish",
+            "french",
+            "galician",
+            "georgian",
+            "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
+            "hausa",
+            "hawaiian",
+            "hebrew",
+            "hindi",
+            "hmong",
+            "hungarian",
+            "icelandic",
+            "igbo",
+            "indonesian",
+            "irish",
+            "italian",
+            "japanese",
+            "javanese",
+            "kannada",
+            "kazakh",
+            "khmer",
+            "kinyarwanda",
+            "korean",
+            "kurdish",
+            "kyrgyz",
+            "lao",
+            "latin",
+            "latvian",
+            "lingala",
+            "lithuanian",
+            "luxembourgish",
+            "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "odia",
+            "oromo",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "punjabi",
+            "quechua",
+            "romanian",
+            "russian",
+            "samoan",
+            "scottish-gaelic",
+            "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "sundanese",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
+            "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
+            "turkish",
+            "turkmen",
+            "ukrainian",
+            "urdu",
+            "uyghur",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
+        ]
+    ] = None
+    """Language to force for the retrieved brand data."""
 
     slogan: Optional[str] = None
     """The brand's slogan"""
@@ -486,12 +693,39 @@ class Brand(BaseModel):
     """The title or name of the brand"""
 
 
+class KeyMetadata(BaseModel):
+    """Metadata about the API key used for the request.
+
+    Included in every response whenever a valid API key is provided, even when the response status is not 200.
+    """
+
+    credits_consumed: int
+    """The number of credits consumed by this request."""
+
+    credits_remaining: int
+    """The number of credits remaining for your organization after this request."""
+
+
 class BrandIdentifyFromTransactionResponse(BaseModel):
+    cache_metadata: CacheMetadata
+    """Cache outcome for this response.
+
+    Composite responses are hits only when every cache-controlled fetch contributing
+    to the output was a hit; age_ms is the oldest contributing hit.
+    """
+
     brand: Optional[Brand] = None
     """Detailed brand information"""
 
     code: Optional[int] = None
     """HTTP status code"""
+
+    key_metadata: Optional[KeyMetadata] = None
+    """Metadata about the API key used for the request.
+
+    Included in every response whenever a valid API key is provided, even when the
+    response status is not 200.
+    """
 
     status: Optional[str] = None
     """Status of the response, e.g., 'ok'"""

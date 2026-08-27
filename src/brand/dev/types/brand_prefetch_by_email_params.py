@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["BrandPrefetchByEmailParams"]
@@ -16,6 +17,9 @@ class BrandPrefetchByEmailParams(TypedDict, total=False):
     The domain will be extracted from the email. Free email providers (gmail.com,
     yahoo.com, etc.) and disposable email addresses are not allowed.
     """
+
+    tags: SequenceNotStr[str]
+    """Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters."""
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
     """Optional timeout in milliseconds for the request.

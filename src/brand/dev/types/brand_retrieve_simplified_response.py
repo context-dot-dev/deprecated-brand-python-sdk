@@ -7,6 +7,7 @@ from .._models import BaseModel
 
 __all__ = [
     "BrandRetrieveSimplifiedResponse",
+    "CacheMetadata",
     "Brand",
     "BrandBackdrop",
     "BrandBackdropColor",
@@ -15,7 +16,24 @@ __all__ = [
     "BrandLogo",
     "BrandLogoColor",
     "BrandLogoResolution",
+    "KeyMetadata",
 ]
+
+
+class CacheMetadata(BaseModel):
+    """Cache outcome for this response.
+
+    Composite responses are hits only when every cache-controlled fetch contributing to the output was a hit; age_ms is the oldest contributing hit.
+    """
+
+    age_ms: int
+    """Age of the cached data in milliseconds. Zero for miss and zdr responses."""
+
+    status: Literal["hit", "miss", "zdr"]
+    """
+    Whether the response was served from cache, required fresh work, or honored
+    zero-data-retention cache bypass.
+    """
 
 
 class BrandBackdropColor(BaseModel):
@@ -56,6 +74,13 @@ class BrandColor(BaseModel):
 
     name: Optional[str] = None
     """Name of the color"""
+
+    source: Optional[Literal["site", "logo"]] = None
+    """
+    Where the color was observed: 'site' colors come from the website's own theme
+    signals (rendered page colors, manifest, theme-color meta), 'logo' colors from
+    logo image pixels.
+    """
 
 
 class BrandLogoColor(BaseModel):
@@ -119,12 +144,39 @@ class Brand(BaseModel):
     """The title or name of the brand"""
 
 
+class KeyMetadata(BaseModel):
+    """Metadata about the API key used for the request.
+
+    Included in every response whenever a valid API key is provided, even when the response status is not 200.
+    """
+
+    credits_consumed: int
+    """The number of credits consumed by this request."""
+
+    credits_remaining: int
+    """The number of credits remaining for your organization after this request."""
+
+
 class BrandRetrieveSimplifiedResponse(BaseModel):
+    cache_metadata: CacheMetadata
+    """Cache outcome for this response.
+
+    Composite responses are hits only when every cache-controlled fetch contributing
+    to the output was a hit; age_ms is the oldest contributing hit.
+    """
+
     brand: Optional[Brand] = None
     """Simplified brand information"""
 
     code: Optional[int] = None
     """HTTP status code of the response"""
+
+    key_metadata: Optional[KeyMetadata] = None
+    """Metadata about the API key used for the request.
+
+    Included in every response whenever a valid API key is provided, even when the
+    response status is not 200.
+    """
 
     status: Optional[str] = None
     """Status of the response, e.g., 'ok'"""

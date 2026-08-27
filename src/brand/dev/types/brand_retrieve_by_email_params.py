@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["BrandRetrieveByEmailParams"]
@@ -17,70 +19,152 @@ class BrandRetrieveByEmailParams(TypedDict, total=False):
     yahoo.com, etc.) and disposable email addresses are not allowed.
     """
 
-    force_language: Literal[
-        "albanian",
-        "arabic",
-        "azeri",
-        "bengali",
-        "bulgarian",
-        "cantonese",
-        "cebuano",
-        "croatian",
-        "czech",
-        "danish",
-        "dutch",
-        "english",
-        "estonian",
-        "farsi",
-        "finnish",
-        "french",
-        "german",
-        "hausa",
-        "hawaiian",
-        "hindi",
-        "hungarian",
-        "icelandic",
-        "indonesian",
-        "italian",
-        "kazakh",
-        "korean",
-        "kyrgyz",
-        "latin",
-        "latvian",
-        "lithuanian",
-        "macedonian",
-        "mongolian",
-        "nepali",
-        "norwegian",
-        "pashto",
-        "pidgin",
-        "polish",
-        "portuguese",
-        "romanian",
-        "russian",
-        "serbian",
-        "slovak",
-        "slovene",
-        "somali",
-        "spanish",
-        "swahili",
-        "swedish",
-        "tagalog",
-        "thai",
-        "turkish",
-        "ukrainian",
-        "urdu",
-        "uzbek",
-        "vietnamese",
-        "welsh",
+    force_language: Optional[
+        Literal[
+            "afrikaans",
+            "albanian",
+            "amharic",
+            "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
+            "azeri",
+            "basque",
+            "belarusian",
+            "bengali",
+            "bosnian",
+            "bulgarian",
+            "burmese",
+            "cantonese",
+            "catalan",
+            "cebuano",
+            "chinese",
+            "corsican",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "esperanto",
+            "estonian",
+            "farsi",
+            "fijian",
+            "finnish",
+            "french",
+            "galician",
+            "georgian",
+            "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
+            "hausa",
+            "hawaiian",
+            "hebrew",
+            "hindi",
+            "hmong",
+            "hungarian",
+            "icelandic",
+            "igbo",
+            "indonesian",
+            "irish",
+            "italian",
+            "japanese",
+            "javanese",
+            "kannada",
+            "kazakh",
+            "khmer",
+            "kinyarwanda",
+            "korean",
+            "kurdish",
+            "kyrgyz",
+            "lao",
+            "latin",
+            "latvian",
+            "lingala",
+            "lithuanian",
+            "luxembourgish",
+            "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "odia",
+            "oromo",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "punjabi",
+            "quechua",
+            "romanian",
+            "russian",
+            "samoan",
+            "scottish-gaelic",
+            "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "sundanese",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
+            "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
+            "turkish",
+            "turkmen",
+            "ukrainian",
+            "urdu",
+            "uyghur",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
+        ]
     ]
-    """Optional parameter to force the language of the retrieved brand data."""
+    """Language to force for the retrieved brand data."""
+
+    max_age_ms: Annotated[Optional[int], PropertyInfo(alias="maxAgeMs")]
+    """
+    Maximum age in milliseconds for cached brand data before the API performs a hard
+    refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+    are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+    year.
+    """
 
     max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
     """Optional parameter to optimize the API call for maximum speed.
 
     When set to true, the API will skip time-consuming operations for faster
     response at the cost of less comprehensive data.
+    """
+
+    tags: SequenceNotStr[str]
+    """Optional comma-separated caller-defined tags for tracking this request.
+
+    Tags are recorded on the request's usage log and can be used to filter usage on
+    the dashboard usage page. Up to 20 tags, each 1-50 characters.
     """
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]

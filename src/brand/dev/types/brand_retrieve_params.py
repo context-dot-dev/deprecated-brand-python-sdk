@@ -2,80 +2,154 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Literal, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["BrandRetrieveParams"]
 
 
 class BrandRetrieveParams(TypedDict, total=False):
-    domain: Required[str]
+    domain: str
     """Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
 
     Cannot be used with name or ticker parameters.
     """
 
-    force_language: Literal[
-        "albanian",
-        "arabic",
-        "azeri",
-        "bengali",
-        "bulgarian",
-        "cantonese",
-        "cebuano",
-        "croatian",
-        "czech",
-        "danish",
-        "dutch",
-        "english",
-        "estonian",
-        "farsi",
-        "finnish",
-        "french",
-        "german",
-        "hausa",
-        "hawaiian",
-        "hindi",
-        "hungarian",
-        "icelandic",
-        "indonesian",
-        "italian",
-        "kazakh",
-        "korean",
-        "kyrgyz",
-        "latin",
-        "latvian",
-        "lithuanian",
-        "macedonian",
-        "mongolian",
-        "nepali",
-        "norwegian",
-        "pashto",
-        "pidgin",
-        "polish",
-        "portuguese",
-        "romanian",
-        "russian",
-        "serbian",
-        "slovak",
-        "slovene",
-        "somali",
-        "spanish",
-        "swahili",
-        "swedish",
-        "tagalog",
-        "thai",
-        "turkish",
-        "ukrainian",
-        "urdu",
-        "uzbek",
-        "vietnamese",
-        "welsh",
+    force_language: Optional[
+        Literal[
+            "afrikaans",
+            "albanian",
+            "amharic",
+            "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
+            "azeri",
+            "basque",
+            "belarusian",
+            "bengali",
+            "bosnian",
+            "bulgarian",
+            "burmese",
+            "cantonese",
+            "catalan",
+            "cebuano",
+            "chinese",
+            "corsican",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "esperanto",
+            "estonian",
+            "farsi",
+            "fijian",
+            "finnish",
+            "french",
+            "galician",
+            "georgian",
+            "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
+            "hausa",
+            "hawaiian",
+            "hebrew",
+            "hindi",
+            "hmong",
+            "hungarian",
+            "icelandic",
+            "igbo",
+            "indonesian",
+            "irish",
+            "italian",
+            "japanese",
+            "javanese",
+            "kannada",
+            "kazakh",
+            "khmer",
+            "kinyarwanda",
+            "korean",
+            "kurdish",
+            "kyrgyz",
+            "lao",
+            "latin",
+            "latvian",
+            "lingala",
+            "lithuanian",
+            "luxembourgish",
+            "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "odia",
+            "oromo",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "punjabi",
+            "quechua",
+            "romanian",
+            "russian",
+            "samoan",
+            "scottish-gaelic",
+            "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "sundanese",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
+            "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
+            "turkish",
+            "turkmen",
+            "ukrainian",
+            "urdu",
+            "uyghur",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
+        ]
     ]
-    """Optional parameter to force the language of the retrieved brand data.
+    """Language to force for the retrieved brand data."""
 
-    Works with all three lookup methods.
+    max_age_ms: Annotated[Optional[int], PropertyInfo(alias="maxAgeMs")]
+    """
+    Maximum age in milliseconds for cached brand data before the API performs a hard
+    refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+    are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+    year.
     """
 
     max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
@@ -85,6 +159,101 @@ class BrandRetrieveParams(TypedDict, total=False):
     response at the cost of less comprehensive data. Works with all three lookup
     methods.
     """
+
+    name: str
+    """Company name to retrieve brand data for (e.g., 'Apple Inc').
+
+    Cannot be used with domain or ticker parameters.
+    """
+
+    tags: SequenceNotStr[str]
+    """Optional comma-separated caller-defined tags for tracking this request.
+
+    Tags are recorded on the request's usage log and can be used to filter usage on
+    the dashboard usage page. Up to 20 tags, each 1-50 characters.
+    """
+
+    ticker: str
+    """Stock ticker symbol to retrieve brand data for (e.g., 'AAPL').
+
+    Cannot be used with domain or name parameters.
+    """
+
+    ticker_exchange: Literal[
+        "AMEX",
+        "AMS",
+        "AQS",
+        "ASX",
+        "ATH",
+        "BER",
+        "BME",
+        "BRU",
+        "BSE",
+        "BUD",
+        "BUE",
+        "BVC",
+        "CBOE",
+        "CNQ",
+        "CPH",
+        "DFM",
+        "DOH",
+        "DUB",
+        "DUS",
+        "DXE",
+        "EGX",
+        "FSX",
+        "HAM",
+        "HEL",
+        "HKSE",
+        "HOSE",
+        "ICE",
+        "IOB",
+        "IST",
+        "JKT",
+        "JNB",
+        "JPX",
+        "KLS",
+        "KOE",
+        "KSC",
+        "KUW",
+        "LIS",
+        "LSE",
+        "MCX",
+        "MEX",
+        "MIL",
+        "MUN",
+        "NASDAQ",
+        "NEO",
+        "NSE",
+        "NYSE",
+        "NZE",
+        "OSL",
+        "OTC",
+        "PAR",
+        "PNK",
+        "PRA",
+        "RIS",
+        "SAO",
+        "SAU",
+        "SES",
+        "SET",
+        "SGO",
+        "SHH",
+        "SHZ",
+        "SIX",
+        "STO",
+        "STU",
+        "TAI",
+        "TAL",
+        "TLV",
+        "TSX",
+        "TSXV",
+        "TWO",
+        "VIE",
+        "WSE",
+        "XETRA",
+    ]
+    """Stock exchange code."""
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
     """Optional timeout in milliseconds for the request.

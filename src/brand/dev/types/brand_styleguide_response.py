@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -9,6 +9,8 @@ from .._models import BaseModel
 
 __all__ = [
     "BrandStyleguideResponse",
+    "CacheMetadata",
+    "KeyMetadata",
     "Styleguide",
     "StyleguideColors",
     "StyleguideComponents",
@@ -18,6 +20,7 @@ __all__ = [
     "StyleguideComponentsButtonSecondary",
     "StyleguideComponentsCard",
     "StyleguideElementSpacing",
+    "StyleguideFontLinks",
     "StyleguideShadows",
     "StyleguideTypography",
     "StyleguideTypographyHeadings",
@@ -27,6 +30,35 @@ __all__ = [
     "StyleguideTypographyHeadingsH4",
     "StyleguideTypographyP",
 ]
+
+
+class CacheMetadata(BaseModel):
+    """Cache outcome for this response.
+
+    Composite responses are hits only when every cache-controlled fetch contributing to the output was a hit; age_ms is the oldest contributing hit.
+    """
+
+    age_ms: int
+    """Age of the cached data in milliseconds. Zero for miss and zdr responses."""
+
+    status: Literal["hit", "miss", "zdr"]
+    """
+    Whether the response was served from cache, required fresh work, or honored
+    zero-data-retention cache bypass.
+    """
+
+
+class KeyMetadata(BaseModel):
+    """Metadata about the API key used for the request.
+
+    Included in every response whenever a valid API key is provided, even when the response status is not 200.
+    """
+
+    credits_consumed: int
+    """The number of credits consumed by this request."""
+
+    credits_remaining: int
+    """The number of credits remaining for your organization after this request."""
 
 
 class StyleguideColors(BaseModel):
@@ -244,6 +276,30 @@ class StyleguideElementSpacing(BaseModel):
     xs: str
 
 
+class StyleguideFontLinks(BaseModel):
+    files: Dict[str, str]
+    """Upright font files keyed by weight string (e.g.
+
+    "400" for regular, "500", "700"). Values are absolute URLs.
+    """
+
+    type: Literal["google", "custom"]
+
+    category: Optional[str] = None
+    """Google Fonts category when type is google (e.g.
+
+    sans-serif, serif, monospace, display, handwriting). Omitted for custom fonts
+    when unknown.
+    """
+
+    display_name: Optional[str] = FieldInfo(alias="displayName", default=None)
+    """
+    Present when type is custom: human-readable name derived from the fontLinks key
+    (strip build/hash suffixes, split camelCase / PascalCase, normalize separators).
+    Google entries omit this.
+    """
+
+
 class StyleguideShadows(BaseModel):
     """Shadow styles used on the website"""
 
@@ -371,6 +427,13 @@ class Styleguide(BaseModel):
     element_spacing: StyleguideElementSpacing = FieldInfo(alias="elementSpacing")
     """Spacing system used on the website"""
 
+    font_links: Dict[str, StyleguideFontLinks] = FieldInfo(alias="fontLinks")
+    """
+    Font assets keyed by family name as it appears in fontFamily/fontFallbacks
+    (non-generic names only). Clients match typography.fontFamily / fontWeight or
+    button styles to pick a file URL from files.
+    """
+
     mode: Literal["light", "dark"]
     """The primary color mode of the website design"""
 
@@ -382,11 +445,25 @@ class Styleguide(BaseModel):
 
 
 class BrandStyleguideResponse(BaseModel):
+    cache_metadata: CacheMetadata
+    """Cache outcome for this response.
+
+    Composite responses are hits only when every cache-controlled fetch contributing
+    to the output was a hit; age_ms is the oldest contributing hit.
+    """
+
     code: Optional[int] = None
     """HTTP status code"""
 
     domain: Optional[str] = None
     """The normalized domain that was processed"""
+
+    key_metadata: Optional[KeyMetadata] = None
+    """Metadata about the API key used for the request.
+
+    Included in every response whenever a valid API key is provided, even when the
+    response status is not 200.
+    """
 
     status: Optional[str] = None
     """Status of the response, e.g., 'ok'"""

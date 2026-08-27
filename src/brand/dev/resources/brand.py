@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, overload
 
 import httpx
@@ -29,7 +29,7 @@ from ..types import (
     brand_retrieve_simplified_params,
     brand_identify_from_transaction_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -87,66 +87,212 @@ class BrandResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        domain: str,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        domain: str | Omit = omit,
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        name: str | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        ticker: str | Omit = omit,
+        ticker_exchange: Literal[
+            "AMEX",
+            "AMS",
+            "AQS",
+            "ASX",
+            "ATH",
+            "BER",
+            "BME",
+            "BRU",
+            "BSE",
+            "BUD",
+            "BUE",
+            "BVC",
+            "CBOE",
+            "CNQ",
+            "CPH",
+            "DFM",
+            "DOH",
+            "DUB",
+            "DUS",
+            "DXE",
+            "EGX",
+            "FSX",
+            "HAM",
+            "HEL",
+            "HKSE",
+            "HOSE",
+            "ICE",
+            "IOB",
+            "IST",
+            "JKT",
+            "JNB",
+            "JPX",
+            "KLS",
+            "KOE",
+            "KSC",
+            "KUW",
+            "LIS",
+            "LSE",
+            "MCX",
+            "MEX",
+            "MIL",
+            "MUN",
+            "NASDAQ",
+            "NEO",
+            "NSE",
+            "NYSE",
+            "NZE",
+            "OSL",
+            "OTC",
+            "PAR",
+            "PNK",
+            "PRA",
+            "RIS",
+            "SAO",
+            "SAU",
+            "SES",
+            "SET",
+            "SGO",
+            "SHH",
+            "SHZ",
+            "SIX",
+            "STO",
+            "STU",
+            "TAI",
+            "TAL",
+            "TLV",
+            "TSX",
+            "TSXV",
+            "TWO",
+            "VIE",
+            "WSE",
+            "XETRA",
+        ]
+        | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -163,12 +309,28 @@ class BrandResource(SyncAPIResource):
           domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
               Cannot be used with name or ticker parameters.
 
-          force_language: Optional parameter to force the language of the retrieved brand data. Works with
-              all three lookup methods.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data. Works with all three lookup methods.
+
+          name: Company name to retrieve brand data for (e.g., 'Apple Inc'). Cannot be used with
+              domain or ticker parameters.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL'). Cannot be used
+              with domain or name parameters.
+
+          ticker_exchange: Stock exchange code.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -193,7 +355,12 @@ class BrandResource(SyncAPIResource):
                     {
                         "domain": domain,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "name": name,
+                        "tags": tags,
+                        "ticker": ticker,
+                        "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
@@ -206,6 +373,8 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        max_age_ms: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -215,15 +384,21 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductResponse:
         """
-        Beta feature: Given a single URL, determines if it is a product detail page,
-        classifies the platform/product type, and extracts the product information.
-        Supports Amazon, TikTok Shop, Etsy, and generic ecommerce sites.
+        Given a single URL, determines if it is a product page and extracts the product
+        information.
 
         Args:
           url: The product page URL to extract product data from.
 
-          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
-              300000ms (5 minutes).
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -238,6 +413,8 @@ class BrandResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "url": url,
+                    "max_age_ms": max_age_ms,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_product_params.BrandAIProductParams,
@@ -253,7 +430,9 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -262,19 +441,26 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           domain: The domain name to analyze.
 
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
           max_products: Maximum number of products to extract.
 
-          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
-              300000ms (5 minutes).
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -291,7 +477,9 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         direct_url: str,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -300,20 +488,27 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           direct_url: A specific URL to use directly as the starting point for extraction without
               domain resolution.
 
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
           max_products: Maximum number of products to extract.
 
-          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
-              300000ms (5 minutes).
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -330,7 +525,9 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str | Omit = omit,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         direct_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -345,7 +542,9 @@ class BrandResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "domain": domain,
+                    "max_age_ms": max_age_ms,
                     "max_products": max_products,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                     "direct_url": direct_url,
                 },
@@ -363,6 +562,7 @@ class BrandResource(SyncAPIResource):
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
         specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -384,6 +584,8 @@ class BrandResource(SyncAPIResource):
 
           specific_pages: Optional object specifying which pages to analyze
 
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -403,6 +605,7 @@ class BrandResource(SyncAPIResource):
                     "data_to_extract": data_to_extract,
                     "domain": domain,
                     "specific_pages": specific_pages,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_query_params.BrandAIQueryParams,
@@ -416,7 +619,10 @@ class BrandResource(SyncAPIResource):
     def fonts(
         self,
         *,
-        domain: str,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -426,12 +632,26 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandFontsResponse:
         """
-        Extract font information from a brand's website including font families, usage
+        Scrape font information from a website including font families, usage
         statistics, fallbacks, and element/word counts.
 
         Args:
+          direct_url: A specific URL to fetch fonts from directly, bypassing domain resolution (e.g.,
+              'https://example.com/design-system'). When provided, fonts are extracted from
+              this exact URL. You must provide either 'domain' or 'directUrl', but not both.
+
           domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -446,7 +666,7 @@ class BrandResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/brand/fonts",
+            "/web/fonts",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -454,7 +674,10 @@ class BrandResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "direct_url": direct_url,
                         "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_fonts_params.BrandFontsParams,
@@ -469,309 +692,377 @@ class BrandResource(SyncAPIResource):
         transaction_info: str,
         city: str | Omit = omit,
         country_gl: Literal[
-            "ad",
-            "ae",
             "af",
-            "ag",
-            "ai",
             "al",
-            "am",
-            "an",
-            "ao",
-            "aq",
-            "ar",
+            "dz",
             "as",
-            "at",
-            "au",
+            "ad",
+            "ao",
+            "ai",
+            "aq",
+            "ag",
+            "ar",
+            "am",
             "aw",
+            "au",
+            "at",
             "az",
-            "ba",
-            "bb",
-            "bd",
-            "be",
-            "bf",
-            "bg",
+            "bs",
             "bh",
-            "bi",
+            "bd",
+            "bb",
+            "by",
+            "be",
+            "bz",
             "bj",
             "bm",
-            "bn",
-            "bo",
-            "br",
-            "bs",
             "bt",
-            "bv",
+            "bo",
+            "ba",
             "bw",
-            "by",
-            "bz",
-            "ca",
-            "cc",
-            "cd",
-            "cf",
-            "cg",
-            "ch",
-            "ci",
-            "ck",
-            "cl",
+            "bv",
+            "br",
+            "io",
+            "bn",
+            "bg",
+            "bf",
+            "bi",
+            "kh",
             "cm",
-            "cn",
-            "co",
-            "cr",
-            "cu",
+            "ca",
             "cv",
+            "ky",
+            "cf",
+            "td",
+            "cl",
+            "cn",
             "cx",
+            "cc",
+            "co",
+            "km",
+            "cg",
+            "cd",
+            "ck",
+            "cr",
+            "ci",
+            "hr",
+            "cu",
             "cy",
             "cz",
-            "de",
-            "dj",
             "dk",
+            "dj",
             "dm",
             "do",
-            "dz",
             "ec",
-            "ee",
             "eg",
-            "eh",
+            "sv",
+            "gq",
             "er",
-            "es",
+            "ee",
             "et",
-            "fi",
-            "fj",
             "fk",
-            "fm",
             "fo",
+            "fj",
+            "fi",
             "fr",
-            "ga",
-            "gb",
-            "gd",
-            "ge",
             "gf",
+            "pf",
+            "tf",
+            "ga",
+            "gm",
+            "ge",
+            "de",
             "gh",
             "gi",
-            "gl",
-            "gm",
-            "gn",
-            "gp",
-            "gq",
             "gr",
-            "gs",
-            "gt",
+            "gl",
+            "gd",
+            "gp",
             "gu",
+            "gt",
+            "gn",
             "gw",
             "gy",
-            "hk",
-            "hm",
-            "hn",
-            "hr",
             "ht",
+            "hm",
+            "va",
+            "hn",
+            "hk",
             "hu",
+            "is",
+            "in",
             "id",
+            "ir",
+            "iq",
             "ie",
             "il",
-            "in",
-            "io",
-            "iq",
-            "ir",
-            "is",
             "it",
             "jm",
-            "jo",
             "jp",
+            "jo",
+            "kz",
             "ke",
-            "kg",
-            "kh",
             "ki",
-            "km",
-            "kn",
             "kp",
             "kr",
             "kw",
-            "ky",
-            "kz",
+            "kg",
             "la",
+            "lv",
             "lb",
-            "lc",
-            "li",
-            "lk",
-            "lr",
             "ls",
+            "lr",
+            "ly",
+            "li",
             "lt",
             "lu",
-            "lv",
-            "ly",
-            "ma",
-            "mc",
-            "md",
-            "mg",
-            "mh",
-            "mk",
-            "ml",
-            "mm",
-            "mn",
             "mo",
-            "mp",
+            "mk",
+            "mg",
+            "mw",
+            "my",
+            "mv",
+            "ml",
+            "mt",
+            "mh",
             "mq",
             "mr",
-            "ms",
-            "mt",
             "mu",
-            "mv",
-            "mw",
+            "yt",
             "mx",
-            "my",
+            "fm",
+            "md",
+            "mc",
+            "mn",
+            "ms",
+            "ma",
             "mz",
+            "mm",
             "na",
-            "nc",
-            "ne",
-            "nf",
-            "ng",
-            "ni",
-            "nl",
-            "no",
-            "np",
             "nr",
-            "nu",
+            "np",
+            "nl",
+            "an",
+            "nc",
             "nz",
+            "ni",
+            "ne",
+            "ng",
+            "nu",
+            "nf",
+            "mp",
+            "no",
             "om",
-            "pa",
-            "pe",
-            "pf",
-            "pg",
-            "ph",
             "pk",
-            "pl",
-            "pm",
-            "pn",
-            "pr",
-            "ps",
-            "pt",
             "pw",
+            "ps",
+            "pa",
+            "pg",
             "py",
+            "pe",
+            "ph",
+            "pn",
+            "pl",
+            "pt",
+            "pr",
             "qa",
             "re",
             "ro",
-            "rs",
             "ru",
             "rw",
-            "sa",
-            "sb",
-            "sc",
-            "sd",
-            "se",
-            "sg",
             "sh",
-            "si",
-            "sj",
-            "sk",
-            "sl",
+            "kn",
+            "lc",
+            "pm",
+            "vc",
+            "ws",
             "sm",
-            "sn",
-            "so",
-            "sr",
             "st",
-            "sv",
-            "sy",
+            "sa",
+            "sn",
+            "rs",
+            "sc",
+            "sl",
+            "sg",
+            "sk",
+            "si",
+            "sb",
+            "so",
+            "za",
+            "gs",
+            "es",
+            "lk",
+            "sd",
+            "sr",
+            "sj",
             "sz",
-            "tc",
-            "td",
-            "tf",
-            "tg",
-            "th",
-            "tj",
-            "tk",
-            "tl",
-            "tm",
-            "tn",
-            "to",
-            "tr",
-            "tt",
-            "tv",
+            "se",
+            "ch",
+            "sy",
             "tw",
+            "tj",
             "tz",
-            "ua",
+            "th",
+            "tl",
+            "tg",
+            "tk",
+            "to",
+            "tt",
+            "tn",
+            "tr",
+            "tm",
+            "tc",
+            "tv",
             "ug",
-            "um",
+            "ua",
+            "ae",
+            "gb",
             "us",
+            "um",
             "uy",
             "uz",
-            "va",
-            "vc",
+            "vu",
             "ve",
+            "vn",
             "vg",
             "vi",
-            "vn",
-            "vu",
             "wf",
-            "ws",
+            "eh",
             "ye",
-            "yt",
-            "za",
             "zm",
             "zw",
         ]
         | Omit = omit,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
         high_confidence_only: bool | Omit = omit,
         max_speed: bool | Omit = omit,
-        mcc: str | Omit = omit,
-        phone: float | Omit = omit,
+        mcc: Union[str, float] | Omit = omit,
+        phone: Union[str, float] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -789,14 +1080,13 @@ class BrandResource(SyncAPIResource):
 
           city: Optional city name to prioritize when searching for the brand.
 
-          country_gl: Optional country code (GL parameter) to specify the country. This affects the
-              geographic location used for search queries.
+          country_gl: Two-letter ISO 3166-1 alpha-2 country code (GL parameter) used to localize
+              search.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
 
           high_confidence_only: When set to true, the API will perform an additional verification steps to
               ensure the identified brand matches the transaction with high confidence.
-              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -806,6 +1096,10 @@ class BrandResource(SyncAPIResource):
               category/industry.
 
           phone: Optional phone number from the transaction to help verify brand match.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -836,6 +1130,7 @@ class BrandResource(SyncAPIResource):
                         "max_speed": max_speed,
                         "mcc": mcc,
                         "phone": phone,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
@@ -848,6 +1143,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -858,12 +1154,12 @@ class BrandResource(SyncAPIResource):
     ) -> BrandPrefetchResponse:
         """
         Signal that you may fetch brand data for a particular domain soon to improve
-        latency. This endpoint does not charge credits and is available for paid
-        customers to optimize future requests. [You must be on a paid plan to use this
-        endpoint]
+        latency.
 
         Args:
           domain: Domain name to prefetch brand data for
+
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -882,6 +1178,7 @@ class BrandResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "domain": domain,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_prefetch_params.BrandPrefetchParams,
@@ -896,6 +1193,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         email: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -908,14 +1206,14 @@ class BrandResource(SyncAPIResource):
         Signal that you may fetch brand data for a particular domain soon to improve
         latency. This endpoint accepts an email address, extracts the domain from it,
         validates that it's not a disposable or free email provider, and queues the
-        domain for prefetching. This endpoint does not charge credits and is available
-        for paid customers to optimize future requests. [You must be on a paid plan to
-        use this endpoint]
+        domain for prefetching.
 
         Args:
           email: Email address to prefetch brand data for. The domain will be extracted from the
               email. Free email providers (gmail.com, yahoo.com, etc.) and disposable email
               addresses are not allowed.
+
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -934,6 +1232,7 @@ class BrandResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "email": email,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_prefetch_by_email_params.BrandPrefetchByEmailParams,
@@ -948,65 +1247,134 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         email: str,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1017,20 +1385,28 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveByEmailResponse:
         """
         Retrieve brand information using an email address while detecting disposable and
-        free email addresses. This endpoint extracts the domain from the email address
-        and returns brand data for that domain. Disposable and free email addresses
-        (like gmail.com, yahoo.com) will throw a 422 error.
+        free email addresses. Disposable and free email addresses (like gmail.com,
+        yahoo.com) will throw a 422 error.
 
         Args:
           email: Email address to retrieve brand data for (e.g., 'contact@example.com'). The
               domain will be extracted from the email. Free email providers (gmail.com,
               yahoo.com, etc.) and disposable email addresses are not allowed.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1055,7 +1431,9 @@ class BrandResource(SyncAPIResource):
                     {
                         "email": email,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_email_params.BrandRetrieveByEmailParams,
@@ -1068,65 +1446,134 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         isin: str,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1137,19 +1584,27 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveByIsinResponse:
         """
         Retrieve brand information using an ISIN (International Securities
-        Identification Number). This endpoint looks up the company associated with the
-        ISIN and returns its brand data.
+        Identification Number).
 
         Args:
           isin: ISIN (International Securities Identification Number) to retrieve brand data for
               (e.g., 'AU000000IMD5', 'US0378331005'). Must be exactly 12 characters: 2 letters
               followed by 9 alphanumeric characters and ending with a digit.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1174,7 +1629,9 @@ class BrandResource(SyncAPIResource):
                     {
                         "isin": isin,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_isin_params.BrandRetrieveByIsinParams,
@@ -1188,306 +1645,375 @@ class BrandResource(SyncAPIResource):
         *,
         name: str,
         country_gl: Literal[
-            "ad",
-            "ae",
             "af",
-            "ag",
-            "ai",
             "al",
-            "am",
-            "an",
-            "ao",
-            "aq",
-            "ar",
+            "dz",
             "as",
-            "at",
-            "au",
+            "ad",
+            "ao",
+            "ai",
+            "aq",
+            "ag",
+            "ar",
+            "am",
             "aw",
+            "au",
+            "at",
             "az",
-            "ba",
-            "bb",
-            "bd",
-            "be",
-            "bf",
-            "bg",
+            "bs",
             "bh",
-            "bi",
+            "bd",
+            "bb",
+            "by",
+            "be",
+            "bz",
             "bj",
             "bm",
-            "bn",
-            "bo",
-            "br",
-            "bs",
             "bt",
-            "bv",
+            "bo",
+            "ba",
             "bw",
-            "by",
-            "bz",
-            "ca",
-            "cc",
-            "cd",
-            "cf",
-            "cg",
-            "ch",
-            "ci",
-            "ck",
-            "cl",
+            "bv",
+            "br",
+            "io",
+            "bn",
+            "bg",
+            "bf",
+            "bi",
+            "kh",
             "cm",
-            "cn",
-            "co",
-            "cr",
-            "cu",
+            "ca",
             "cv",
+            "ky",
+            "cf",
+            "td",
+            "cl",
+            "cn",
             "cx",
+            "cc",
+            "co",
+            "km",
+            "cg",
+            "cd",
+            "ck",
+            "cr",
+            "ci",
+            "hr",
+            "cu",
             "cy",
             "cz",
-            "de",
-            "dj",
             "dk",
+            "dj",
             "dm",
             "do",
-            "dz",
             "ec",
-            "ee",
             "eg",
-            "eh",
+            "sv",
+            "gq",
             "er",
-            "es",
+            "ee",
             "et",
-            "fi",
-            "fj",
             "fk",
-            "fm",
             "fo",
+            "fj",
+            "fi",
             "fr",
-            "ga",
-            "gb",
-            "gd",
-            "ge",
             "gf",
+            "pf",
+            "tf",
+            "ga",
+            "gm",
+            "ge",
+            "de",
             "gh",
             "gi",
-            "gl",
-            "gm",
-            "gn",
-            "gp",
-            "gq",
             "gr",
-            "gs",
-            "gt",
+            "gl",
+            "gd",
+            "gp",
             "gu",
+            "gt",
+            "gn",
             "gw",
             "gy",
-            "hk",
-            "hm",
-            "hn",
-            "hr",
             "ht",
+            "hm",
+            "va",
+            "hn",
+            "hk",
             "hu",
+            "is",
+            "in",
             "id",
+            "ir",
+            "iq",
             "ie",
             "il",
-            "in",
-            "io",
-            "iq",
-            "ir",
-            "is",
             "it",
             "jm",
-            "jo",
             "jp",
+            "jo",
+            "kz",
             "ke",
-            "kg",
-            "kh",
             "ki",
-            "km",
-            "kn",
             "kp",
             "kr",
             "kw",
-            "ky",
-            "kz",
+            "kg",
             "la",
+            "lv",
             "lb",
-            "lc",
-            "li",
-            "lk",
-            "lr",
             "ls",
+            "lr",
+            "ly",
+            "li",
             "lt",
             "lu",
-            "lv",
-            "ly",
-            "ma",
-            "mc",
-            "md",
-            "mg",
-            "mh",
-            "mk",
-            "ml",
-            "mm",
-            "mn",
             "mo",
-            "mp",
+            "mk",
+            "mg",
+            "mw",
+            "my",
+            "mv",
+            "ml",
+            "mt",
+            "mh",
             "mq",
             "mr",
-            "ms",
-            "mt",
             "mu",
-            "mv",
-            "mw",
+            "yt",
             "mx",
-            "my",
+            "fm",
+            "md",
+            "mc",
+            "mn",
+            "ms",
+            "ma",
             "mz",
+            "mm",
             "na",
-            "nc",
-            "ne",
-            "nf",
-            "ng",
-            "ni",
-            "nl",
-            "no",
-            "np",
             "nr",
-            "nu",
+            "np",
+            "nl",
+            "an",
+            "nc",
             "nz",
+            "ni",
+            "ne",
+            "ng",
+            "nu",
+            "nf",
+            "mp",
+            "no",
             "om",
-            "pa",
-            "pe",
-            "pf",
-            "pg",
-            "ph",
             "pk",
-            "pl",
-            "pm",
-            "pn",
-            "pr",
-            "ps",
-            "pt",
             "pw",
+            "ps",
+            "pa",
+            "pg",
             "py",
+            "pe",
+            "ph",
+            "pn",
+            "pl",
+            "pt",
+            "pr",
             "qa",
             "re",
             "ro",
-            "rs",
             "ru",
             "rw",
-            "sa",
-            "sb",
-            "sc",
-            "sd",
-            "se",
-            "sg",
             "sh",
-            "si",
-            "sj",
-            "sk",
-            "sl",
+            "kn",
+            "lc",
+            "pm",
+            "vc",
+            "ws",
             "sm",
-            "sn",
-            "so",
-            "sr",
             "st",
-            "sv",
-            "sy",
+            "sa",
+            "sn",
+            "rs",
+            "sc",
+            "sl",
+            "sg",
+            "sk",
+            "si",
+            "sb",
+            "so",
+            "za",
+            "gs",
+            "es",
+            "lk",
+            "sd",
+            "sr",
+            "sj",
             "sz",
-            "tc",
-            "td",
-            "tf",
-            "tg",
-            "th",
-            "tj",
-            "tk",
-            "tl",
-            "tm",
-            "tn",
-            "to",
-            "tr",
-            "tt",
-            "tv",
+            "se",
+            "ch",
+            "sy",
             "tw",
+            "tj",
             "tz",
-            "ua",
+            "th",
+            "tl",
+            "tg",
+            "tk",
+            "to",
+            "tt",
+            "tn",
+            "tr",
+            "tm",
+            "tc",
+            "tv",
             "ug",
-            "um",
+            "ua",
+            "ae",
+            "gb",
             "us",
+            "um",
             "uy",
             "uz",
-            "va",
-            "vc",
+            "vu",
             "ve",
+            "vn",
             "vg",
             "vi",
-            "vn",
-            "vu",
             "wf",
-            "ws",
+            "eh",
             "ye",
-            "yt",
-            "za",
             "zm",
             "zw",
         ]
         | Omit = omit,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1496,23 +2022,30 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByNameResponse:
-        """Retrieve brand information using a company name.
-
-        This endpoint searches for the
-        company by name and returns its brand data.
+        """
+        Retrieve brand information using a company name.
 
         Args:
           name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
               Corporation'). Must be 3-30 characters.
 
-          country_gl: Optional country code (GL parameter) to specify the country. This affects the
-              geographic location used for search queries.
+          country_gl: Two-letter ISO 3166-1 alpha-2 country code (GL parameter) used to localize
+              search.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1538,7 +2071,9 @@ class BrandResource(SyncAPIResource):
                         "name": name,
                         "country_gl": country_gl,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_name_params.BrandRetrieveByNameParams,
@@ -1551,65 +2086,134 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         ticker: str,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         ticker_exchange: Literal[
             "AMEX",
             "AMS",
@@ -1693,22 +2297,29 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByTickerResponse:
-        """Retrieve brand information using a stock ticker symbol.
-
-        This endpoint looks up
-        the company associated with the ticker and returns its brand data.
+        """
+        Retrieve brand information using a stock ticker symbol.
 
         Args:
           ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
               Must be 1-15 characters, letters/numbers/dots only.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
-          ticker_exchange: Optional stock exchange for the ticker. Defaults to NASDAQ if not specified.
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          ticker_exchange: Stock exchange code.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1733,7 +2344,9 @@ class BrandResource(SyncAPIResource):
                     {
                         "ticker": ticker,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
@@ -1749,6 +2362,7 @@ class BrandResource(SyncAPIResource):
         input: str,
         max_results: int | Omit = omit,
         min_results: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1758,17 +2372,21 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveNaicsResponse:
         """
-        Endpoint to classify any brand into a 2022 NAICS code.
+        Classify any brand into 2022 NAICS industry codes from its domain or name.
 
         Args:
-          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
-              in `input`, it will be used for classification, otherwise, we will search for
-              the brand using the provided title.
+          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided,
+              it will be used for classification, otherwise, we will search for the brand
+              using the provided title.
 
           max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
               to 5.
 
           min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1783,7 +2401,7 @@ class BrandResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/brand/naics",
+            "/web/naics",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1794,6 +2412,7 @@ class BrandResource(SyncAPIResource):
                         "input": input,
                         "max_results": max_results,
                         "min_results": min_results,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_naics_params.BrandRetrieveNaicsParams,
@@ -1806,6 +2425,9 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        theme: Literal["light", "dark"] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1816,11 +2438,22 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveSimplifiedResponse:
         """
         Returns a simplified version of brand data containing only essential
-        information: domain, title, colors, logos, and backdrops. This endpoint is
-        optimized for faster responses and reduced data transfer.
+        information: domain, title, colors, logos, and backdrops. Optimized for faster
+        responses and reduced data transfer.
 
         Args:
           domain: Domain name to retrieve simplified brand data for
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          theme: Optional theme preference used when selecting brand assets.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1844,6 +2477,9 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
+                        "theme": theme,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_simplified_params.BrandRetrieveSimplifiedParams,
@@ -1855,10 +2491,227 @@ class BrandResource(SyncAPIResource):
     def screenshot(
         self,
         *,
-        domain: str,
+        clear_popups: bool | Omit = omit,
+        color_scheme: Literal["light", "dark"] | Omit = omit,
+        country: Literal[
+            "ad",
+            "ae",
+            "af",
+            "ag",
+            "ai",
+            "al",
+            "am",
+            "ao",
+            "ar",
+            "at",
+            "au",
+            "aw",
+            "az",
+            "ba",
+            "bb",
+            "bd",
+            "be",
+            "bf",
+            "bg",
+            "bh",
+            "bi",
+            "bj",
+            "bm",
+            "bn",
+            "bo",
+            "bq",
+            "br",
+            "bs",
+            "bw",
+            "by",
+            "bz",
+            "ca",
+            "cd",
+            "cf",
+            "cg",
+            "ch",
+            "ci",
+            "cl",
+            "cm",
+            "cn",
+            "co",
+            "cr",
+            "cv",
+            "cw",
+            "cy",
+            "cz",
+            "de",
+            "dj",
+            "dk",
+            "dm",
+            "do",
+            "dz",
+            "ec",
+            "ee",
+            "eg",
+            "es",
+            "et",
+            "fi",
+            "fj",
+            "fr",
+            "ga",
+            "gb",
+            "gd",
+            "ge",
+            "gf",
+            "gg",
+            "gh",
+            "gm",
+            "gn",
+            "gp",
+            "gq",
+            "gr",
+            "gt",
+            "gu",
+            "gw",
+            "gy",
+            "hk",
+            "hn",
+            "hr",
+            "ht",
+            "hu",
+            "id",
+            "ie",
+            "il",
+            "im",
+            "in",
+            "iq",
+            "ir",
+            "is",
+            "it",
+            "je",
+            "jm",
+            "jo",
+            "jp",
+            "ke",
+            "kg",
+            "kh",
+            "kn",
+            "kr",
+            "kw",
+            "ky",
+            "kz",
+            "la",
+            "lb",
+            "lc",
+            "lk",
+            "lr",
+            "ls",
+            "lt",
+            "lu",
+            "lv",
+            "ly",
+            "ma",
+            "mc",
+            "md",
+            "me",
+            "mf",
+            "mg",
+            "mk",
+            "ml",
+            "mm",
+            "mn",
+            "mo",
+            "mq",
+            "mr",
+            "mt",
+            "mu",
+            "mv",
+            "mw",
+            "mx",
+            "my",
+            "mz",
+            "na",
+            "nc",
+            "ne",
+            "ng",
+            "ni",
+            "nl",
+            "no",
+            "np",
+            "nz",
+            "om",
+            "pa",
+            "pe",
+            "pf",
+            "pg",
+            "ph",
+            "pk",
+            "pl",
+            "pr",
+            "ps",
+            "pt",
+            "py",
+            "qa",
+            "re",
+            "ro",
+            "rs",
+            "ru",
+            "rw",
+            "sa",
+            "sc",
+            "sd",
+            "se",
+            "sg",
+            "si",
+            "sk",
+            "sl",
+            "sm",
+            "sn",
+            "so",
+            "sr",
+            "ss",
+            "st",
+            "sv",
+            "sx",
+            "sy",
+            "sz",
+            "tc",
+            "td",
+            "tg",
+            "th",
+            "tj",
+            "tl",
+            "tm",
+            "tn",
+            "tr",
+            "tt",
+            "tw",
+            "tz",
+            "ua",
+            "ug",
+            "us",
+            "uy",
+            "uz",
+            "vc",
+            "ve",
+            "vg",
+            "vi",
+            "vn",
+            "ye",
+            "yt",
+            "za",
+            "zm",
+            "zw",
+        ]
+        | Omit = omit,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
         full_screenshot: Literal["true", "false"] | Omit = omit,
+        handle_cookie_popup: bool | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
-        prioritize: Literal["speed", "quality"] | Omit = omit,
+        scroll_offset: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        viewport: brand_screenshot_params.Viewport | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1866,29 +2719,73 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandScreenshotResponse:
-        """Capture a screenshot of a website.
-
-        Supports both viewport (standard browser
-        view) and full-page screenshots. Can also screenshot specific page types (login,
-        pricing, etc.) by using heuristics to find the appropriate URL. Returns a URL to
-        the uploaded screenshot image hosted on our CDN.
+        """
+        Capture a screenshot of a website.
 
         Args:
+          clear_popups: Optional parameter for comprehensive popup cleanup. If 'true', the browser
+              dismisses detected cookie/consent UI and clears other detected obstructive
+              popups and overlays before capture. If 'false' or not provided, this parameter
+              requests no cleanup; handleCookiePopup can still request cookie/consent handling
+              independently.
+
+          color_scheme: Optional parameter to choose the site's visual theme in the screenshot. Use
+              'light' or 'dark' when the site offers both appearances.
+
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
+
+          direct_url: A specific URL to screenshot directly, bypassing domain resolution (e.g.,
+              'https://example.com/pricing'). When provided, the screenshot is taken of this
+              exact URL. You must provide either 'domain' or 'directUrl', but not both.
+
           domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
 
           full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
               screenshot capturing all content. If 'false' or not provided, takes a viewport
               screenshot (standard browser view).
 
+          handle_cookie_popup: Optional parameter to control cookie/consent popup handling. If 'true', we
+              dismiss cookie banner before capture. If 'false' or not provided, captures the
+              page without that step.
+
+          max_age_ms: Return a cached screenshot if a prior screenshot for the same parameters exists
+              and is younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always capture fresh.
+
           page: Optional parameter to specify which page type to screenshot. If provided, the
               system will scrape the domain's links and use heuristics to find the most
               appropriate URL for the specified page type (30 supported languages). If not
-              provided, screenshots the main domain landing page.
+              provided, screenshots the main domain landing page. Only applicable when using
+              'domain', not 'directUrl'.
 
-          prioritize: Optional parameter to prioritize screenshot capture. If 'speed', optimizes for
-              faster capture with basic quality. If 'quality', optimizes for higher quality
-              with longer wait times. Defaults to 'quality' if not provided.
+          scroll_offset: Optional vertical scroll offset in pixels for capturing a long page in
+              viewport-sized chunks. When provided, the full page is captured once and the
+              returned image is the viewport-sized slice that begins at this Y offset (e.g.
+              request scrollOffset=0, then 1080, then 2160 to walk a 1920x1080 landing page
+              top to bottom). The final slice may be shorter than the viewport height. Takes
+              precedence over fullScreenshot. Max: 100000.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          viewport: Optional browser viewport dimensions for the screenshot. Defaults to 1920x1080.
+
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before taking
+              the screenshot. Min: 0. Max: 30000 (30 seconds). Defaults to 3000 ms when
+              omitted.
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
 
           extra_headers: Send extra headers
 
@@ -1899,7 +2796,7 @@ class BrandResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/brand/screenshot",
+            "/web/screenshot",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1907,10 +2804,21 @@ class BrandResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "clear_popups": clear_popups,
+                        "color_scheme": color_scheme,
+                        "country": country,
+                        "direct_url": direct_url,
                         "domain": domain,
                         "full_screenshot": full_screenshot,
+                        "handle_cookie_popup": handle_cookie_popup,
+                        "max_age_ms": max_age_ms,
                         "page": page,
-                        "prioritize": prioritize,
+                        "scroll_offset": scroll_offset,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "viewport": viewport,
+                        "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
                     },
                     brand_screenshot_params.BrandScreenshotParams,
                 ),
@@ -1921,8 +2829,11 @@ class BrandResource(SyncAPIResource):
     def styleguide(
         self,
         *,
+        color_scheme: Literal["light", "dark"] | Omit = omit,
         direct_url: str | Omit = omit,
         domain: str | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1932,17 +2843,30 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandStyleguideResponse:
         """
-        Automatically extract comprehensive design system information from a brand's
-        website including colors, typography, spacing, shadows, and UI components.
-        Either 'domain' or 'directUrl' must be provided as a query parameter, but not
-        both.
+        Extract a comprehensive design system from a website including colors,
+        typography, spacing, shadows, and UI components.
 
         Args:
+          color_scheme: Optional browser color scheme to emulate for websites that respond to
+              prefers-color-scheme. This value is part of the styleguide cache key.
+
           direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
-              resolution (e.g., 'https://example.com/design-system').
+              resolution (e.g., 'https://example.com/design-system'). When provided, the
+              styleguide is extracted from this exact URL. You must provide either 'domain' or
+              'directUrl', but not both.
 
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1957,7 +2881,7 @@ class BrandResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/brand/styleguide",
+            "/web/styleguide",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -1965,8 +2889,11 @@ class BrandResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "color_scheme": color_scheme,
                         "direct_url": direct_url,
                         "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_styleguide_params.BrandStyleguideParams,
@@ -1979,6 +2906,226 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        actions: Optional[Iterable[brand_web_scrape_html_params.Action]] | Omit = omit,
+        country: Literal[
+            "ad",
+            "ae",
+            "af",
+            "ag",
+            "ai",
+            "al",
+            "am",
+            "ao",
+            "ar",
+            "at",
+            "au",
+            "aw",
+            "az",
+            "ba",
+            "bb",
+            "bd",
+            "be",
+            "bf",
+            "bg",
+            "bh",
+            "bi",
+            "bj",
+            "bm",
+            "bn",
+            "bo",
+            "bq",
+            "br",
+            "bs",
+            "bw",
+            "by",
+            "bz",
+            "ca",
+            "cd",
+            "cf",
+            "cg",
+            "ch",
+            "ci",
+            "cl",
+            "cm",
+            "cn",
+            "co",
+            "cr",
+            "cv",
+            "cw",
+            "cy",
+            "cz",
+            "de",
+            "dj",
+            "dk",
+            "dm",
+            "do",
+            "dz",
+            "ec",
+            "ee",
+            "eg",
+            "es",
+            "et",
+            "fi",
+            "fj",
+            "fr",
+            "ga",
+            "gb",
+            "gd",
+            "ge",
+            "gf",
+            "gg",
+            "gh",
+            "gm",
+            "gn",
+            "gp",
+            "gq",
+            "gr",
+            "gt",
+            "gu",
+            "gw",
+            "gy",
+            "hk",
+            "hn",
+            "hr",
+            "ht",
+            "hu",
+            "id",
+            "ie",
+            "il",
+            "im",
+            "in",
+            "iq",
+            "ir",
+            "is",
+            "it",
+            "je",
+            "jm",
+            "jo",
+            "jp",
+            "ke",
+            "kg",
+            "kh",
+            "kn",
+            "kr",
+            "kw",
+            "ky",
+            "kz",
+            "la",
+            "lb",
+            "lc",
+            "lk",
+            "lr",
+            "ls",
+            "lt",
+            "lu",
+            "lv",
+            "ly",
+            "ma",
+            "mc",
+            "md",
+            "me",
+            "mf",
+            "mg",
+            "mk",
+            "ml",
+            "mm",
+            "mn",
+            "mo",
+            "mq",
+            "mr",
+            "mt",
+            "mu",
+            "mv",
+            "mw",
+            "mx",
+            "my",
+            "mz",
+            "na",
+            "nc",
+            "ne",
+            "ng",
+            "ni",
+            "nl",
+            "no",
+            "np",
+            "nz",
+            "om",
+            "pa",
+            "pe",
+            "pf",
+            "pg",
+            "ph",
+            "pk",
+            "pl",
+            "pr",
+            "ps",
+            "pt",
+            "py",
+            "qa",
+            "re",
+            "ro",
+            "rs",
+            "ru",
+            "rw",
+            "sa",
+            "sc",
+            "sd",
+            "se",
+            "sg",
+            "si",
+            "sk",
+            "sl",
+            "sm",
+            "sn",
+            "so",
+            "sr",
+            "ss",
+            "st",
+            "sv",
+            "sx",
+            "sy",
+            "sz",
+            "tc",
+            "td",
+            "tg",
+            "th",
+            "tj",
+            "tl",
+            "tm",
+            "tn",
+            "tr",
+            "tt",
+            "tw",
+            "tz",
+            "ua",
+            "ug",
+            "us",
+            "uy",
+            "uz",
+            "vc",
+            "ve",
+            "vg",
+            "vi",
+            "vn",
+            "ye",
+            "yt",
+            "za",
+            "zm",
+            "zw",
+        ]
+        | Omit = omit,
+        exclude_selectors: Optional[SequenceNotStr[str]] | Omit = omit,
+        headers: Dict[str, str] | Omit = omit,
+        include_frames: bool | Omit = omit,
+        include_selectors: Optional[SequenceNotStr[str]] | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        pdf: brand_web_scrape_html_params.Pdf | Omit = omit,
+        settle_animations: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        use_main_content_only: bool | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1986,11 +3133,65 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeHTMLResponse:
-        """
-        Scrapes the given URL and returns the raw HTML content of the page.
+        """Scrapes the given URL and returns the raw HTML content of the page.
+
+        The base
+        request costs 1 credit; requests with browser actions cost 2 credits.
 
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
+
+          actions: Optional browser actions executed in array order after the page loads and before
+              content is captured. Requires a paid plan. Send a JSON array in the query
+              parameter. Maximum: 5 actions.
+
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
+
+          exclude_selectors: CSS selectors to remove from the result. Applied after includeSelectors.
+              Exclusion takes precedence: an element matching both is removed. Examples:
+              "nav", "footer", ".ad-banner", "[aria-hidden=true]".
+
+          headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
+              deep-object query params such as headers[X-Custom]=value. When provided, caching
+              is bypassed: the result is neither read from nor written to cache.
+
+          include_frames: When true, iframes are rendered inline into the returned HTML.
+
+          include_selectors: CSS selectors. When provided, only matching subtrees (and their descendants) are
+              kept and everything else is dropped. When omitted, the entire document is kept.
+              Examples: "article.main", "#content", "[role=main]".
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          pdf: PDF parsing controls. Use start/end to limit text extraction and embedded-image
+              detection/OCR to an inclusive 1-based page range.
+
+          settle_animations: When true, waits briefly for CSS and transition animations to settle before
+              extracting HTML. Defaults to false. This adds a bit of latency in exchange for
+              more stable output on animated pages.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          use_main_content_only: When true, return only the page's main content in the HTML response, excluding
+              headers, footers, sidebars, and navigation when detectable.
+
+          wait_for_ms:
+              Optional browser wait time in milliseconds after initial page load. Min: 0. Max:
+              30000 (30 seconds).
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
 
           extra_headers: Send extra headers
 
@@ -2007,7 +3208,26 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"url": url}, brand_web_scrape_html_params.BrandWebScrapeHTMLParams),
+                query=maybe_transform(
+                    {
+                        "url": url,
+                        "actions": actions,
+                        "country": country,
+                        "exclude_selectors": exclude_selectors,
+                        "headers": headers,
+                        "include_frames": include_frames,
+                        "include_selectors": include_selectors,
+                        "max_age_ms": max_age_ms,
+                        "pdf": pdf,
+                        "settle_animations": settle_animations,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "use_main_content_only": use_main_content_only,
+                        "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
+                    },
+                    brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
+                ),
             ),
             cast_to=BrandWebScrapeHTMLResponse,
         )
@@ -2016,6 +3236,14 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        actions: Optional[Iterable[brand_web_scrape_images_params.Action]] | Omit = omit,
+        dedupe: bool | Omit = omit,
+        enrichment: Optional[brand_web_scrape_images_params.Enrichment] | Omit = omit,
+        headers: Dict[str, str] | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2023,14 +3251,45 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeImagesResponse:
-        """Scrapes all images from the given URL.
-
-        Extracts images from img, svg,
-        picture/source, link, and video elements including inline SVGs, base64 data
-        URIs, and standard URLs.
+        """
+        Extract image assets from a web page, including standard URLs, inline SVGs, data
+        URIs, responsive image sources, metadata, CSS backgrounds, video posters, and
+        embeds. The base request costs 1 credit, or 2 credits with browser actions. When
+        enrichment is enabled, the entire call costs 5 credits, including requests that
+        also use actions.
 
         Args:
-          url: Full URL to scrape images from (must include http:// or https:// protocol)
+          url: Page URL to inspect. Must include http:// or https://.
+
+          actions: Optional browser actions executed in array order after the page loads and before
+              content is captured. Requires a paid plan. Send a JSON array in the query
+              parameter. Maximum: 5 actions.
+
+          dedupe: When true, visually duplicate images are removed: every image is loaded and
+              perceptually hashed, and only the highest-resolution copy of each duplicate
+              group is kept. Images that cannot be downloaded or hashed are kept. Default:
+              false.
+
+          enrichment: Optional per-image processing, sent as deep-object query params such as
+              enrichment[resolution]=true.
+
+          headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
+              deep-object query params such as headers[X-Custom]=value. When provided, caching
+              is bypassed: the result is neither read from nor written to cache.
+
+          max_age_ms: Reuse a cached result this many milliseconds old or newer. Default: 86400000 (1
+              day). Set to 0 to bypass cache. Maximum: 2592000000 (30 days).
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before
+              collecting images. Min: 0. Max: 30000 (30 seconds).
 
           extra_headers: Send extra headers
 
@@ -2047,7 +3306,20 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"url": url}, brand_web_scrape_images_params.BrandWebScrapeImagesParams),
+                query=maybe_transform(
+                    {
+                        "url": url,
+                        "actions": actions,
+                        "dedupe": dedupe,
+                        "enrichment": enrichment,
+                        "headers": headers,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "wait_for_ms": wait_for_ms,
+                    },
+                    brand_web_scrape_images_params.BrandWebScrapeImagesParams,
+                ),
             ),
             cast_to=BrandWebScrapeImagesResponse,
         )
@@ -2056,10 +3328,230 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        actions: Optional[Iterable[brand_web_scrape_md_params.Action]] | Omit = omit,
+        country: Literal[
+            "ad",
+            "ae",
+            "af",
+            "ag",
+            "ai",
+            "al",
+            "am",
+            "ao",
+            "ar",
+            "at",
+            "au",
+            "aw",
+            "az",
+            "ba",
+            "bb",
+            "bd",
+            "be",
+            "bf",
+            "bg",
+            "bh",
+            "bi",
+            "bj",
+            "bm",
+            "bn",
+            "bo",
+            "bq",
+            "br",
+            "bs",
+            "bw",
+            "by",
+            "bz",
+            "ca",
+            "cd",
+            "cf",
+            "cg",
+            "ch",
+            "ci",
+            "cl",
+            "cm",
+            "cn",
+            "co",
+            "cr",
+            "cv",
+            "cw",
+            "cy",
+            "cz",
+            "de",
+            "dj",
+            "dk",
+            "dm",
+            "do",
+            "dz",
+            "ec",
+            "ee",
+            "eg",
+            "es",
+            "et",
+            "fi",
+            "fj",
+            "fr",
+            "ga",
+            "gb",
+            "gd",
+            "ge",
+            "gf",
+            "gg",
+            "gh",
+            "gm",
+            "gn",
+            "gp",
+            "gq",
+            "gr",
+            "gt",
+            "gu",
+            "gw",
+            "gy",
+            "hk",
+            "hn",
+            "hr",
+            "ht",
+            "hu",
+            "id",
+            "ie",
+            "il",
+            "im",
+            "in",
+            "iq",
+            "ir",
+            "is",
+            "it",
+            "je",
+            "jm",
+            "jo",
+            "jp",
+            "ke",
+            "kg",
+            "kh",
+            "kn",
+            "kr",
+            "kw",
+            "ky",
+            "kz",
+            "la",
+            "lb",
+            "lc",
+            "lk",
+            "lr",
+            "ls",
+            "lt",
+            "lu",
+            "lv",
+            "ly",
+            "ma",
+            "mc",
+            "md",
+            "me",
+            "mf",
+            "mg",
+            "mk",
+            "ml",
+            "mm",
+            "mn",
+            "mo",
+            "mq",
+            "mr",
+            "mt",
+            "mu",
+            "mv",
+            "mw",
+            "mx",
+            "my",
+            "mz",
+            "na",
+            "nc",
+            "ne",
+            "ng",
+            "ni",
+            "nl",
+            "no",
+            "np",
+            "nz",
+            "om",
+            "pa",
+            "pe",
+            "pf",
+            "pg",
+            "ph",
+            "pk",
+            "pl",
+            "pr",
+            "ps",
+            "pt",
+            "py",
+            "qa",
+            "re",
+            "ro",
+            "rs",
+            "ru",
+            "rw",
+            "sa",
+            "sc",
+            "sd",
+            "se",
+            "sg",
+            "si",
+            "sk",
+            "sl",
+            "sm",
+            "sn",
+            "so",
+            "sr",
+            "ss",
+            "st",
+            "sv",
+            "sx",
+            "sy",
+            "sz",
+            "tc",
+            "td",
+            "tg",
+            "th",
+            "tj",
+            "tl",
+            "tm",
+            "tn",
+            "tr",
+            "tt",
+            "tw",
+            "tz",
+            "ua",
+            "ug",
+            "us",
+            "uy",
+            "uz",
+            "vc",
+            "ve",
+            "vg",
+            "vi",
+            "vn",
+            "ye",
+            "yt",
+            "za",
+            "zm",
+            "zw",
+        ]
+        | Omit = omit,
+        exclude_selectors: Optional[SequenceNotStr[str]] | Omit = omit,
+        headers: Dict[str, str] | Omit = omit,
+        include_frames: bool | Omit = omit,
+        include_html: bool | Omit = omit,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        include_selectors: Optional[SequenceNotStr[str]] | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        pdf: brand_web_scrape_md_params.Pdf | Omit = omit,
+        settle_animations: bool | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2067,22 +3559,102 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeMdResponse:
-        """
-        Scrapes the given URL, converts the HTML content to Markdown, and returns the
-        result.
+        """Scrapes the given URL into LLM usable Markdown.
+
+        Inspect key_metadata on JSON
+        responses from a recognized API key; use error_code to distinguish stable
+        failure categories.
+
+        ### YouTube
+
+        YouTube URLs return the video or channel itself rather than the surrounding
+        player and navigation chrome. A URL addressing a single video (`/watch`,
+        `youtu.be`, `/shorts`, `/embed`, `/live`) returns its title, channel, duration,
+        view count, keywords, full description, and the transcript when the video has
+        captions that can be retrieved; videos without captions return everything except
+        the transcript. A channel URL (`/channel/UC…`, `/@handle`, `/c/…`, `/user/…`)
+        returns its name, handle, subscriber count, video count, and full description.
+        When `includeImages=true`, video responses also include the thumbnail and
+        channel responses include the avatar. Costs the same as any other scrape.
+
+        ### Billing & errors
+
+        | HTTP status | Billed?                                   | Meaning                                                                                                                                                                                                                                                                                                       |
+        | ----------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        | 200         | Yes — 1 credit, or 2 credits with actions | Successful scrape, including a zero-length result when includeSelectors matched nothing                                                                                                                                                                                                                       |
+        | 400         | No                                        | Invalid input, skipped PDF, or the page could not be scraped. error_code WEBSITE_BLOCKED specifically means the site answered with an anti-bot challenge, CAPTCHA wall, or login shell instead of the page (even when the site returned HTTP 200) — retrying later or from another country sometimes succeeds |
+        | 401 / 403   | No                                        | Invalid/disabled key, insufficient permissions, or credits exhausted; inspect error_code                                                                                                                                                                                                                      |
+        | 404         | No                                        | Target page returned or fingerprinted as not found                                                                                                                                                                                                                                                            |
+        | 408         | No                                        | Request timed out                                                                                                                                                                                                                                                                                             |
+        | 413         | No                                        | Target content exceeds the maximum supported size (20 MB)                                                                                                                                                                                                                                                     |
+        | 415         | No                                        | Unsupported content type                                                                                                                                                                                                                                                                                      |
+        | 429         | No                                        | Per-minute rate limit exceeded; honor Retry-After                                                                                                                                                                                                                                                             |
+        | 500         | No                                        | Internal error                                                                                                                                                                                                                                                                                                |
 
         Args:
-          url: Full URL to scrape and convert to markdown (must include http:// or https://
+          url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
+
+          actions: Optional browser actions executed in array order after the page loads and before
+              content is captured. Requires a paid plan. Send a JSON array in the query
+              parameter. Maximum: 5 actions.
+
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
+
+          exclude_selectors: CSS selectors to remove before conversion to Markdown. Applied after
+              includeSelectors. Exclusion takes precedence: an element matching both is
+              removed. Examples: "nav", "footer", ".ad-banner", "[aria-hidden=true]".
+
+          headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
+              deep-object query params such as headers[X-Custom]=value. When provided, caching
+              is bypassed: the result is neither read from nor written to cache.
+
+          include_frames: When true, the contents of iframes are rendered to Markdown.
+
+          include_html: When true, the response also includes an `html` field with the page HTML the
+              Markdown was converted from — the same body the Scrape HTML endpoint returns for
+              the equivalent request.
 
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
 
+          include_selectors: CSS selectors. When provided, only matching HTML subtrees (and their
+              descendants) are kept before conversion to Markdown. When omitted, the entire
+              document is kept. Examples: "article.main", "#content", "[role=main]".
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          pdf: PDF parsing controls. Use start/end to limit text extraction and embedded-image
+              detection/OCR to an inclusive 1-based page range.
+
+          settle_animations: When true, waits briefly for CSS and transition animations to settle before
+              converting to Markdown. Defaults to false. This adds a bit of latency in
+              exchange for more stable output on animated pages.
+
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           use_main_content_only: Extract only the main content of the page, excluding headers, footers, sidebars,
               and navigation
+
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before
+              converting the page to Markdown. Min: 0. Max: 30000 (30 seconds).
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
 
           extra_headers: Send extra headers
 
@@ -2102,10 +3674,24 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "url": url,
+                        "actions": actions,
+                        "country": country,
+                        "exclude_selectors": exclude_selectors,
+                        "headers": headers,
+                        "include_frames": include_frames,
+                        "include_html": include_html,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "include_selectors": include_selectors,
+                        "max_age_ms": max_age_ms,
+                        "pdf": pdf,
+                        "settle_animations": settle_animations,
                         "shorten_base64_images": shorten_base64_images,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
+                        "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_md_params.BrandWebScrapeMdParams,
                 ),
@@ -2117,7 +3703,14 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        headers: Dict[str, str] | Omit = omit,
         max_links: int | Omit = omit,
+        search: str | Omit = omit,
+        sitemap_url: str | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        url_regex: str | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2125,17 +3718,46 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
-        """
-        Crawls the sitemap of the given domain and returns all discovered page URLs.
-        Supports sitemap index files (recursive), parallel fetching with concurrency
-        control, deduplication, and filters out non-page resources (images, PDFs, etc.).
+        """Crawl an entire website's sitemap and return all discovered page URLs.
+
+        Pass
+        `search` to have the crawled sitemap filtered down to the pages about a phrase
+        (for example `pricing and plans` or `api authentication docs`), most relevant
+        first — a searched crawl scans the whole sitemap and costs 2 credits instead
+        of 1.
 
         Args:
-          domain: Domain name to crawl sitemaps for (e.g., 'example.com'). The domain will be
-              automatically normalized and validated.
+          domain: Domain to build a sitemap for
+
+          headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
+              deep-object query params such as headers[X-Custom]=value. When provided, caching
+              is bypassed: the result is neither read from nor written to cache.
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          search: Optional search phrase. When provided, the crawled sitemap is filtered to the
+              pages whose URLs are about that phrase, most relevant first, and the request
+              costs 2 credits instead of 1.
+
+          sitemap_url: Optional explicit sitemap URL. When provided, exactly this sitemap is crawled
+              instead of discovering the domain's sitemaps.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          url_regex: Optional RE2-compatible regex pattern. Only URLs matching this pattern are
+              returned and counted against maxLinks.
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
 
           extra_headers: Send extra headers
 
@@ -2155,7 +3777,14 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "domain": domain,
+                        "headers": headers,
                         "max_links": max_links,
+                        "search": search,
+                        "sitemap_url": sitemap_url,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "url_regex": url_regex,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),
@@ -2187,66 +3816,212 @@ class AsyncBrandResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        domain: str,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        domain: str | Omit = omit,
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        name: str | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        ticker: str | Omit = omit,
+        ticker_exchange: Literal[
+            "AMEX",
+            "AMS",
+            "AQS",
+            "ASX",
+            "ATH",
+            "BER",
+            "BME",
+            "BRU",
+            "BSE",
+            "BUD",
+            "BUE",
+            "BVC",
+            "CBOE",
+            "CNQ",
+            "CPH",
+            "DFM",
+            "DOH",
+            "DUB",
+            "DUS",
+            "DXE",
+            "EGX",
+            "FSX",
+            "HAM",
+            "HEL",
+            "HKSE",
+            "HOSE",
+            "ICE",
+            "IOB",
+            "IST",
+            "JKT",
+            "JNB",
+            "JPX",
+            "KLS",
+            "KOE",
+            "KSC",
+            "KUW",
+            "LIS",
+            "LSE",
+            "MCX",
+            "MEX",
+            "MIL",
+            "MUN",
+            "NASDAQ",
+            "NEO",
+            "NSE",
+            "NYSE",
+            "NZE",
+            "OSL",
+            "OTC",
+            "PAR",
+            "PNK",
+            "PRA",
+            "RIS",
+            "SAO",
+            "SAU",
+            "SES",
+            "SET",
+            "SGO",
+            "SHH",
+            "SHZ",
+            "SIX",
+            "STO",
+            "STU",
+            "TAI",
+            "TAL",
+            "TLV",
+            "TSX",
+            "TSXV",
+            "TWO",
+            "VIE",
+            "WSE",
+            "XETRA",
+        ]
+        | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2263,12 +4038,28 @@ class AsyncBrandResource(AsyncAPIResource):
           domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
               Cannot be used with name or ticker parameters.
 
-          force_language: Optional parameter to force the language of the retrieved brand data. Works with
-              all three lookup methods.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data. Works with all three lookup methods.
+
+          name: Company name to retrieve brand data for (e.g., 'Apple Inc'). Cannot be used with
+              domain or ticker parameters.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL'). Cannot be used
+              with domain or name parameters.
+
+          ticker_exchange: Stock exchange code.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -2293,7 +4084,12 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "domain": domain,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "name": name,
+                        "tags": tags,
+                        "ticker": ticker,
+                        "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
@@ -2306,6 +4102,8 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        max_age_ms: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2315,15 +4113,21 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductResponse:
         """
-        Beta feature: Given a single URL, determines if it is a product detail page,
-        classifies the platform/product type, and extracts the product information.
-        Supports Amazon, TikTok Shop, Etsy, and generic ecommerce sites.
+        Given a single URL, determines if it is a product page and extracts the product
+        information.
 
         Args:
           url: The product page URL to extract product data from.
 
-          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
-              300000ms (5 minutes).
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -2338,6 +4142,8 @@ class AsyncBrandResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "max_age_ms": max_age_ms,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_product_params.BrandAIProductParams,
@@ -2353,7 +4159,9 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2362,19 +4170,26 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           domain: The domain name to analyze.
 
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
           max_products: Maximum number of products to extract.
 
-          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
-              300000ms (5 minutes).
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -2391,7 +4206,9 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         direct_url: str,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2400,20 +4217,27 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           direct_url: A specific URL to use directly as the starting point for extraction without
               domain resolution.
 
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
           max_products: Maximum number of products to extract.
 
-          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
-              300000ms (5 minutes).
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -2430,7 +4254,9 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str | Omit = omit,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         direct_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2445,7 +4271,9 @@ class AsyncBrandResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "domain": domain,
+                    "max_age_ms": max_age_ms,
                     "max_products": max_products,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                     "direct_url": direct_url,
                 },
@@ -2463,6 +4291,7 @@ class AsyncBrandResource(AsyncAPIResource):
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
         specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2484,6 +4313,8 @@ class AsyncBrandResource(AsyncAPIResource):
 
           specific_pages: Optional object specifying which pages to analyze
 
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -2503,6 +4334,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     "data_to_extract": data_to_extract,
                     "domain": domain,
                     "specific_pages": specific_pages,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_query_params.BrandAIQueryParams,
@@ -2516,7 +4348,10 @@ class AsyncBrandResource(AsyncAPIResource):
     async def fonts(
         self,
         *,
-        domain: str,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2526,12 +4361,26 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandFontsResponse:
         """
-        Extract font information from a brand's website including font families, usage
+        Scrape font information from a website including font families, usage
         statistics, fallbacks, and element/word counts.
 
         Args:
+          direct_url: A specific URL to fetch fonts from directly, bypassing domain resolution (e.g.,
+              'https://example.com/design-system'). When provided, fonts are extracted from
+              this exact URL. You must provide either 'domain' or 'directUrl', but not both.
+
           domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -2546,7 +4395,7 @@ class AsyncBrandResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/brand/fonts",
+            "/web/fonts",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -2554,7 +4403,10 @@ class AsyncBrandResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "direct_url": direct_url,
                         "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_fonts_params.BrandFontsParams,
@@ -2569,309 +4421,377 @@ class AsyncBrandResource(AsyncAPIResource):
         transaction_info: str,
         city: str | Omit = omit,
         country_gl: Literal[
-            "ad",
-            "ae",
             "af",
-            "ag",
-            "ai",
             "al",
-            "am",
-            "an",
-            "ao",
-            "aq",
-            "ar",
+            "dz",
             "as",
-            "at",
-            "au",
+            "ad",
+            "ao",
+            "ai",
+            "aq",
+            "ag",
+            "ar",
+            "am",
             "aw",
+            "au",
+            "at",
             "az",
-            "ba",
-            "bb",
-            "bd",
-            "be",
-            "bf",
-            "bg",
+            "bs",
             "bh",
-            "bi",
+            "bd",
+            "bb",
+            "by",
+            "be",
+            "bz",
             "bj",
             "bm",
-            "bn",
-            "bo",
-            "br",
-            "bs",
             "bt",
-            "bv",
+            "bo",
+            "ba",
             "bw",
-            "by",
-            "bz",
-            "ca",
-            "cc",
-            "cd",
-            "cf",
-            "cg",
-            "ch",
-            "ci",
-            "ck",
-            "cl",
+            "bv",
+            "br",
+            "io",
+            "bn",
+            "bg",
+            "bf",
+            "bi",
+            "kh",
             "cm",
-            "cn",
-            "co",
-            "cr",
-            "cu",
+            "ca",
             "cv",
+            "ky",
+            "cf",
+            "td",
+            "cl",
+            "cn",
             "cx",
+            "cc",
+            "co",
+            "km",
+            "cg",
+            "cd",
+            "ck",
+            "cr",
+            "ci",
+            "hr",
+            "cu",
             "cy",
             "cz",
-            "de",
-            "dj",
             "dk",
+            "dj",
             "dm",
             "do",
-            "dz",
             "ec",
-            "ee",
             "eg",
-            "eh",
+            "sv",
+            "gq",
             "er",
-            "es",
+            "ee",
             "et",
-            "fi",
-            "fj",
             "fk",
-            "fm",
             "fo",
+            "fj",
+            "fi",
             "fr",
-            "ga",
-            "gb",
-            "gd",
-            "ge",
             "gf",
+            "pf",
+            "tf",
+            "ga",
+            "gm",
+            "ge",
+            "de",
             "gh",
             "gi",
-            "gl",
-            "gm",
-            "gn",
-            "gp",
-            "gq",
             "gr",
-            "gs",
-            "gt",
+            "gl",
+            "gd",
+            "gp",
             "gu",
+            "gt",
+            "gn",
             "gw",
             "gy",
-            "hk",
-            "hm",
-            "hn",
-            "hr",
             "ht",
+            "hm",
+            "va",
+            "hn",
+            "hk",
             "hu",
+            "is",
+            "in",
             "id",
+            "ir",
+            "iq",
             "ie",
             "il",
-            "in",
-            "io",
-            "iq",
-            "ir",
-            "is",
             "it",
             "jm",
-            "jo",
             "jp",
+            "jo",
+            "kz",
             "ke",
-            "kg",
-            "kh",
             "ki",
-            "km",
-            "kn",
             "kp",
             "kr",
             "kw",
-            "ky",
-            "kz",
+            "kg",
             "la",
+            "lv",
             "lb",
-            "lc",
-            "li",
-            "lk",
-            "lr",
             "ls",
+            "lr",
+            "ly",
+            "li",
             "lt",
             "lu",
-            "lv",
-            "ly",
-            "ma",
-            "mc",
-            "md",
-            "mg",
-            "mh",
-            "mk",
-            "ml",
-            "mm",
-            "mn",
             "mo",
-            "mp",
+            "mk",
+            "mg",
+            "mw",
+            "my",
+            "mv",
+            "ml",
+            "mt",
+            "mh",
             "mq",
             "mr",
-            "ms",
-            "mt",
             "mu",
-            "mv",
-            "mw",
+            "yt",
             "mx",
-            "my",
+            "fm",
+            "md",
+            "mc",
+            "mn",
+            "ms",
+            "ma",
             "mz",
+            "mm",
             "na",
-            "nc",
-            "ne",
-            "nf",
-            "ng",
-            "ni",
-            "nl",
-            "no",
-            "np",
             "nr",
-            "nu",
+            "np",
+            "nl",
+            "an",
+            "nc",
             "nz",
+            "ni",
+            "ne",
+            "ng",
+            "nu",
+            "nf",
+            "mp",
+            "no",
             "om",
-            "pa",
-            "pe",
-            "pf",
-            "pg",
-            "ph",
             "pk",
-            "pl",
-            "pm",
-            "pn",
-            "pr",
-            "ps",
-            "pt",
             "pw",
+            "ps",
+            "pa",
+            "pg",
             "py",
+            "pe",
+            "ph",
+            "pn",
+            "pl",
+            "pt",
+            "pr",
             "qa",
             "re",
             "ro",
-            "rs",
             "ru",
             "rw",
-            "sa",
-            "sb",
-            "sc",
-            "sd",
-            "se",
-            "sg",
             "sh",
-            "si",
-            "sj",
-            "sk",
-            "sl",
+            "kn",
+            "lc",
+            "pm",
+            "vc",
+            "ws",
             "sm",
-            "sn",
-            "so",
-            "sr",
             "st",
-            "sv",
-            "sy",
+            "sa",
+            "sn",
+            "rs",
+            "sc",
+            "sl",
+            "sg",
+            "sk",
+            "si",
+            "sb",
+            "so",
+            "za",
+            "gs",
+            "es",
+            "lk",
+            "sd",
+            "sr",
+            "sj",
             "sz",
-            "tc",
-            "td",
-            "tf",
-            "tg",
-            "th",
-            "tj",
-            "tk",
-            "tl",
-            "tm",
-            "tn",
-            "to",
-            "tr",
-            "tt",
-            "tv",
+            "se",
+            "ch",
+            "sy",
             "tw",
+            "tj",
             "tz",
-            "ua",
+            "th",
+            "tl",
+            "tg",
+            "tk",
+            "to",
+            "tt",
+            "tn",
+            "tr",
+            "tm",
+            "tc",
+            "tv",
             "ug",
-            "um",
+            "ua",
+            "ae",
+            "gb",
             "us",
+            "um",
             "uy",
             "uz",
-            "va",
-            "vc",
+            "vu",
             "ve",
+            "vn",
             "vg",
             "vi",
-            "vn",
-            "vu",
             "wf",
-            "ws",
+            "eh",
             "ye",
-            "yt",
-            "za",
             "zm",
             "zw",
         ]
         | Omit = omit,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
         high_confidence_only: bool | Omit = omit,
         max_speed: bool | Omit = omit,
-        mcc: str | Omit = omit,
-        phone: float | Omit = omit,
+        mcc: Union[str, float] | Omit = omit,
+        phone: Union[str, float] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2889,14 +4809,13 @@ class AsyncBrandResource(AsyncAPIResource):
 
           city: Optional city name to prioritize when searching for the brand.
 
-          country_gl: Optional country code (GL parameter) to specify the country. This affects the
-              geographic location used for search queries.
+          country_gl: Two-letter ISO 3166-1 alpha-2 country code (GL parameter) used to localize
+              search.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
 
           high_confidence_only: When set to true, the API will perform an additional verification steps to
               ensure the identified brand matches the transaction with high confidence.
-              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -2906,6 +4825,10 @@ class AsyncBrandResource(AsyncAPIResource):
               category/industry.
 
           phone: Optional phone number from the transaction to help verify brand match.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -2936,6 +4859,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "max_speed": max_speed,
                         "mcc": mcc,
                         "phone": phone,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
@@ -2948,6 +4872,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2958,12 +4883,12 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandPrefetchResponse:
         """
         Signal that you may fetch brand data for a particular domain soon to improve
-        latency. This endpoint does not charge credits and is available for paid
-        customers to optimize future requests. [You must be on a paid plan to use this
-        endpoint]
+        latency.
 
         Args:
           domain: Domain name to prefetch brand data for
+
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -2982,6 +4907,7 @@ class AsyncBrandResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "domain": domain,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_prefetch_params.BrandPrefetchParams,
@@ -2996,6 +4922,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         email: str,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3008,14 +4935,14 @@ class AsyncBrandResource(AsyncAPIResource):
         Signal that you may fetch brand data for a particular domain soon to improve
         latency. This endpoint accepts an email address, extracts the domain from it,
         validates that it's not a disposable or free email provider, and queues the
-        domain for prefetching. This endpoint does not charge credits and is available
-        for paid customers to optimize future requests. [You must be on a paid plan to
-        use this endpoint]
+        domain for prefetching.
 
         Args:
           email: Email address to prefetch brand data for. The domain will be extracted from the
               email. Free email providers (gmail.com, yahoo.com, etc.) and disposable email
               addresses are not allowed.
+
+          tags: Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -3034,6 +4961,7 @@ class AsyncBrandResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "email": email,
+                    "tags": tags,
                     "timeout_ms": timeout_ms,
                 },
                 brand_prefetch_by_email_params.BrandPrefetchByEmailParams,
@@ -3048,65 +4976,134 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         email: str,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3117,20 +5114,28 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveByEmailResponse:
         """
         Retrieve brand information using an email address while detecting disposable and
-        free email addresses. This endpoint extracts the domain from the email address
-        and returns brand data for that domain. Disposable and free email addresses
-        (like gmail.com, yahoo.com) will throw a 422 error.
+        free email addresses. Disposable and free email addresses (like gmail.com,
+        yahoo.com) will throw a 422 error.
 
         Args:
           email: Email address to retrieve brand data for (e.g., 'contact@example.com'). The
               domain will be extracted from the email. Free email providers (gmail.com,
               yahoo.com, etc.) and disposable email addresses are not allowed.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -3155,7 +5160,9 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "email": email,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_email_params.BrandRetrieveByEmailParams,
@@ -3168,65 +5175,134 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         isin: str,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3237,19 +5313,27 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveByIsinResponse:
         """
         Retrieve brand information using an ISIN (International Securities
-        Identification Number). This endpoint looks up the company associated with the
-        ISIN and returns its brand data.
+        Identification Number).
 
         Args:
           isin: ISIN (International Securities Identification Number) to retrieve brand data for
               (e.g., 'AU000000IMD5', 'US0378331005'). Must be exactly 12 characters: 2 letters
               followed by 9 alphanumeric characters and ending with a digit.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -3274,7 +5358,9 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "isin": isin,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_isin_params.BrandRetrieveByIsinParams,
@@ -3288,306 +5374,375 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         name: str,
         country_gl: Literal[
-            "ad",
-            "ae",
             "af",
-            "ag",
-            "ai",
             "al",
-            "am",
-            "an",
-            "ao",
-            "aq",
-            "ar",
+            "dz",
             "as",
-            "at",
-            "au",
+            "ad",
+            "ao",
+            "ai",
+            "aq",
+            "ag",
+            "ar",
+            "am",
             "aw",
+            "au",
+            "at",
             "az",
-            "ba",
-            "bb",
-            "bd",
-            "be",
-            "bf",
-            "bg",
+            "bs",
             "bh",
-            "bi",
+            "bd",
+            "bb",
+            "by",
+            "be",
+            "bz",
             "bj",
             "bm",
-            "bn",
-            "bo",
-            "br",
-            "bs",
             "bt",
-            "bv",
+            "bo",
+            "ba",
             "bw",
-            "by",
-            "bz",
-            "ca",
-            "cc",
-            "cd",
-            "cf",
-            "cg",
-            "ch",
-            "ci",
-            "ck",
-            "cl",
+            "bv",
+            "br",
+            "io",
+            "bn",
+            "bg",
+            "bf",
+            "bi",
+            "kh",
             "cm",
-            "cn",
-            "co",
-            "cr",
-            "cu",
+            "ca",
             "cv",
+            "ky",
+            "cf",
+            "td",
+            "cl",
+            "cn",
             "cx",
+            "cc",
+            "co",
+            "km",
+            "cg",
+            "cd",
+            "ck",
+            "cr",
+            "ci",
+            "hr",
+            "cu",
             "cy",
             "cz",
-            "de",
-            "dj",
             "dk",
+            "dj",
             "dm",
             "do",
-            "dz",
             "ec",
-            "ee",
             "eg",
-            "eh",
+            "sv",
+            "gq",
             "er",
-            "es",
+            "ee",
             "et",
-            "fi",
-            "fj",
             "fk",
-            "fm",
             "fo",
+            "fj",
+            "fi",
             "fr",
-            "ga",
-            "gb",
-            "gd",
-            "ge",
             "gf",
+            "pf",
+            "tf",
+            "ga",
+            "gm",
+            "ge",
+            "de",
             "gh",
             "gi",
-            "gl",
-            "gm",
-            "gn",
-            "gp",
-            "gq",
             "gr",
-            "gs",
-            "gt",
+            "gl",
+            "gd",
+            "gp",
             "gu",
+            "gt",
+            "gn",
             "gw",
             "gy",
-            "hk",
-            "hm",
-            "hn",
-            "hr",
             "ht",
+            "hm",
+            "va",
+            "hn",
+            "hk",
             "hu",
+            "is",
+            "in",
             "id",
+            "ir",
+            "iq",
             "ie",
             "il",
-            "in",
-            "io",
-            "iq",
-            "ir",
-            "is",
             "it",
             "jm",
-            "jo",
             "jp",
+            "jo",
+            "kz",
             "ke",
-            "kg",
-            "kh",
             "ki",
-            "km",
-            "kn",
             "kp",
             "kr",
             "kw",
-            "ky",
-            "kz",
+            "kg",
             "la",
+            "lv",
             "lb",
-            "lc",
-            "li",
-            "lk",
-            "lr",
             "ls",
+            "lr",
+            "ly",
+            "li",
             "lt",
             "lu",
-            "lv",
-            "ly",
-            "ma",
-            "mc",
-            "md",
-            "mg",
-            "mh",
-            "mk",
-            "ml",
-            "mm",
-            "mn",
             "mo",
-            "mp",
+            "mk",
+            "mg",
+            "mw",
+            "my",
+            "mv",
+            "ml",
+            "mt",
+            "mh",
             "mq",
             "mr",
-            "ms",
-            "mt",
             "mu",
-            "mv",
-            "mw",
+            "yt",
             "mx",
-            "my",
+            "fm",
+            "md",
+            "mc",
+            "mn",
+            "ms",
+            "ma",
             "mz",
+            "mm",
             "na",
-            "nc",
-            "ne",
-            "nf",
-            "ng",
-            "ni",
-            "nl",
-            "no",
-            "np",
             "nr",
-            "nu",
+            "np",
+            "nl",
+            "an",
+            "nc",
             "nz",
+            "ni",
+            "ne",
+            "ng",
+            "nu",
+            "nf",
+            "mp",
+            "no",
             "om",
-            "pa",
-            "pe",
-            "pf",
-            "pg",
-            "ph",
             "pk",
-            "pl",
-            "pm",
-            "pn",
-            "pr",
-            "ps",
-            "pt",
             "pw",
+            "ps",
+            "pa",
+            "pg",
             "py",
+            "pe",
+            "ph",
+            "pn",
+            "pl",
+            "pt",
+            "pr",
             "qa",
             "re",
             "ro",
-            "rs",
             "ru",
             "rw",
-            "sa",
-            "sb",
-            "sc",
-            "sd",
-            "se",
-            "sg",
             "sh",
-            "si",
-            "sj",
-            "sk",
-            "sl",
+            "kn",
+            "lc",
+            "pm",
+            "vc",
+            "ws",
             "sm",
-            "sn",
-            "so",
-            "sr",
             "st",
-            "sv",
-            "sy",
+            "sa",
+            "sn",
+            "rs",
+            "sc",
+            "sl",
+            "sg",
+            "sk",
+            "si",
+            "sb",
+            "so",
+            "za",
+            "gs",
+            "es",
+            "lk",
+            "sd",
+            "sr",
+            "sj",
             "sz",
-            "tc",
-            "td",
-            "tf",
-            "tg",
-            "th",
-            "tj",
-            "tk",
-            "tl",
-            "tm",
-            "tn",
-            "to",
-            "tr",
-            "tt",
-            "tv",
+            "se",
+            "ch",
+            "sy",
             "tw",
+            "tj",
             "tz",
-            "ua",
+            "th",
+            "tl",
+            "tg",
+            "tk",
+            "to",
+            "tt",
+            "tn",
+            "tr",
+            "tm",
+            "tc",
+            "tv",
             "ug",
-            "um",
+            "ua",
+            "ae",
+            "gb",
             "us",
+            "um",
             "uy",
             "uz",
-            "va",
-            "vc",
+            "vu",
             "ve",
+            "vn",
             "vg",
             "vi",
-            "vn",
-            "vu",
             "wf",
-            "ws",
+            "eh",
             "ye",
-            "yt",
-            "za",
             "zm",
             "zw",
         ]
         | Omit = omit,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3596,23 +5751,30 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByNameResponse:
-        """Retrieve brand information using a company name.
-
-        This endpoint searches for the
-        company by name and returns its brand data.
+        """
+        Retrieve brand information using a company name.
 
         Args:
           name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
               Corporation'). Must be 3-30 characters.
 
-          country_gl: Optional country code (GL parameter) to specify the country. This affects the
-              geographic location used for search queries.
+          country_gl: Two-letter ISO 3166-1 alpha-2 country code (GL parameter) used to localize
+              search.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -3638,7 +5800,9 @@ class AsyncBrandResource(AsyncAPIResource):
                         "name": name,
                         "country_gl": country_gl,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_by_name_params.BrandRetrieveByNameParams,
@@ -3651,65 +5815,134 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         ticker: str,
-        force_language: Literal[
-            "albanian",
-            "arabic",
-            "azeri",
-            "bengali",
-            "bulgarian",
-            "cantonese",
-            "cebuano",
-            "croatian",
-            "czech",
-            "danish",
-            "dutch",
-            "english",
-            "estonian",
-            "farsi",
-            "finnish",
-            "french",
-            "german",
-            "hausa",
-            "hawaiian",
-            "hindi",
-            "hungarian",
-            "icelandic",
-            "indonesian",
-            "italian",
-            "kazakh",
-            "korean",
-            "kyrgyz",
-            "latin",
-            "latvian",
-            "lithuanian",
-            "macedonian",
-            "mongolian",
-            "nepali",
-            "norwegian",
-            "pashto",
-            "pidgin",
-            "polish",
-            "portuguese",
-            "romanian",
-            "russian",
-            "serbian",
-            "slovak",
-            "slovene",
-            "somali",
-            "spanish",
-            "swahili",
-            "swedish",
-            "tagalog",
-            "thai",
-            "turkish",
-            "ukrainian",
-            "urdu",
-            "uzbek",
-            "vietnamese",
-            "welsh",
+        force_language: Optional[
+            Literal[
+                "afrikaans",
+                "albanian",
+                "amharic",
+                "arabic",
+                "armenian",
+                "assamese",
+                "aymara",
+                "azeri",
+                "basque",
+                "belarusian",
+                "bengali",
+                "bosnian",
+                "bulgarian",
+                "burmese",
+                "cantonese",
+                "catalan",
+                "cebuano",
+                "chinese",
+                "corsican",
+                "croatian",
+                "czech",
+                "danish",
+                "dutch",
+                "english",
+                "esperanto",
+                "estonian",
+                "farsi",
+                "fijian",
+                "finnish",
+                "french",
+                "galician",
+                "georgian",
+                "german",
+                "greek",
+                "guarani",
+                "gujarati",
+                "haitian-creole",
+                "hausa",
+                "hawaiian",
+                "hebrew",
+                "hindi",
+                "hmong",
+                "hungarian",
+                "icelandic",
+                "igbo",
+                "indonesian",
+                "irish",
+                "italian",
+                "japanese",
+                "javanese",
+                "kannada",
+                "kazakh",
+                "khmer",
+                "kinyarwanda",
+                "korean",
+                "kurdish",
+                "kyrgyz",
+                "lao",
+                "latin",
+                "latvian",
+                "lingala",
+                "lithuanian",
+                "luxembourgish",
+                "macedonian",
+                "malagasy",
+                "malay",
+                "malayalam",
+                "maltese",
+                "maori",
+                "marathi",
+                "mongolian",
+                "nepali",
+                "norwegian",
+                "odia",
+                "oromo",
+                "pashto",
+                "pidgin",
+                "polish",
+                "portuguese",
+                "punjabi",
+                "quechua",
+                "romanian",
+                "russian",
+                "samoan",
+                "scottish-gaelic",
+                "serbian",
+                "sesotho",
+                "shona",
+                "sindhi",
+                "sinhala",
+                "slovak",
+                "slovene",
+                "somali",
+                "spanish",
+                "sundanese",
+                "swahili",
+                "swedish",
+                "tagalog",
+                "tajik",
+                "tamil",
+                "tatar",
+                "telugu",
+                "thai",
+                "tibetan",
+                "tigrinya",
+                "tongan",
+                "tswana",
+                "turkish",
+                "turkmen",
+                "ukrainian",
+                "urdu",
+                "uyghur",
+                "uzbek",
+                "vietnamese",
+                "welsh",
+                "wolof",
+                "xhosa",
+                "yiddish",
+                "yoruba",
+                "zulu",
+            ]
         ]
         | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         max_speed: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         ticker_exchange: Literal[
             "AMEX",
             "AMS",
@@ -3793,22 +6026,29 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByTickerResponse:
-        """Retrieve brand information using a stock ticker symbol.
-
-        This endpoint looks up
-        the company associated with the ticker and returns its brand data.
+        """
+        Retrieve brand information using a stock ticker symbol.
 
         Args:
           ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
               Must be 1-15 characters, letters/numbers/dots only.
 
-          force_language: Optional parameter to force the language of the retrieved brand data.
+          force_language: Language to force for the retrieved brand data.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
 
-          ticker_exchange: Optional stock exchange for the ticker. Defaults to NASDAQ if not specified.
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          ticker_exchange: Stock exchange code.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -3833,7 +6073,9 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "ticker": ticker,
                         "force_language": force_language,
+                        "max_age_ms": max_age_ms,
                         "max_speed": max_speed,
+                        "tags": tags,
                         "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
@@ -3849,6 +6091,7 @@ class AsyncBrandResource(AsyncAPIResource):
         input: str,
         max_results: int | Omit = omit,
         min_results: int | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3858,17 +6101,21 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveNaicsResponse:
         """
-        Endpoint to classify any brand into a 2022 NAICS code.
+        Classify any brand into 2022 NAICS industry codes from its domain or name.
 
         Args:
-          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
-              in `input`, it will be used for classification, otherwise, we will search for
-              the brand using the provided title.
+          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided,
+              it will be used for classification, otherwise, we will search for the brand
+              using the provided title.
 
           max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
               to 5.
 
           min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -3883,7 +6130,7 @@ class AsyncBrandResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/brand/naics",
+            "/web/naics",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -3894,6 +6141,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "input": input,
                         "max_results": max_results,
                         "min_results": min_results,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_naics_params.BrandRetrieveNaicsParams,
@@ -3906,6 +6154,9 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        theme: Literal["light", "dark"] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3916,11 +6167,22 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveSimplifiedResponse:
         """
         Returns a simplified version of brand data containing only essential
-        information: domain, title, colors, logos, and backdrops. This endpoint is
-        optimized for faster responses and reduced data transfer.
+        information: domain, title, colors, logos, and backdrops. Optimized for faster
+        responses and reduced data transfer.
 
         Args:
           domain: Domain name to retrieve simplified brand data for
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          theme: Optional theme preference used when selecting brand assets.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -3944,6 +6206,9 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
+                        "theme": theme,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_simplified_params.BrandRetrieveSimplifiedParams,
@@ -3955,10 +6220,227 @@ class AsyncBrandResource(AsyncAPIResource):
     async def screenshot(
         self,
         *,
-        domain: str,
+        clear_popups: bool | Omit = omit,
+        color_scheme: Literal["light", "dark"] | Omit = omit,
+        country: Literal[
+            "ad",
+            "ae",
+            "af",
+            "ag",
+            "ai",
+            "al",
+            "am",
+            "ao",
+            "ar",
+            "at",
+            "au",
+            "aw",
+            "az",
+            "ba",
+            "bb",
+            "bd",
+            "be",
+            "bf",
+            "bg",
+            "bh",
+            "bi",
+            "bj",
+            "bm",
+            "bn",
+            "bo",
+            "bq",
+            "br",
+            "bs",
+            "bw",
+            "by",
+            "bz",
+            "ca",
+            "cd",
+            "cf",
+            "cg",
+            "ch",
+            "ci",
+            "cl",
+            "cm",
+            "cn",
+            "co",
+            "cr",
+            "cv",
+            "cw",
+            "cy",
+            "cz",
+            "de",
+            "dj",
+            "dk",
+            "dm",
+            "do",
+            "dz",
+            "ec",
+            "ee",
+            "eg",
+            "es",
+            "et",
+            "fi",
+            "fj",
+            "fr",
+            "ga",
+            "gb",
+            "gd",
+            "ge",
+            "gf",
+            "gg",
+            "gh",
+            "gm",
+            "gn",
+            "gp",
+            "gq",
+            "gr",
+            "gt",
+            "gu",
+            "gw",
+            "gy",
+            "hk",
+            "hn",
+            "hr",
+            "ht",
+            "hu",
+            "id",
+            "ie",
+            "il",
+            "im",
+            "in",
+            "iq",
+            "ir",
+            "is",
+            "it",
+            "je",
+            "jm",
+            "jo",
+            "jp",
+            "ke",
+            "kg",
+            "kh",
+            "kn",
+            "kr",
+            "kw",
+            "ky",
+            "kz",
+            "la",
+            "lb",
+            "lc",
+            "lk",
+            "lr",
+            "ls",
+            "lt",
+            "lu",
+            "lv",
+            "ly",
+            "ma",
+            "mc",
+            "md",
+            "me",
+            "mf",
+            "mg",
+            "mk",
+            "ml",
+            "mm",
+            "mn",
+            "mo",
+            "mq",
+            "mr",
+            "mt",
+            "mu",
+            "mv",
+            "mw",
+            "mx",
+            "my",
+            "mz",
+            "na",
+            "nc",
+            "ne",
+            "ng",
+            "ni",
+            "nl",
+            "no",
+            "np",
+            "nz",
+            "om",
+            "pa",
+            "pe",
+            "pf",
+            "pg",
+            "ph",
+            "pk",
+            "pl",
+            "pr",
+            "ps",
+            "pt",
+            "py",
+            "qa",
+            "re",
+            "ro",
+            "rs",
+            "ru",
+            "rw",
+            "sa",
+            "sc",
+            "sd",
+            "se",
+            "sg",
+            "si",
+            "sk",
+            "sl",
+            "sm",
+            "sn",
+            "so",
+            "sr",
+            "ss",
+            "st",
+            "sv",
+            "sx",
+            "sy",
+            "sz",
+            "tc",
+            "td",
+            "tg",
+            "th",
+            "tj",
+            "tl",
+            "tm",
+            "tn",
+            "tr",
+            "tt",
+            "tw",
+            "tz",
+            "ua",
+            "ug",
+            "us",
+            "uy",
+            "uz",
+            "vc",
+            "ve",
+            "vg",
+            "vi",
+            "vn",
+            "ye",
+            "yt",
+            "za",
+            "zm",
+            "zw",
+        ]
+        | Omit = omit,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
         full_screenshot: Literal["true", "false"] | Omit = omit,
+        handle_cookie_popup: bool | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
         page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
-        prioritize: Literal["speed", "quality"] | Omit = omit,
+        scroll_offset: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        viewport: brand_screenshot_params.Viewport | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3966,29 +6448,73 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandScreenshotResponse:
-        """Capture a screenshot of a website.
-
-        Supports both viewport (standard browser
-        view) and full-page screenshots. Can also screenshot specific page types (login,
-        pricing, etc.) by using heuristics to find the appropriate URL. Returns a URL to
-        the uploaded screenshot image hosted on our CDN.
+        """
+        Capture a screenshot of a website.
 
         Args:
+          clear_popups: Optional parameter for comprehensive popup cleanup. If 'true', the browser
+              dismisses detected cookie/consent UI and clears other detected obstructive
+              popups and overlays before capture. If 'false' or not provided, this parameter
+              requests no cleanup; handleCookiePopup can still request cookie/consent handling
+              independently.
+
+          color_scheme: Optional parameter to choose the site's visual theme in the screenshot. Use
+              'light' or 'dark' when the site offers both appearances.
+
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
+
+          direct_url: A specific URL to screenshot directly, bypassing domain resolution (e.g.,
+              'https://example.com/pricing'). When provided, the screenshot is taken of this
+              exact URL. You must provide either 'domain' or 'directUrl', but not both.
+
           domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
 
           full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
               screenshot capturing all content. If 'false' or not provided, takes a viewport
               screenshot (standard browser view).
 
+          handle_cookie_popup: Optional parameter to control cookie/consent popup handling. If 'true', we
+              dismiss cookie banner before capture. If 'false' or not provided, captures the
+              page without that step.
+
+          max_age_ms: Return a cached screenshot if a prior screenshot for the same parameters exists
+              and is younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always capture fresh.
+
           page: Optional parameter to specify which page type to screenshot. If provided, the
               system will scrape the domain's links and use heuristics to find the most
               appropriate URL for the specified page type (30 supported languages). If not
-              provided, screenshots the main domain landing page.
+              provided, screenshots the main domain landing page. Only applicable when using
+              'domain', not 'directUrl'.
 
-          prioritize: Optional parameter to prioritize screenshot capture. If 'speed', optimizes for
-              faster capture with basic quality. If 'quality', optimizes for higher quality
-              with longer wait times. Defaults to 'quality' if not provided.
+          scroll_offset: Optional vertical scroll offset in pixels for capturing a long page in
+              viewport-sized chunks. When provided, the full page is captured once and the
+              returned image is the viewport-sized slice that begins at this Y offset (e.g.
+              request scrollOffset=0, then 1080, then 2160 to walk a 1920x1080 landing page
+              top to bottom). The final slice may be shorter than the viewport height. Takes
+              precedence over fullScreenshot. Max: 100000.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          viewport: Optional browser viewport dimensions for the screenshot. Defaults to 1920x1080.
+
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before taking
+              the screenshot. Min: 0. Max: 30000 (30 seconds). Defaults to 3000 ms when
+              omitted.
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
 
           extra_headers: Send extra headers
 
@@ -3999,7 +6525,7 @@ class AsyncBrandResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/brand/screenshot",
+            "/web/screenshot",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -4007,10 +6533,21 @@ class AsyncBrandResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "clear_popups": clear_popups,
+                        "color_scheme": color_scheme,
+                        "country": country,
+                        "direct_url": direct_url,
                         "domain": domain,
                         "full_screenshot": full_screenshot,
+                        "handle_cookie_popup": handle_cookie_popup,
+                        "max_age_ms": max_age_ms,
                         "page": page,
-                        "prioritize": prioritize,
+                        "scroll_offset": scroll_offset,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "viewport": viewport,
+                        "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
                     },
                     brand_screenshot_params.BrandScreenshotParams,
                 ),
@@ -4021,8 +6558,11 @@ class AsyncBrandResource(AsyncAPIResource):
     async def styleguide(
         self,
         *,
+        color_scheme: Literal["light", "dark"] | Omit = omit,
         direct_url: str | Omit = omit,
         domain: str | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -4032,17 +6572,30 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandStyleguideResponse:
         """
-        Automatically extract comprehensive design system information from a brand's
-        website including colors, typography, spacing, shadows, and UI components.
-        Either 'domain' or 'directUrl' must be provided as a query parameter, but not
-        both.
+        Extract a comprehensive design system from a website including colors,
+        typography, spacing, shadows, and UI components.
 
         Args:
+          color_scheme: Optional browser color scheme to emulate for websites that respond to
+              prefers-color-scheme. This value is part of the styleguide cache key.
+
           direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
-              resolution (e.g., 'https://example.com/design-system').
+              resolution (e.g., 'https://example.com/design-system'). When provided, the
+              styleguide is extracted from this exact URL. You must provide either 'domain' or
+              'directUrl', but not both.
 
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
+              domain will be automatically normalized and validated. You must provide either
+              'domain' or 'directUrl', but not both.
+
+          max_age_ms: Maximum age in milliseconds for cached brand data before the API performs a hard
+              refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+              are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+              year.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -4057,7 +6610,7 @@ class AsyncBrandResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/brand/styleguide",
+            "/web/styleguide",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -4065,8 +6618,11 @@ class AsyncBrandResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "color_scheme": color_scheme,
                         "direct_url": direct_url,
                         "domain": domain,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
                         "timeout_ms": timeout_ms,
                     },
                     brand_styleguide_params.BrandStyleguideParams,
@@ -4079,6 +6635,226 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        actions: Optional[Iterable[brand_web_scrape_html_params.Action]] | Omit = omit,
+        country: Literal[
+            "ad",
+            "ae",
+            "af",
+            "ag",
+            "ai",
+            "al",
+            "am",
+            "ao",
+            "ar",
+            "at",
+            "au",
+            "aw",
+            "az",
+            "ba",
+            "bb",
+            "bd",
+            "be",
+            "bf",
+            "bg",
+            "bh",
+            "bi",
+            "bj",
+            "bm",
+            "bn",
+            "bo",
+            "bq",
+            "br",
+            "bs",
+            "bw",
+            "by",
+            "bz",
+            "ca",
+            "cd",
+            "cf",
+            "cg",
+            "ch",
+            "ci",
+            "cl",
+            "cm",
+            "cn",
+            "co",
+            "cr",
+            "cv",
+            "cw",
+            "cy",
+            "cz",
+            "de",
+            "dj",
+            "dk",
+            "dm",
+            "do",
+            "dz",
+            "ec",
+            "ee",
+            "eg",
+            "es",
+            "et",
+            "fi",
+            "fj",
+            "fr",
+            "ga",
+            "gb",
+            "gd",
+            "ge",
+            "gf",
+            "gg",
+            "gh",
+            "gm",
+            "gn",
+            "gp",
+            "gq",
+            "gr",
+            "gt",
+            "gu",
+            "gw",
+            "gy",
+            "hk",
+            "hn",
+            "hr",
+            "ht",
+            "hu",
+            "id",
+            "ie",
+            "il",
+            "im",
+            "in",
+            "iq",
+            "ir",
+            "is",
+            "it",
+            "je",
+            "jm",
+            "jo",
+            "jp",
+            "ke",
+            "kg",
+            "kh",
+            "kn",
+            "kr",
+            "kw",
+            "ky",
+            "kz",
+            "la",
+            "lb",
+            "lc",
+            "lk",
+            "lr",
+            "ls",
+            "lt",
+            "lu",
+            "lv",
+            "ly",
+            "ma",
+            "mc",
+            "md",
+            "me",
+            "mf",
+            "mg",
+            "mk",
+            "ml",
+            "mm",
+            "mn",
+            "mo",
+            "mq",
+            "mr",
+            "mt",
+            "mu",
+            "mv",
+            "mw",
+            "mx",
+            "my",
+            "mz",
+            "na",
+            "nc",
+            "ne",
+            "ng",
+            "ni",
+            "nl",
+            "no",
+            "np",
+            "nz",
+            "om",
+            "pa",
+            "pe",
+            "pf",
+            "pg",
+            "ph",
+            "pk",
+            "pl",
+            "pr",
+            "ps",
+            "pt",
+            "py",
+            "qa",
+            "re",
+            "ro",
+            "rs",
+            "ru",
+            "rw",
+            "sa",
+            "sc",
+            "sd",
+            "se",
+            "sg",
+            "si",
+            "sk",
+            "sl",
+            "sm",
+            "sn",
+            "so",
+            "sr",
+            "ss",
+            "st",
+            "sv",
+            "sx",
+            "sy",
+            "sz",
+            "tc",
+            "td",
+            "tg",
+            "th",
+            "tj",
+            "tl",
+            "tm",
+            "tn",
+            "tr",
+            "tt",
+            "tw",
+            "tz",
+            "ua",
+            "ug",
+            "us",
+            "uy",
+            "uz",
+            "vc",
+            "ve",
+            "vg",
+            "vi",
+            "vn",
+            "ye",
+            "yt",
+            "za",
+            "zm",
+            "zw",
+        ]
+        | Omit = omit,
+        exclude_selectors: Optional[SequenceNotStr[str]] | Omit = omit,
+        headers: Dict[str, str] | Omit = omit,
+        include_frames: bool | Omit = omit,
+        include_selectors: Optional[SequenceNotStr[str]] | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        pdf: brand_web_scrape_html_params.Pdf | Omit = omit,
+        settle_animations: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        use_main_content_only: bool | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4086,11 +6862,65 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeHTMLResponse:
-        """
-        Scrapes the given URL and returns the raw HTML content of the page.
+        """Scrapes the given URL and returns the raw HTML content of the page.
+
+        The base
+        request costs 1 credit; requests with browser actions cost 2 credits.
 
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
+
+          actions: Optional browser actions executed in array order after the page loads and before
+              content is captured. Requires a paid plan. Send a JSON array in the query
+              parameter. Maximum: 5 actions.
+
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
+
+          exclude_selectors: CSS selectors to remove from the result. Applied after includeSelectors.
+              Exclusion takes precedence: an element matching both is removed. Examples:
+              "nav", "footer", ".ad-banner", "[aria-hidden=true]".
+
+          headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
+              deep-object query params such as headers[X-Custom]=value. When provided, caching
+              is bypassed: the result is neither read from nor written to cache.
+
+          include_frames: When true, iframes are rendered inline into the returned HTML.
+
+          include_selectors: CSS selectors. When provided, only matching subtrees (and their descendants) are
+              kept and everything else is dropped. When omitted, the entire document is kept.
+              Examples: "article.main", "#content", "[role=main]".
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          pdf: PDF parsing controls. Use start/end to limit text extraction and embedded-image
+              detection/OCR to an inclusive 1-based page range.
+
+          settle_animations: When true, waits briefly for CSS and transition animations to settle before
+              extracting HTML. Defaults to false. This adds a bit of latency in exchange for
+              more stable output on animated pages.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          use_main_content_only: When true, return only the page's main content in the HTML response, excluding
+              headers, footers, sidebars, and navigation when detectable.
+
+          wait_for_ms:
+              Optional browser wait time in milliseconds after initial page load. Min: 0. Max:
+              30000 (30 seconds).
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
 
           extra_headers: Send extra headers
 
@@ -4107,7 +6937,26 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"url": url}, brand_web_scrape_html_params.BrandWebScrapeHTMLParams),
+                query=await async_maybe_transform(
+                    {
+                        "url": url,
+                        "actions": actions,
+                        "country": country,
+                        "exclude_selectors": exclude_selectors,
+                        "headers": headers,
+                        "include_frames": include_frames,
+                        "include_selectors": include_selectors,
+                        "max_age_ms": max_age_ms,
+                        "pdf": pdf,
+                        "settle_animations": settle_animations,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "use_main_content_only": use_main_content_only,
+                        "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
+                    },
+                    brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
+                ),
             ),
             cast_to=BrandWebScrapeHTMLResponse,
         )
@@ -4116,6 +6965,14 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        actions: Optional[Iterable[brand_web_scrape_images_params.Action]] | Omit = omit,
+        dedupe: bool | Omit = omit,
+        enrichment: Optional[brand_web_scrape_images_params.Enrichment] | Omit = omit,
+        headers: Dict[str, str] | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4123,14 +6980,45 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeImagesResponse:
-        """Scrapes all images from the given URL.
-
-        Extracts images from img, svg,
-        picture/source, link, and video elements including inline SVGs, base64 data
-        URIs, and standard URLs.
+        """
+        Extract image assets from a web page, including standard URLs, inline SVGs, data
+        URIs, responsive image sources, metadata, CSS backgrounds, video posters, and
+        embeds. The base request costs 1 credit, or 2 credits with browser actions. When
+        enrichment is enabled, the entire call costs 5 credits, including requests that
+        also use actions.
 
         Args:
-          url: Full URL to scrape images from (must include http:// or https:// protocol)
+          url: Page URL to inspect. Must include http:// or https://.
+
+          actions: Optional browser actions executed in array order after the page loads and before
+              content is captured. Requires a paid plan. Send a JSON array in the query
+              parameter. Maximum: 5 actions.
+
+          dedupe: When true, visually duplicate images are removed: every image is loaded and
+              perceptually hashed, and only the highest-resolution copy of each duplicate
+              group is kept. Images that cannot be downloaded or hashed are kept. Default:
+              false.
+
+          enrichment: Optional per-image processing, sent as deep-object query params such as
+              enrichment[resolution]=true.
+
+          headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
+              deep-object query params such as headers[X-Custom]=value. When provided, caching
+              is bypassed: the result is neither read from nor written to cache.
+
+          max_age_ms: Reuse a cached result this many milliseconds old or newer. Default: 86400000 (1
+              day). Set to 0 to bypass cache. Maximum: 2592000000 (30 days).
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before
+              collecting images. Min: 0. Max: 30000 (30 seconds).
 
           extra_headers: Send extra headers
 
@@ -4148,7 +7036,18 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"url": url}, brand_web_scrape_images_params.BrandWebScrapeImagesParams
+                    {
+                        "url": url,
+                        "actions": actions,
+                        "dedupe": dedupe,
+                        "enrichment": enrichment,
+                        "headers": headers,
+                        "max_age_ms": max_age_ms,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "wait_for_ms": wait_for_ms,
+                    },
+                    brand_web_scrape_images_params.BrandWebScrapeImagesParams,
                 ),
             ),
             cast_to=BrandWebScrapeImagesResponse,
@@ -4158,10 +7057,230 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        actions: Optional[Iterable[brand_web_scrape_md_params.Action]] | Omit = omit,
+        country: Literal[
+            "ad",
+            "ae",
+            "af",
+            "ag",
+            "ai",
+            "al",
+            "am",
+            "ao",
+            "ar",
+            "at",
+            "au",
+            "aw",
+            "az",
+            "ba",
+            "bb",
+            "bd",
+            "be",
+            "bf",
+            "bg",
+            "bh",
+            "bi",
+            "bj",
+            "bm",
+            "bn",
+            "bo",
+            "bq",
+            "br",
+            "bs",
+            "bw",
+            "by",
+            "bz",
+            "ca",
+            "cd",
+            "cf",
+            "cg",
+            "ch",
+            "ci",
+            "cl",
+            "cm",
+            "cn",
+            "co",
+            "cr",
+            "cv",
+            "cw",
+            "cy",
+            "cz",
+            "de",
+            "dj",
+            "dk",
+            "dm",
+            "do",
+            "dz",
+            "ec",
+            "ee",
+            "eg",
+            "es",
+            "et",
+            "fi",
+            "fj",
+            "fr",
+            "ga",
+            "gb",
+            "gd",
+            "ge",
+            "gf",
+            "gg",
+            "gh",
+            "gm",
+            "gn",
+            "gp",
+            "gq",
+            "gr",
+            "gt",
+            "gu",
+            "gw",
+            "gy",
+            "hk",
+            "hn",
+            "hr",
+            "ht",
+            "hu",
+            "id",
+            "ie",
+            "il",
+            "im",
+            "in",
+            "iq",
+            "ir",
+            "is",
+            "it",
+            "je",
+            "jm",
+            "jo",
+            "jp",
+            "ke",
+            "kg",
+            "kh",
+            "kn",
+            "kr",
+            "kw",
+            "ky",
+            "kz",
+            "la",
+            "lb",
+            "lc",
+            "lk",
+            "lr",
+            "ls",
+            "lt",
+            "lu",
+            "lv",
+            "ly",
+            "ma",
+            "mc",
+            "md",
+            "me",
+            "mf",
+            "mg",
+            "mk",
+            "ml",
+            "mm",
+            "mn",
+            "mo",
+            "mq",
+            "mr",
+            "mt",
+            "mu",
+            "mv",
+            "mw",
+            "mx",
+            "my",
+            "mz",
+            "na",
+            "nc",
+            "ne",
+            "ng",
+            "ni",
+            "nl",
+            "no",
+            "np",
+            "nz",
+            "om",
+            "pa",
+            "pe",
+            "pf",
+            "pg",
+            "ph",
+            "pk",
+            "pl",
+            "pr",
+            "ps",
+            "pt",
+            "py",
+            "qa",
+            "re",
+            "ro",
+            "rs",
+            "ru",
+            "rw",
+            "sa",
+            "sc",
+            "sd",
+            "se",
+            "sg",
+            "si",
+            "sk",
+            "sl",
+            "sm",
+            "sn",
+            "so",
+            "sr",
+            "ss",
+            "st",
+            "sv",
+            "sx",
+            "sy",
+            "sz",
+            "tc",
+            "td",
+            "tg",
+            "th",
+            "tj",
+            "tl",
+            "tm",
+            "tn",
+            "tr",
+            "tt",
+            "tw",
+            "tz",
+            "ua",
+            "ug",
+            "us",
+            "uy",
+            "uz",
+            "vc",
+            "ve",
+            "vg",
+            "vi",
+            "vn",
+            "ye",
+            "yt",
+            "za",
+            "zm",
+            "zw",
+        ]
+        | Omit = omit,
+        exclude_selectors: Optional[SequenceNotStr[str]] | Omit = omit,
+        headers: Dict[str, str] | Omit = omit,
+        include_frames: bool | Omit = omit,
+        include_html: bool | Omit = omit,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        include_selectors: Optional[SequenceNotStr[str]] | Omit = omit,
+        max_age_ms: Optional[int] | Omit = omit,
+        pdf: brand_web_scrape_md_params.Pdf | Omit = omit,
+        settle_animations: bool | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
+        wait_for_ms: Optional[int] | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4169,22 +7288,102 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeMdResponse:
-        """
-        Scrapes the given URL, converts the HTML content to Markdown, and returns the
-        result.
+        """Scrapes the given URL into LLM usable Markdown.
+
+        Inspect key_metadata on JSON
+        responses from a recognized API key; use error_code to distinguish stable
+        failure categories.
+
+        ### YouTube
+
+        YouTube URLs return the video or channel itself rather than the surrounding
+        player and navigation chrome. A URL addressing a single video (`/watch`,
+        `youtu.be`, `/shorts`, `/embed`, `/live`) returns its title, channel, duration,
+        view count, keywords, full description, and the transcript when the video has
+        captions that can be retrieved; videos without captions return everything except
+        the transcript. A channel URL (`/channel/UC…`, `/@handle`, `/c/…`, `/user/…`)
+        returns its name, handle, subscriber count, video count, and full description.
+        When `includeImages=true`, video responses also include the thumbnail and
+        channel responses include the avatar. Costs the same as any other scrape.
+
+        ### Billing & errors
+
+        | HTTP status | Billed?                                   | Meaning                                                                                                                                                                                                                                                                                                       |
+        | ----------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        | 200         | Yes — 1 credit, or 2 credits with actions | Successful scrape, including a zero-length result when includeSelectors matched nothing                                                                                                                                                                                                                       |
+        | 400         | No                                        | Invalid input, skipped PDF, or the page could not be scraped. error_code WEBSITE_BLOCKED specifically means the site answered with an anti-bot challenge, CAPTCHA wall, or login shell instead of the page (even when the site returned HTTP 200) — retrying later or from another country sometimes succeeds |
+        | 401 / 403   | No                                        | Invalid/disabled key, insufficient permissions, or credits exhausted; inspect error_code                                                                                                                                                                                                                      |
+        | 404         | No                                        | Target page returned or fingerprinted as not found                                                                                                                                                                                                                                                            |
+        | 408         | No                                        | Request timed out                                                                                                                                                                                                                                                                                             |
+        | 413         | No                                        | Target content exceeds the maximum supported size (20 MB)                                                                                                                                                                                                                                                     |
+        | 415         | No                                        | Unsupported content type                                                                                                                                                                                                                                                                                      |
+        | 429         | No                                        | Per-minute rate limit exceeded; honor Retry-After                                                                                                                                                                                                                                                             |
+        | 500         | No                                        | Internal error                                                                                                                                                                                                                                                                                                |
 
         Args:
-          url: Full URL to scrape and convert to markdown (must include http:// or https://
+          url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
+
+          actions: Optional browser actions executed in array order after the page loads and before
+              content is captured. Requires a paid plan. Send a JSON array in the query
+              parameter. Maximum: 5 actions.
+
+          country: Fetch the target page through a residential proxy in this country (ISO 3166-1
+              alpha-2).
+
+          exclude_selectors: CSS selectors to remove before conversion to Markdown. Applied after
+              includeSelectors. Exclusion takes precedence: an element matching both is
+              removed. Examples: "nav", "footer", ".ad-banner", "[aria-hidden=true]".
+
+          headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
+              deep-object query params such as headers[X-Custom]=value. When provided, caching
+              is bypassed: the result is neither read from nor written to cache.
+
+          include_frames: When true, the contents of iframes are rendered to Markdown.
+
+          include_html: When true, the response also includes an `html` field with the page HTML the
+              Markdown was converted from — the same body the Scrape HTML endpoint returns for
+              the equivalent request.
 
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
 
+          include_selectors: CSS selectors. When provided, only matching HTML subtrees (and their
+              descendants) are kept before conversion to Markdown. When omitted, the entire
+              document is kept. Examples: "article.main", "#content", "[role=main]".
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          pdf: PDF parsing controls. Use start/end to limit text extraction and embedded-image
+              detection/OCR to an inclusive 1-based page range.
+
+          settle_animations: When true, waits briefly for CSS and transition animations to settle before
+              converting to Markdown. Defaults to false. This adds a bit of latency in
+              exchange for more stable output on animated pages.
+
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           use_main_content_only: Extract only the main content of the page, excluding headers, footers, sidebars,
               and navigation
+
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before
+              converting the page to Markdown. Min: 0. Max: 30000 (30 seconds).
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
 
           extra_headers: Send extra headers
 
@@ -4204,10 +7403,24 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "url": url,
+                        "actions": actions,
+                        "country": country,
+                        "exclude_selectors": exclude_selectors,
+                        "headers": headers,
+                        "include_frames": include_frames,
+                        "include_html": include_html,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "include_selectors": include_selectors,
+                        "max_age_ms": max_age_ms,
+                        "pdf": pdf,
+                        "settle_animations": settle_animations,
                         "shorten_base64_images": shorten_base64_images,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
+                        "wait_for_ms": wait_for_ms,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_md_params.BrandWebScrapeMdParams,
                 ),
@@ -4219,7 +7432,14 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        headers: Dict[str, str] | Omit = omit,
         max_links: int | Omit = omit,
+        search: str | Omit = omit,
+        sitemap_url: str | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        url_regex: str | Omit = omit,
+        zdr: Literal["enabled", "disabled"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4227,17 +7447,46 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
-        """
-        Crawls the sitemap of the given domain and returns all discovered page URLs.
-        Supports sitemap index files (recursive), parallel fetching with concurrency
-        control, deduplication, and filters out non-page resources (images, PDFs, etc.).
+        """Crawl an entire website's sitemap and return all discovered page URLs.
+
+        Pass
+        `search` to have the crawled sitemap filtered down to the pages about a phrase
+        (for example `pricing and plans` or `api authentication docs`), most relevant
+        first — a searched crawl scans the whole sitemap and costs 2 credits instead
+        of 1.
 
         Args:
-          domain: Domain name to crawl sitemaps for (e.g., 'example.com'). The domain will be
-              automatically normalized and validated.
+          domain: Domain to build a sitemap for
+
+          headers: Optional outbound HTTP headers forwarded only to the target URL, sent as
+              deep-object query params such as headers[X-Custom]=value. When provided, caching
+              is bypassed: the result is neither read from nor written to cache.
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          search: Optional search phrase. When provided, the crawled sitemap is filtered to the
+              pages whose URLs are about that phrase, most relevant first, and the request
+              costs 2 credits instead of 1.
+
+          sitemap_url: Optional explicit sitemap URL. When provided, exactly this sitemap is crawled
+              instead of discovering the domain's sitemaps.
+
+          tags: Optional comma-separated caller-defined tags for tracking this request. Tags are
+              recorded on the request's usage log and can be used to filter usage on the
+              dashboard usage page. Up to 20 tags, each 1-50 characters.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          url_regex: Optional RE2-compatible regex pattern. Only URLs matching this pattern are
+              returned and counted against maxLinks.
+
+          zdr: Set to enabled to bypass shared caches and omit request and response content
+              from retained usage logs. Requires zero data retention to be enabled for your
+              organization (contact support@context.dev), otherwise the request fails with
+              ZDR_NOT_ENABLED. Successful ZDR responses include X-Context-ZDR: true.
 
           extra_headers: Send extra headers
 
@@ -4257,7 +7506,14 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "domain": domain,
+                        "headers": headers,
                         "max_links": max_links,
+                        "search": search,
+                        "sitemap_url": sitemap_url,
+                        "tags": tags,
+                        "timeout_ms": timeout_ms,
+                        "url_regex": url_regex,
+                        "zdr": zdr,
                     },
                     brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),

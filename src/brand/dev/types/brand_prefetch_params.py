@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing_extensions import Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["BrandPrefetchParams"]
@@ -12,6 +13,9 @@ __all__ = ["BrandPrefetchParams"]
 class BrandPrefetchParams(TypedDict, total=False):
     domain: Required[str]
     """Domain name to prefetch brand data for"""
+
+    tags: SequenceNotStr[str]
+    """Optional tags for tracking usage. Up to 20 tags, each 1 to 50 characters."""
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
     """Optional timeout in milliseconds for the request.
